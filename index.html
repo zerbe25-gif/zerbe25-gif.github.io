@@ -224,57 +224,25 @@
 
     /* ================= PHOTO ================= */
 
-    .photo-area {
-      position: relative;
-    }
+   .photo-area {
+  position: relative;
+}
 
-    .photo-placeholder {
-      aspect-ratio: 4 / 5;
-      max-width: 390px;
-      margin-left: auto;
-      border-radius: 180px 180px 30px 30px;
-      background:
-        linear-gradient(
-          145deg,
-          #e2f2f0,
-          #f4f9f8
-        );
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: var(--muted);
-      padding: 40px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--line);
-      position: relative;
-      overflow: hidden;
-    }
+.profile-photo {
+  display: block;
+  width: 100%;
+  max-width: 390px;
+  height: 520px;
+  margin-left: auto;
 
-    .photo-placeholder::after {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: rgba(120, 201, 193, .18);
-      bottom: -60px;
-      right: -50px;
-    }
+  object-fit: cover;
+  object-position: center;
 
-    .photo-placeholder-content {
-      position: relative;
-      z-index: 1;
-    }
+  border-radius: 24px;
 
-    .photo-placeholder strong {
-      display: block;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 24px;
-      font-weight: 400;
-      margin-bottom: 8px;
-    }
-
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+}
     /* ================= SECTIONS ================= */
 
     section {
@@ -773,33 +741,19 @@
         </div>
 
 
-        <!-- ФОТО -->
-        <div class="photo-area reveal">
+     <!-- ФОТО -->
+        
+<div class="photo-area reveal">
 
-          <!--
-            ПОЗЖЕ ЗДЕСЬ БУДЕТ ВАШЕ ФОТО.
+  <img
+    src="images/sergey.jpg"
+    alt="Сергей Цербе"
+    class="profile-photo"
+  >
 
-            Когда будете готовы, я покажу,
-            как заменить этот блок на фотографию.
-          -->
+</div>
 
-          <div class="photo-placeholder">
-
-            <div class="photo-placeholder-content">
-
-              <strong>Ваше фото</strong>
-
-              <p>
-                Здесь будет размещена
-                ваша фотография.
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
+       
       </div>
     </section>
 
