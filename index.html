@@ -1,1 +1,1325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Сергей Цербе — психологическая помощь онлайн</title>
+
+  <meta
+    name="description"
+    content="Русскоязычный психодинамический консультант. Индивидуальные и парные онлайн-сессии для взрослых и подростков."
+  >
+
+  <style>
+    :root {
+      --bg: #fbfdfc;
+      --surface: #f1f8f7;
+      --surface-2: #e8f4f2;
+      --text: #263638;
+      --muted: #68787a;
+      --accent: #78c9c1;
+      --accent-dark: #3e9690;
+      --accent-light: #dff2ef;
+      --white: #ffffff;
+      --line: #dce9e7;
+      --shadow: 0 18px 50px rgba(53, 94, 91, 0.08);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(251, 253, 252, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(220, 233, 231, 0.7);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .logo {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 23px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+    }
+
+    .logo span {
+      display: block;
+      font-family: inherit;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      margin-top: -4px;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .menu a {
+      font-size: 14px;
+      color: var(--muted);
+      transition: color .25s ease;
+    }
+
+    .menu a:hover {
+      color: var(--accent-dark);
+    }
+
+    .menu .nav-button {
+      color: var(--white);
+      background: var(--accent-dark);
+      padding: 11px 18px;
+      border-radius: 30px;
+    }
+
+    .menu .nav-button:hover {
+      color: white;
+      background: #347f7a;
+    }
+
+    .mobile-button {
+      display: none;
+      border: none;
+      background: none;
+      font-size: 25px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      padding: 95px 0 105px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      right: -150px;
+      top: -130px;
+      opacity: .65;
+      z-index: -1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 75px;
+    }
+
+    .eyebrow {
+      color: var(--accent-dark);
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      font-size: clamp(48px, 6vw, 76px);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 25px;
+    }
+
+    .hero-title-accent {
+      color: var(--accent-dark);
+    }
+
+    .hero-text {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 650px;
+      margin-bottom: 32px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 23px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all .25s ease;
+    }
+
+    .button-primary {
+      background: var(--accent-dark);
+      color: white;
+    }
+
+    .button-primary:hover {
+      transform: translateY(-2px);
+      background: #347f7a;
+    }
+
+    .button-secondary {
+      border: 1px solid var(--line);
+      background: white;
+    }
+
+    .button-secondary:hover {
+      border-color: var(--accent);
+      background: var(--surface);
+    }
+
+    /* ================= PHOTO ================= */
+
+    .photo-area {
+      position: relative;
+    }
+
+    .photo-placeholder {
+      aspect-ratio: 4 / 5;
+      max-width: 390px;
+      margin-left: auto;
+      border-radius: 180px 180px 30px 30px;
+      background:
+        linear-gradient(
+          145deg,
+          #e2f2f0,
+          #f4f9f8
+        );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--muted);
+      padding: 40px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-placeholder::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(120, 201, 193, .18);
+      bottom: -60px;
+      right: -50px;
+    }
+
+    .photo-placeholder-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .photo-placeholder strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    /* ================= SECTIONS ================= */
+
+    section {
+      padding: 95px 0;
+    }
+
+    .section-header {
+      max-width: 700px;
+      margin-bottom: 50px;
+    }
+
+    .section-label {
+      color: var(--accent-dark);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-bottom: 13px;
+    }
+
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      font-size: clamp(36px, 4vw, 52px);
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 18px;
+    }
+
+    .section-description {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    /* ================= ABOUT ================= */
+
+    .about {
+      background: var(--surface);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .about-text p {
+      margin-bottom: 20px;
+      color: #536466;
+    }
+
+    .model-cards {
+      display: grid;
+      gap: 15px;
+    }
+
+    .model-card {
+      background: white;
+      padding: 25px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .model-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .model-number {
+      display: inline-flex;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-size: 13px;
+      margin-bottom: 13px;
+    }
+
+    .model-card h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+
+    .model-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ================= FORMATS ================= */
+
+    .formats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 17px;
+    }
+
+    .format-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      min-height: 190px;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .format-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .format-card h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .format-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ================= QUOTE ================= */
+
+    .quote-section {
+      padding: 70px 0;
+    }
+
+    .quote {
+      border-radius: 35px;
+      background: var(--surface-2);
+      padding: 65px;
+      text-align: center;
+    }
+
+    .quote p {
+      max-width: 760px;
+      margin: auto;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(27px, 4vw, 43px);
+      line-height: 1.25;
+      font-weight: 400;
+    }
+
+    .quote span {
+      display: block;
+      color: var(--accent-dark);
+      font-family: inherit;
+      font-size: 15px;
+      margin-top: 22px;
+    }
+
+    /* ================= CONTACT ================= */
+
+    .contact {
+      background: var(--surface);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+    .contact-links {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-link {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 15px 18px;
+      transition: border-color .25s ease;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+    }
+
+    .contact-link small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .contact-link strong {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .form {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 7px;
+      color: #4f6062;
+    }
+
+    .form input,
+    .form textarea,
+    .form select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fcfefe;
+      border-radius: 13px;
+      padding: 13px 14px;
+      font: inherit;
+      color: var(--text);
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .form input:focus,
+    .form textarea:focus,
+    .form select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(120, 201, 193, .12);
+    }
+
+    .form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form button {
+      width: 100%;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form-note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* ================= WHATSAPP ================= */
+
+    .whatsapp {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      background: #4fae8d;
+      color: white;
+      padding: 13px 18px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(48, 117, 96, .2);
+      transition: transform .25s ease;
+    }
+
+    .whatsapp:hover {
+      transform: translateY(-3px);
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      padding: 35px 0;
+      border-top: 1px solid var(--line);
+      background: var(--bg);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-dark);
+    }
+
+    /* ================= ANIMATION ================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 850px) {
+
+      .menu {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: 75px;
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .menu a {
+        padding: 8px;
+      }
+
+      .mobile-button {
+        display: block;
+      }
+
+      .hero {
+        padding: 65px 0 75px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .photo-placeholder {
+        margin: auto;
+        max-width: 340px;
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .formats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      section {
+        padding: 70px 0;
+      }
+    }
+
+    @media (max-width: 550px) {
+
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      h1 {
+        font-size: 47px;
+      }
+
+      .hero-text {
+        font-size: 16px;
+      }
+
+      .formats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quote {
+        padding: 40px 25px;
+      }
+
+      .form {
+        padding: 22px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .whatsapp {
+        right: 14px;
+        bottom: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+
+  <header>
+    <div class="container nav">
+
+      <a href="#top" class="logo">
+        Сергей Цербе
+        <span>психологическое консультирование онлайн</span>
+      </a>
+
+      <button class="mobile-button" id="mobileButton" aria-label="Открыть меню">
+        ☰
+      </button>
+
+      <nav class="menu" id="menu">
+        <a href="#about">Подход</a>
+        <a href="#formats">Форматы</a>
+        <a href="#contact">Контакты</a>
+        <a href="#contact" class="nav-button">Записаться</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <main id="top">
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div class="reveal">
+
+          <div class="eyebrow">
+            Онлайн-консультирование
+          </div>
+
+          <h1>
+            Психологическая
+            <span class="hero-title-accent">помощь онлайн</span>
+          </h1>
+
+          <p class="hero-text">
+            Сергей Цербе — русскоязычный психодинамический консультант.
+            Индивидуальные и парные онлайн-сессии для взрослых и подростков
+            по всему миру.
+          </p>
+
+          <div class="buttons">
+            <a href="#contact" class="button button-primary">
+              Записаться на консультацию
+            </a>
+
+            <a href="#about" class="button button-secondary">
+              Узнать о подходе
+            </a>
+          </div>
+
+        </div>
+
+
+        <!-- ФОТО -->
+        <div class="photo-area reveal">
+
+          <!--
+            ПОЗЖЕ ЗДЕСЬ БУДЕТ ВАШЕ ФОТО.
+
+            Когда будете готовы, я покажу,
+            как заменить этот блок на фотографию.
+          -->
+
+          <div class="photo-placeholder">
+
+            <div class="photo-placeholder-content">
+
+              <strong>Ваше фото</strong>
+
+              <p>
+                Здесь будет размещена
+                ваша фотография.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="about" id="about">
+
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <div class="section-label">
+            Мой подход
+          </div>
+
+          <h2>
+            Смотреть на человека целостно
+          </h2>
+
+          <p class="section-description">
+            Психодинамический подход в сочетании с биопсихосоциальной
+            моделью позволяет рассматривать внутренний мир человека
+            вместе с его жизненным контекстом и состоянием организма.
+          </p>
+
+        </div>
+
+
+        <div class="about-grid">
+
+          <div class="about-text reveal">
+
+            <p>
+              Как русскоязычный психодинамический консультант,
+              я предлагаю индивидуальные и парные онлайн-сессии
+              для взрослых и подростков по всему миру.
+            </p>
+
+            <p>
+              В своей практике я использую интегративный
+              психодинамический подход, опираясь на
+              биопсихосоциальную модель.
+            </p>
+
+            <p>
+              Это означает, что я не останавливаюсь только
+              на личной истории человека. Мы можем рассматривать
+              взаимосвязь внутренних психических механизмов
+              с социальными и культурными факторами, а также
+              с биологическим контекстом.
+            </p>
+
+            <p>
+              В том числе значение могут иметь соматические
+              заболевания, истощение организма, уровень нагрузки,
+              образ жизни и другие обстоятельства.
+            </p>
+
+          </div>
+
+
+          <div class="model-cards">
+
+            <div class="model-card reveal">
+
+              <div class="model-number">01</div>
+
+              <h3>Внутренний мир</h3>
+
+              <p>
+                Чувства, переживания, отношения, внутренние
+                конфликты и повторяющиеся жизненные сценарии.
+              </p>
+
+            </div>
+
+
+            <div class="model-card reveal">
+
+              <div class="model-number">02</div>
+
+              <h3>Контекст жизни</h3>
+
+              <p>
+                Семья, отношения, культура, социальная среда,
+                работа и обстоятельства, в которых находится человек.
+              </p>
+
+            </div>
+
+
+            <div class="model-card reveal">
+
+              <div class="model-number">03</div>
+
+              <h3>Тело и состояние</h3>
+
+              <p>
+                Физическое состояние, усталость, болезни,
+                восстановление и другие биологические факторы.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= FORMATS ================= -->
+
+    <section id="formats">
+
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <div class="section-label">
+            Форматы работы
+          </div>
+
+          <h2>
+            Формат зависит от вашего запроса
+          </h2>
+
+          <p class="section-description">
+            Мы можем выбрать формат сотрудничества,
+            который соответствует вашей ситуации и целям.
+          </p>
+
+        </div>
+
+
+        <div class="formats-grid">
+
+          <div class="format-card reveal">
+            <h3>Индивидуальная работа</h3>
+            <p>
+              Пространство для исследования личных переживаний,
+              отношений, внутренних конфликтов и жизненных трудностей.
+            </p>
+          </div>
+
+
+          <div class="format-card reveal">
+            <h3>Парная работа</h3>
+            <p>
+              Работа с отношениями, повторяющимися конфликтами,
+              дистанцией и трудностями взаимопонимания.
+            </p>
+          </div>
+
+
+          <div class="format-card reveal">
+            <h3>Работа с подростками</h3>
+            <p>
+              Индивидуальная работа с подростками с учётом
+              их возраста, семейной и социальной среды.
+            </p>
+          </div>
+
+
+          <div class="format-card reveal">
+            <h3>Краткосрочная работа</h3>
+            <p>
+              Сосредоточение на конкретном запросе
+              и ограниченном во времени формате.
+            </p>
+          </div>
+
+
+          <div class="format-card reveal">
+            <h3>Долгосрочная работа</h3>
+            <p>
+              Более глубокое исследование устойчивых
+              внутренних и межличностных процессов.
+            </p>
+          </div>
+
+
+          <div class="format-card reveal">
+            <h3>Текстовая терапия</h3>
+            <p>
+              Работа в письменном формате, если такой способ
+              взаимодействия подходит вашему запросу.
+            </p>
+          </div>
+
+
+          <div class="format-card reveal">
+            <h3>Коучинг</h3>
+            <p>
+              Сфокусированная работа с целями, решениями
+              и актуальными жизненными задачами.
+            </p>
+          </div>
+
+
+          <div class="format-card reveal">
+            <h3>Ознакомительный формат</h3>
+            <p>
+              Первая встреча для знакомства, обсуждения запроса
+              и понимания возможного формата дальнейшей работы.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= QUOTE ================= -->
+
+    <section class="quote-section">
+
+      <div class="container">
+
+        <div class="quote reveal">
+
+          <p>
+            «Не готовые ответы, а совместное исследование
+            того, что происходит именно с вами».
+          </p>
+
+          <span>
+            Сергей Цербе
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="contact" id="contact">
+
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <div class="section-label">
+            Контакты
+          </div>
+
+          <h2>
+            Давайте познакомимся
+          </h2>
+
+          <p class="section-description">
+            Вы можете написать мне напрямую или оставить сообщение
+            через форму ниже.
+          </p>
+
+        </div>
+
+
+        <div class="contact-grid">
+
+
+          <!-- CONTACT INFO -->
+
+          <div class="contact-info reveal">
+
+            <p>
+              Все консультации проходят онлайн.
+              Работаю с русскоязычными клиентами
+              независимо от страны проживания.
+            </p>
+
+
+            <div class="contact-links">
+
+              <a
+                class="contact-link"
+                href="mailto:SergeiT2026@gmail.com"
+              >
+                <small>Email</small>
+                <strong>SergeiT2026@gmail.com</strong>
+              </a>
+
+
+              <a
+                class="contact-link"
+                href="tel:+491773469616"
+              >
+                <small>Телефон</small>
+                <strong>+49 177 3469616</strong>
+              </a>
+
+
+              <a
+                class="contact-link"
+                href="https://www.facebook.com/profile.php?id=100001823448814&locale=ru_RU"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <small>Facebook</small>
+                <strong>Профиль Facebook</strong>
+              </a>
+
+            </div>
+
+          </div>
+
+
+          <!-- FORM -->
+
+          <form
+            class="form reveal"
+            action="https://formspree.io/f/YOUR_FORM_ID"
+            method="POST"
+          >
+
+            <div class="form-group">
+
+              <label for="name">
+                Ваше имя
+              </label>
+
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Как я могу к вам обращаться?"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="email">
+                Ваш Email
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="therapy">
+                Интересующий формат
+              </label>
+
+              <select id="therapy" name="therapy" required>
+
+                <option value="">
+                  Выберите вариант
+                </option>
+
+                <option value="individual">
+                  Индивидуальная работа
+                </option>
+
+                <option value="couple">
+                  Работа с парой
+                </option>
+
+                <option value="adolescents">
+                  Работа с подростками
+                </option>
+
+                <option value="text">
+                  Текстовая терапия
+                </option>
+
+                <option value="coaching">
+                  Коучинг
+                </option>
+
+                <option value="introductory">
+                  Ознакомительный формат
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="message">
+                Сообщение
+              </label>
+
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Коротко расскажите о вашем запросе..."
+                required
+              ></textarea>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="button button-primary"
+            >
+              Отправить сообщение
+            </button>
+
+
+            <div class="form-note">
+              После настройки формы сообщение будет автоматически
+              отправляться на вашу электронную почту.
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================= WHATSAPP ================= -->
+
+  <a
+    class="whatsapp"
+    href="https://wa.me/491773469616?text=Здравствуйте%2C%20я%20хотел%20бы%20узнать%20о%20консультации."
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    WhatsApp
+  </a>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <div class="container footer-content">
+
+      <div>
+        © 2026 Сергей Цербе
+      </div>
+
+      <div class="footer-links">
+
+        <a href="#about">
+          Подход
+        </a>
+
+        <a href="#formats">
+          Форматы
+        </a>
+
+        <a href="#contact">
+          Контакты
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    // Мобильное меню
+    const mobileButton = document.getElementById("mobileButton");
+    const menu = document.getElementById("menu");
+
+    mobileButton.addEventListener("click", () => {
+      menu.classList.toggle("active");
+    });
+
+
+    // Закрытие меню после перехода
+    document.querySelectorAll(".menu a").forEach(link => {
+      link.addEventListener("click", () => {
+        menu.classList.remove("active");
+      });
+    });
+
+
+    // Плавное появление элементов при прокрутке
+    const observer = new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+
+    document.querySelectorAll(".reveal").forEach(element => {
+      observer.observe(element);
+    });
+
+  </script>
+
+</body>
+</html>
