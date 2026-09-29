@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Статьи — Сергей Цербе</title>
+
+  <meta
+    name="description"
+    content="Статьи Сергея Цербе о психологии, отношениях, внутреннем мире и психодинамическом подходе."
+  >
+
+
+  <style>
+
+    :root {
+      --bg: #fbfdfc;
+      --surface: #f1f8f7;
+      --surface-2: #e8f4f2;
+      --text: #263638;
+      --muted: #68787a;
+      --accent: #78c9c1;
+      --accent-dark: #3e9690;
+      --accent-light: #dff2ef;
+      --white: #ffffff;
+      --line: #dce9e7;
+
+      --shadow:
+        0 18px 50px rgba(53, 94, 91, 0.08);
+
+      --radius: 24px;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      background: var(--bg);
+
+      color: var(--text);
+
+      line-height: 1.7;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    .container {
+
+      width:
+        min(
+          900px,
+          calc(100% - 40px)
+        );
+
+      margin: 0 auto;
+    }
+
+
+    /* ================= HEADER ================= */
+
+    header {
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 100;
+
+      background:
+        rgba(251, 253, 252, 0.93);
+
+      backdrop-filter: blur(12px);
+
+      border-bottom:
+        1px solid rgba(220, 233, 231, 0.8);
+    }
+
+
+    .nav {
+
+      min-height: 78px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 30px;
+    }
+
+
+    .logo {
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 23px;
+
+      font-weight: 500;
+    }
+
+
+    .logo span {
+
+      display: block;
+
+      font-size: 12px;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      color: var(--muted);
+
+      margin-top: -5px;
+    }
+
+
+    .menu {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 28px;
+    }
+
+
+    .menu a {
+
+      font-size: 14px;
+
+      color: var(--muted);
+
+      transition: color .2s ease;
+    }
+
+
+    .menu a:hover {
+
+      color:
+        var(--accent-dark);
+    }
+
+
+    .menu .active {
+
+      color:
+        var(--accent-dark);
+
+      font-weight: 600;
+    }
+
+
+    .mobile-button {
+
+      display: none;
+
+      border: none;
+
+      background: none;
+
+      font-size: 25px;
+
+      cursor: pointer;
+
+      color: var(--text);
+    }
+
+
+    /* ================= PAGE INTRO ================= */
+
+    .page-intro {
+
+      padding:
+        100px 0 70px;
+
+      text-align: center;
+    }
+
+
+    .eyebrow {
+
+      color:
+        var(--accent-dark);
+
+      text-transform: uppercase;
+
+      font-size: 12px;
+
+      letter-spacing: 2px;
+
+      font-weight: 600;
+
+      margin-bottom: 17px;
+    }
+
+
+    h1 {
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-weight: 400;
+
+      font-size:
+        clamp(48px, 7vw, 70px);
+
+      line-height: 1.1;
+
+      letter-spacing: -2px;
+
+      margin-bottom: 22px;
+    }
+
+
+    .intro-text {
+
+      max-width: 650px;
+
+      margin: 0 auto;
+
+      color: var(--muted);
+
+      font-size: 17px;
+    }
+
+
+    /* ================= ARTICLES ================= */
+
+    .articles {
+
+      padding:
+        10px 0 100px;
+    }
+
+
+    .article {
+
+      background:
+        var(--white);
+
+      border:
+        1px solid var(--line);
+
+      border-radius:
+        var(--radius);
+
+      overflow: hidden;
+
+      margin-bottom: 28px;
+
+      box-shadow:
+        0 8px 35px rgba(53, 94, 91, 0.035);
+
+      transition:
+        box-shadow .3s ease,
+        transform .3s ease;
+    }
+
+
+    .article:hover {
+
+      box-shadow:
+        var(--shadow);
+    }
+
+
+    /* ================= ARTICLE IMAGE ================= */
+
+    .article-image {
+
+      width: 100%;
+
+      height: 310px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #e5f3f1,
+          #f6faf9
+        );
+
+      overflow: hidden;
+
+      position: relative;
+    }
+
+
+    .article-image img {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+    }
+
+
+    /*
+      Если картинки пока нет,
+      показываем красивую заглушку.
+    */
+
+    .image-placeholder {
+
+      height: 100%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      padding: 30px;
+    }
+
+
+    .image-placeholder span {
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 24px;
+
+      color:
+        var(--accent-dark);
+    }
+
+
+    /* ================= ARTICLE CONTENT ================= */
+
+    .article-content {
+
+      padding:
+        34px 38px 38px;
+    }
+
+
+    .article-category {
+
+      display: inline-block;
+
+      color:
+        var(--accent-dark);
+
+      background:
+        var(--accent-light);
+
+      border-radius: 30px;
+
+      padding:
+        5px 12px;
+
+      font-size: 11px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+
+      margin-bottom: 15px;
+    }
+
+
+    .article h2 {
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(29px, 4vw, 40px);
+
+      font-weight: 400;
+
+      line-height: 1.2;
+
+      letter-spacing: -0.7px;
+
+      margin-bottom: 13px;
+    }
+
+
+    .article-date {
+
+      font-size: 12px;
+
+      color: var(--muted);
+
+      margin-bottom: 20px;
+    }
+
+
+    /* ================= PREVIEW ================= */
+
+    .article-preview {
+
+      color:
+        #5d6d6f;
+
+      font-size: 16px;
+
+      line-height: 1.75;
+
+      margin-bottom: 20px;
+
+      /*
+        Примерно 5–7 строк текста.
+      */
+
+      max-height:
+        9.2em;
+
+      overflow: hidden;
+
+      position: relative;
+    }
+
+
+    /*
+      Мягкое исчезновение последних строк
+    */
+
+    .article-preview::after {
+
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+
+      right: 0;
+
+      bottom: 0;
+
+      height: 45px;
+
+      background:
+        linear-gradient(
+          transparent,
+          white
+        );
+    }
+
+
+    /* ================= FULL TEXT ================= */
+
+    .article-full {
+
+      display: none;
+
+      color:
+        #4f6062;
+
+      font-size: 16px;
+
+      line-height: 1.85;
+
+      padding-top: 8px;
+
+      animation:
+        articleOpen .35s ease;
+    }
+
+
+    .article.open
+    .article-full {
+
+      display: block;
+    }
+
+
+    .article.open
+    .article-preview {
+
+      display: none;
+    }
+
+
+    @keyframes articleOpen {
+
+      from {
+
+        opacity: 0;
+
+        transform:
+          translateY(-8px);
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform:
+          translateY(0);
+      }
+    }
+
+
+    .article-full p {
+
+      margin-bottom: 22px;
+    }
+
+
+    .article-full h3 {
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-weight: 400;
+
+      font-size: 25px;
+
+      margin:
+        30px 0 12px;
+
+      color: var(--text);
+    }
+
+
+    .article-full ul {
+
+      padding-left: 25px;
+
+      margin-bottom: 22px;
+    }
+
+
+    .article-full li {
+
+      margin-bottom: 8px;
+    }
+
+
+    /* ================= READ BUTTON ================= */
+
+    .read-button {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      border: none;
+
+      background: none;
+
+      color:
+        var(--accent-dark);
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+      padding: 5px 0;
+
+      transition:
+        color .2s ease;
+    }
+
+
+    .read-button:hover {
+
+      color:
+        #286f6b;
+    }
+
+
+    .arrow {
+
+      font-size: 16px;
+
+      transition:
+        transform .3s ease;
+    }
+
+
+    .article.open
+    .arrow {
+
+      transform:
+        rotate(180deg);
+    }
+
+
+    /* ================= VIDEO ================= */
+
+    .video-block {
+
+      margin-top: 30px;
+
+      padding: 25px;
+
+      background:
+        var(--surface);
+
+      border-radius: 18px;
+    }
+
+
+    .video-block strong {
+
+      display: block;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 21px;
+
+      font-weight: 400;
+
+      margin-bottom: 7px;
+    }
+
+
+    .video-block p {
+
+      font-size: 14px;
+
+      color: var(--muted);
+
+      margin-bottom: 15px;
+    }
+
+
+    .video-link {
+
+      display: inline-flex;
+
+      padding:
+        10px 17px;
+
+      border-radius:
+        30px;
+
+      background:
+        var(--accent-dark);
+
+      color: white;
+
+      font-size: 13px;
+
+      font-weight: 600;
+    }
+
+
+    /* ================= FOOTER ================= */
+
+    footer {
+
+      border-top:
+        1px solid var(--line);
+
+      padding:
+        35px 0;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    .footer-content {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 20px;
+    }
+
+
+    .footer-links {
+
+      display: flex;
+
+      gap: 20px;
+    }
+
+
+    .footer-links a:hover {
+
+      color:
+        var(--accent-dark);
+    }
+
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 700px) {
+
+      .menu {
+
+        position: absolute;
+
+        left: 14px;
+
+        right: 14px;
+
+        top: 74px;
+
+        background: white;
+
+        border:
+          1px solid var(--line);
+
+        border-radius: 18px;
+
+        padding: 18px;
+
+        box-shadow:
+          var(--shadow);
+
+        display: none;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 5px;
+      }
+
+
+      .menu.active {
+
+        display: flex;
+      }
+
+
+      .menu a {
+
+        padding: 8px;
+      }
+
+
+      .mobile-button {
+
+        display: block;
+      }
+
+
+      .page-intro {
+
+        padding:
+          70px 0 50px;
+      }
+
+
+      .article-image {
+
+        height: 230px;
+      }
+
+
+      .article-content {
+
+        padding:
+          25px 22px 28px;
+      }
+
+
+      .footer-content {
+
+        flex-direction: column;
+
+        text-align: center;
+      }
+
+    }
+
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- ================= HEADER ================= -->
+
+  <header>
+
+    <div class="container nav">
+
+
+      <a href="index.html" class="logo">
+
+        Сергей Цербе
+
+        <span>
+          психологическое консультирование онлайн
+        </span>
+
+      </a>
+
+
+      <button
+        class="mobile-button"
+        id="mobileButton"
+        aria-label="Открыть меню"
+      >
+        ☰
+      </button>
+
+
+      <nav class="menu" id="menu">
+
+        <a href="index.html">
+          Главная
+        </a>
+
+        <a href="index.html#about">
+          Подход
+        </a>
+
+        <a
+          href="articles.html"
+          class="active"
+        >
+          Статьи
+        </a>
+
+        <a href="index.html#contact">
+          Контакты
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- ================= INTRO ================= -->
+
+  <main>
+
+    <section class="page-intro">
+
+      <div class="container">
+
+        <div class="eyebrow">
+          Статьи и материалы
+        </div>
+
+        <h1>
+          Мысли и наблюдения
+        </h1>
+
+        <p class="intro-text">
+          Здесь я буду публиковать материалы о психологии,
+          отношениях, внутреннем мире человека и различных
+          аспектах психологического консультирования.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ================= ARTICLES ================= -->
+
+    <section class="articles">
+
+      <div class="container">
+
+
+        <!-- ================================================= -->
+        <!-- СТАТЬЯ №1                                         -->
+        <!-- ================================================= -->
+
+        <article class="article">
+
+
+          <!-- КАРТИНКА -->
+
+          <div class="article-image">
+
+            <!--
+              КОГДА БУДЕТ КАРТИНКА:
+
+              1. Создайте папку images
+              2. Загрузите туда картинку
+              3. Замените этот блок на:
+
+              <img
+                src="images/article-1.jpg"
+                alt="Название статьи"
+              >
+            -->
+
+            <div class="image-placeholder">
+
+              <span>
+                Изображение статьи
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="article-content">
+
+
+            <div class="article-category">
+              Психология
+            </div>
+
+
+            <h2>
+              Название первой статьи
+            </h2>
+
+
+            <div class="article-date">
+              29 сентября 2026
+            </div>
+
+
+            <!-- ПРЕВЬЮ -->
+
+            <div class="article-preview">
+
+              Здесь будет начало вашей статьи.
+              Этот текст специально ограничен несколькими
+              строками, чтобы посетитель мог быстро понять,
+              о чём материал. После нажатия на кнопку ниже
+              читатель сможет открыть полный текст статьи.
+
+            </div>
+
+
+            <!-- ПОЛНЫЙ ТЕКСТ -->
+
+            <div class="article-full">
+
+              <p>
+                Здесь начинается полный текст статьи.
+                Вы можете писать столько, сколько необходимо
+                для раскрытия темы.
+              </p>
+
+
+              <p>
+                Каждый абзац будет автоматически оформляться
+                в удобном для чтения виде. Вам не потребуется
+                создавать отдельную страницу для каждой статьи.
+              </p>
+
+
+              <h3>
+                Подзаголовок статьи
+              </h3>
+
+
+              <p>
+                Здесь можно продолжить текст статьи.
+                Можно использовать несколько подзаголовков,
+                списки и другие элементы форматирования.
+              </p>
+
+
+              <p>
+                В дальнейшем мы можем сделать для вас
+                несколько готовых шаблонов статей, чтобы
+                добавление нового материала занимало
+                буквально несколько минут.
+              </p>
+
+
+              <!-- ВИДЕО -->
+
+              <div class="video-block">
+
+                <strong>
+                  Видео по теме
+                </strong>
+
+                <p>
+                  Здесь можно разместить ссылку
+                  на видео в Instagram, YouTube
+                  или другой платформе.
+                </p>
+
+                <a
+                  href="#"
+                  class="video-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Смотреть видео
+                </a>
+
+              </div>
+
+            </div>
+
+
+            <!-- КНОПКА -->
+
+            <button
+              class="read-button"
+              type="button"
+            >
+
+              <span class="button-text">
+                Читать полностью
+              </span>
+
+              <span class="arrow">
+                ↓
+              </span>
+
+            </button>
+
+
+          </div>
+
+        </article>
+
+
+
+        <!-- ================================================= -->
+        <!-- СТАТЬЯ №2                                         -->
+        <!-- ================================================= -->
+
+        <article class="article">
+
+
+          <div class="article-image">
+
+            <div class="image-placeholder">
+
+              <span>
+                Изображение статьи
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="article-content">
+
+
+            <div class="article-category">
+              Отношения
+            </div>
+
+
+            <h2>
+              Название второй статьи
+            </h2>
+
+
+            <div class="article-date">
+              Дата публикации
+            </div>
+
+
+            <div class="article-preview">
+
+              Здесь будет начало второй статьи.
+              Первые несколько строк помогают посетителю
+              понять содержание материала и решить,
+              хочет ли он прочитать его полностью.
+
+            </div>
+
+
+            <div class="article-full">
+
+              <p>
+                Полный текст второй статьи начинается здесь.
+              </p>
+
+              <p>
+                Вы можете заменить этот текст своим материалом.
+              </p>
+
+              <h3>
+                Подзаголовок
+              </h3>
+
+              <p>
+                Продолжение статьи.
+              </p>
+
+            </div>
+
+
+            <button
+              class="read-button"
+              type="button"
+            >
+
+              <span class="button-text">
+                Читать полностью
+              </span>
+
+              <span class="arrow">
+                ↓
+              </span>
+
+            </button>
+
+
+          </div>
+
+        </article>
+
+
+
+        <!-- ================================================= -->
+        <!-- СТАТЬЯ №3                                         -->
+        <!-- ================================================= -->
+
+        <article class="article">
+
+
+          <div class="article-image">
+
+            <div class="image-placeholder">
+
+              <span>
+                Изображение статьи
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="article-content">
+
+
+            <div class="article-category">
+              Внутренний мир
+            </div>
+
+
+            <h2>
+              Название третьей статьи
+            </h2>
+
+
+            <div class="article-date">
+              Дата публикации
+            </div>
+
+
+            <div class="article-preview">
+
+              Здесь будет начало третьей статьи.
+              Этот блок автоматически показывает только
+              короткий фрагмент материала.
+
+            </div>
+
+
+            <div class="article-full">
+
+              <p>
+                Полный текст третьей статьи.
+              </p>
+
+              <p>
+                Продолжение материала.
+              </p>
+
+            </div>
+
+
+            <button
+              class="read-button"
+              type="button"
+            >
+
+              <span class="button-text">
+                Читать полностью
+              </span>
+
+              <span class="arrow">
+                ↓
+              </span>
+
+            </button>
+
+
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <div class="container footer-content">
+
+      <div>
+        © 2026 Сергей Цербе
+      </div>
+
+
+      <div class="footer-links">
+
+        <a href="index.html">
+          Главная
+        </a>
+
+        <a href="index.html#about">
+          Подход
+        </a>
+
+        <a href="index.html#contact">
+          Контакты
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+
+    /* ================= MOBILE MENU ================= */
+
+    const mobileButton =
+      document.getElementById("mobileButton");
+
+    const menu =
+      document.getElementById("menu");
+
+
+    mobileButton.addEventListener(
+      "click",
+      () => {
+
+        menu.classList.toggle("active");
+
+      }
+    );
+
+
+    document
+      .querySelectorAll(".menu a")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            menu.classList.remove("active");
+
+          }
+        );
+
+      });
+
+
+
+    /* ================= ARTICLES ================= */
+
+    const articles =
+      document.querySelectorAll(".article");
+
+
+    articles.forEach(article => {
+
+
+      const button =
+        article.querySelector(".read-button");
+
+
+      const buttonText =
+        article.querySelector(".button-text");
+
+
+      button.addEventListener(
+        "click",
+        () => {
+
+
+          const wasOpen =
+            article.classList.contains("open");
+
+
+          /*
+            Сначала закрываем ВСЕ статьи.
+            Поэтому одновременно открыта
+            только одна статья.
+          */
+
+          articles.forEach(item => {
+
+            item.classList.remove("open");
+
+            const text =
+              item.querySelector(".button-text");
+
+            text.textContent =
+              "Читать полностью";
+
+          });
+
+
+          /*
+            Если нажатая статья
+            раньше была закрыта —
+            открываем её.
+          */
+
+          if (!wasOpen) {
+
+            article.classList.add("open");
+
+            buttonText.textContent =
+              "Свернуть";
+
+            /*
+              Небольшая прокрутка,
+              чтобы начало статьи
+              оставалось перед глазами.
+            */
+
+            setTimeout(() => {
+
+              article.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+              });
+
+            }, 100);
+
+          }
+
+        }
+      );
+
+    });
+
+
+  </script>
+
+
+</body>
+
+</html>
