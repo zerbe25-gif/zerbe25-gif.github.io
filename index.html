@@ -224,25 +224,75 @@
 
     /* ================= PHOTO ================= */
 
-   .photo-area {
+.photo-area {
   position: relative;
-}
-
-.profile-photo {
-  display: block;
   width: 100%;
-  max-width: 390px;
+  max-width: 430px;
   height: 500px;
   margin-left: auto;
+  cursor: pointer;
+  perspective: 1200px;
+}
 
-  object-fit: cover;
-  object-position: center 35%;;
+.photo-card {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 390px;
+  height: 500px;
 
   border-radius: 24px;
+  overflow: hidden;
 
   box-shadow: var(--shadow);
   border: 1px solid var(--line);
+
+  background: #fcfefe;
+
+  transition:
+    transform .65s cubic-bezier(.22, .61, .36, 1),
+    opacity .65s ease,
+    box-shadow .4s ease;
 }
+
+.photo-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center 35%;
+
+  pointer-events: none;
+}
+
+/* Передняя фотография */
+
+.photo-card-front {
+  z-index: 2;
+  transform: translateX(0);
+}
+
+/* Вторая фотография, которая немного выглядывает */
+
+.photo-card-back {
+  z-index: 1;
+  transform: translateX(42px) scale(.96);
+}
+
+/* ================= PHOTO OPEN STATE ================= */
+
+.photo-area.swap .photo-card-front {
+  transform: translateX(-42px) scale(.96);
+  z-index: 1;
+}
+
+.photo-area.swap .photo-card-back {
+  transform: translateX(0) scale(1);
+  z-index: 2;
+}
+    
     /* ================= SECTIONS ================= */
 
     section {
@@ -371,6 +421,38 @@
       color: var(--muted);
       font-size: 14px;
     }
+    /* Разделение групп форматов */
+
+.format-group-title {
+  margin: 38px 0 18px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--text);
+}
+
+.format-group-title-second {
+  margin-top: 48px;
+}
+
+/* Оранжевая линия у форматов по длительности */
+
+.format-duration {
+  position: relative;
+  padding-bottom: 30px;
+}
+
+.format-duration::after {
+  content: "";
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 0;
+
+  height: 2px;
+  background: #e8b98f;
+  border-radius: 2px;
+}
 
     /* ================= QUOTE ================= */
 
@@ -506,7 +588,106 @@
       margin-top: 12px;
       text-align: center;
     }
+    
+/* Запросы */
 
+.requests-card {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 34px;
+  background: #fcfefe;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+
+.requests-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+
+.requests-list li {
+  position: relative;
+  padding-left: 25px;
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.requests-list li::before {
+  content: "•";
+  position: absolute;
+  left: 5px;
+  top: 0;
+  color: var(--accent);
+  font-size: 22px;
+  line-height: 1.45;
+}
+
+.requests-more {
+  display: none;
+  margin-top: 26px;
+}
+
+.requests-card.open .requests-more {
+  display: block;
+}
+
+.clinical-note {
+  padding: 20px 22px;
+  background: #f3f9f8;
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+  color: var(--text);
+}
+
+.clinical-note strong {
+  color: var(--text);
+}
+
+.clinical-note p {
+  margin: 0 0 10px;
+  line-height: 1.65;
+}
+
+.clinical-note p:last-child {
+  margin-bottom: 0;
+}
+
+.requests-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 26px;
+  padding: 13px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+}
+
+.requests-toggle:hover {
+  background: #f3f9f8;
+  border-color: var(--accent);
+}
+
+.requests-toggle-icon {
+  font-size: 20px;
+  line-height: 1;
+  color: var(--accent);
+  transition: transform .2s ease;
+}
+
+.requests-card.open .requests-toggle-icon {
+  transform: rotate(45deg);
+}
     /* ================= WHATSAPP ================= */
 
     .whatsapp {
@@ -667,6 +848,29 @@
         bottom: 14px;
       }
     }
+
+      /* ================= PHOTO MOBILE ================= */
+    
+    @media (max-width: 700px) {
+  
+  .photo-area {
+    max-width: 390px;
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .photo-card {
+    width: 100%;
+  }
+
+  .photo-card-back {
+    transform: translateX(24px) scale(.96);
+  }
+
+  .photo-area.swap .photo-card-front {
+    transform: translateX(-24px) scale(.96);
+  }
+}
   </style>
 </head>
 
@@ -689,6 +893,8 @@
      <nav class="menu" id="menu">
 
   <a href="#about">Подход</a>
+
+  <a href="index.html#requests">Запросы</a>
 
   <a href="#formats">Форматы</a>
 
@@ -733,8 +939,8 @@
               Записаться на консультацию
             </a>
 
-            <a href="#about" class="button button-secondary">
-              Узнать о подходе
+            <a href="#requests" class="button button-secondary" id="requests-button">
+               Запросы
             </a>
           </div>
 
@@ -743,19 +949,24 @@
 
      <!-- ================= ФОТО ================= -->
         
-<div class="photo-area reveal">
+<div class="photo-area reveal" id="photo-slider">
 
-  <img
-    src="images/sergey В.jpg"
-    alt="Сергей Цербе"
-    class="profile-photo"
-  >
+  <div class="photo-card photo-card-back">
+    <img
+      src="images/sergey-B.jpg"
+      alt="Сергей Цербе"
+    >
+  </div>
 
+  <div class="photo-card photo-card-front">
+    <img
+      src="images/sergey-A.jpg"
+      alt="Сергей Цербе"
+    >
+  </div>
+     
 </div>
-
-       
-      </div>
-    </section>
+</section>
 
 
     <!-- ================= ABOUT ================= -->
@@ -867,6 +1078,100 @@
 
     </section>
 
+   
+    <!-- С КАКИМИ ЗАПРОСАМИ Я РАБОТАЮ -->
+
+<section class="section" id="requests">
+  <div class="container">
+
+    <div class="section-heading reveal">
+      <span class="eyebrow">Запросы</span>
+
+      <h2>С какими запросами я работаю</h2>
+
+      <p>
+        Работа может быть посвящена разным жизненным ситуациям,
+        внутренним конфликтам и вопросам самоопределения.
+      </p>
+    </div>
+
+
+    <div class="requests-card reveal">
+
+      <ul class="requests-list">
+
+        <li>Тревога, стресс, выгорание, переутомление.</li>
+
+        <li>
+          Проблемы в отношениях: созависимость, семейные конфликты,
+          конфликты поколений, развод, измены.
+        </li>
+
+        <li>
+          Поиск себя, вопросы самоидентификации.
+        </li>
+
+        <li>
+          Трудности на работе и вопросы самореализации.
+        </li>
+
+        <li>
+          Последствия жестокого обращения, буллинг.
+        </li>
+
+        <li>
+          Исследование мужской самоидентичности и особенностей социализации.
+        </li>
+
+        <li>
+          Вопросы сексуальной идентичности, поддержка ЛГБТК+ сообщества.
+        </li>
+
+        <li>
+          Эмиграция и адаптация в новой среде.
+        </li>
+
+        <li>
+          Переживание утраты, горя.
+        </li>
+
+      </ul>
+
+
+      <div class="requests-more">
+
+        <div class="clinical-note">
+          <strong>Отдельное направление работы</strong>
+
+          <p>
+            Сопровождение при наличии клинических состояний и помощь
+            в восстановлении после госпитализаций (тревожные расстройства,
+            ОКР, депрессия и др.).
+          </p>
+
+          <p>
+            <strong>Важно:</strong> психодинамическое консультирование
+            дополняет, но не заменяет медикаментозное лечение и наблюдение
+            у профильного психиатра.
+          </p>
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="requests-toggle"
+        aria-expanded="false"
+      >
+        <span>Показать полностью</span>
+        <span class="requests-toggle-icon">+</span>
+      </button>
+
+    </div>
+
+  </div>
+</section>
 
     <!-- ================= FORMATS ================= -->
 
@@ -891,86 +1196,95 @@
 
         </div>
 
+       <div class="format-group-title">
+  Длительность работы
+</div>
 
-        <div class="formats-grid">
+<div class="formats-grid">
 
-          <div class="format-card reveal">
-            <h3>Краткосрочная работа</h3>
-            <p>
-              Сосредоточение на конкретном запросе
-              и ограниченном во времени формате.
-            </p>
-          </div>
-
-
-          <div class="format-card reveal">
-            <h3>Долгосрочная работа</h3>
-            <p>
-              Более глубокое исследование устойчивых
-              внутренних и межличностных процессов.
-            </p>
-          </div>
-
-          <div class="format-card reveal">
-            <h3>Ознакомительный формат</h3>
-            <p>
-              Первая встреча для знакомства, обсуждения запроса
-              и понимания возможного формата дальнейшей работы.
-            </p>
-          </div>
-
-          
-          <div class="format-card reveal">
-            <h3>Индивидуальная работа</h3>
-            <p>
-              Пространство для исследования личных переживаний,
-              отношений, внутренних конфликтов и жизненных трудностей.
-            </p>
-          </div>
+  <div class="format-card format-duration reveal">
+    <h3>Краткосрочная работа</h3>
+    <p>
+      Сосредоточение на конкретном запросе
+      и ограниченном во времени формате.
+    </p>
+  </div>
 
 
-          <div class="format-card reveal">
-            <h3>Парная работа</h3>
-            <p>
-              Работа с отношениями, повторяющимися конфликтами,
-              дистанцией и трудностями взаимопонимания.
-            </p>
-          </div>
+  <div class="format-card format-duration reveal">
+    <h3>Долгосрочная работа</h3>
+    <p>
+      Более глубокое исследование устойчивых
+      внутренних и межличностных процессов.
+    </p>
+  </div>
 
 
-          <div class="format-card reveal">
-            <h3>Работа с подростками</h3>
-            <p>
-              Индивидуальная работа с подростками с учётом
-              их возраста, семейной и социальной среды.
-            </p>
-          </div>
+  <div class="format-card format-duration reveal">
+    <h3>Ознакомительный формат</h3>
+    <p>
+      Первая встреча для знакомства, обсуждения запроса
+      и понимания возможного формата дальнейшей работы.
+    </p>
+  </div>
+
+</div>
 
 
-          <div class="format-card reveal">
-            <h3>Коучинг</h3>
-            <p>
-              Сфокусированная работа с целями, решениями
-              и актуальными жизненными задачами.
-            </p>
-          </div>
+<div class="format-group-title format-group-title-second">
+  Тип работы
+</div>
+
+<div class="formats-grid">
+
+  <div class="format-card reveal">
+    <h3>Индивидуальная работа</h3>
+    <p>
+      Пространство для исследования личных переживаний,
+      отношений, внутренних конфликтов и жизненных трудностей.
+    </p>
+  </div>
 
 
-          <div class="format-card reveal">
-            <h3>Текстовая терапия</h3>
-            <p>
-              Работа в письменном формате, если такой способ
-              взаимодействия подходит вашему запросу.
-            </p>
-          </div>
+  <div class="format-card reveal">
+    <h3>Парная работа</h3>
+    <p>
+      Работа с отношениями, повторяющимися конфликтами,
+      дистанцией и трудностями взаимопонимания.
+    </p>
+  </div>
 
-          
-          </div>
 
-      </div>
+  <div class="format-card reveal">
+    <h3>Работа с подростками</h3>
+    <p>
+      Индивидуальная работа с подростками с учётом
+      их возраста, семейной и социальной среды.
+    </p>
+  </div>
 
-    </section>
 
+  <div class="format-card reveal">
+    <h3>Коучинг</h3>
+    <p>
+      Сфокусированная работа с целями, решениями
+      и актуальными жизненными задачами.
+    </p>
+  </div>
+
+
+  <div class="format-card reveal">
+    <h3>Текстовая терапия</h3>
+    <p>
+      Работа в письменном формате, если такой способ
+      взаимодействия подходит вашему запросу.
+    </p>
+  </div>
+
+  </div>
+</div>
+      
+</section>
 
     <!-- ================= QUOTE ================= -->
 
@@ -1274,6 +1588,40 @@
       observer.observe(element);
     });
 
+    const requestsCard = document.querySelector(".requests-card");
+    const requestsToggle = document.querySelector(".requests-toggle");
+
+      if (requestsCard && requestsToggle) {
+        requestsToggle.addEventListener("click", () => {
+          const isOpen = requestsCard.classList.toggle("open");
+
+          requestsToggle.setAttribute("aria-expanded", isOpen);
+
+          requestsToggle.querySelector("span").textContent =
+            isOpen ? "Свернуть" : "Показать полностью";
+  });
+}
+    const requestsButton = document.querySelector("#requests-button");
+
+    if (requestsButton && requestsCard && requestsToggle) {
+      requestsButton.addEventListener("click", () => {
+
+        requestsCard.classList.add("open");
+
+        requestsToggle.setAttribute("aria-expanded", "true");
+
+        requestsToggle.querySelector("span").textContent = "Свернуть";
+
+  });
+}
+    const photoSlider = document.querySelector("#photo-slider");
+
+    if (photoSlider) {
+      photoSlider.addEventListener("click", () => {
+        photoSlider.classList.toggle("swap");
+      });
+    }
+    
   </script>
 
 </body>
