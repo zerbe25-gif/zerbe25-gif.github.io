@@ -38,7 +38,10 @@
       --radius: 24px;
     }
 
-
+.article-template {
+  display: none;
+}
+    
     * {
       box-sizing: border-box;
       margin: 0;
@@ -443,53 +446,15 @@
 
     .article-preview {
 
-      color:
-        #5d6d6f;
+  color: #5d6d6f;
 
-      font-size: 16px;
+  font-size: 16px;
 
-      line-height: 1.75;
+  line-height: 1.75;
 
-      margin-bottom: 20px;
+  margin-bottom: 20px;
 
-      /*
-        Примерно 5–7 строк текста.
-      */
-
-      max-height:
-        9.2em;
-
-      overflow: hidden;
-
-      position: relative;
-    }
-
-
-    /*
-      Мягкое исчезновение последних строк
-    */
-
-    .article-preview::after {
-
-      content: "";
-
-      position: absolute;
-
-      left: 0;
-
-      right: 0;
-
-      bottom: 0;
-
-      height: 45px;
-
-      background:
-        linear-gradient(
-          transparent,
-          white
-        );
-    }
-
+}
 
     /* ================= FULL TEXT ================= */
 
@@ -930,8 +895,7 @@
         <!-- СТАТЬЯ №1                                         -->
         <!-- ================================================= -->
 
-        <article class="article">
-
+     <article class="article">
 
           <!-- КАРТИНКА -->
 
@@ -1104,8 +1068,8 @@
         <!-- СТАТЬЯ №2                                         -->
         <!-- ================================================= -->
 
-        <article class="article">
-
+        <article class="article article-template">
+  
 
           <div class="article-image">
 
@@ -1195,8 +1159,7 @@
         <!-- СТАТЬЯ №3                                         -->
         <!-- ================================================= -->
 
-        <article class="article">
-
+      <article class="article article-template">
 
           <div class="article-image">
 
