@@ -626,7 +626,17 @@
   font-size: 22px;
   line-height: 1.45;
 }
+    
+/* Скрываем пункты после 7-го */
 
+.requests-list li:nth-child(n+8) {
+  display: none;
+}
+
+.requests-card.open .requests-list li:nth-child(n+8) {
+  display: list-item;
+}
+    
 .requests-more {
   display: none;
   margin-top: 26px;
