@@ -284,12 +284,13 @@
 .photo-card-front {
   z-index: 2;
   transform: translateX(0);
+  opacity: 1;
 }
 
 /* Вторая фотография, которая немного выглядывает */
 
 .photo-card-back {
-  z-index: 1;
+  z-index: 3;
   transform: translateX(42px) scale(.96);
   opacity: 1;
 }
@@ -901,8 +902,7 @@
 
   .photo-area.swap .photo-card-front {
   transform: translateX(-22px) scale(.97);
-  opacity: .92;
-}
+  }
 
   .photo-area.swap .photo-card-back {
     transform: translateX(0) scale(1);
@@ -969,10 +969,10 @@
     transform: translateX(22px) scale(.96);
   }
 
-  .photo-area.swap .photo-card-front {
-  transform: translateX(-16px) scale(.97);
-  opacity: .92;
+ .photo-area.swap .photo-card-front {
+  transform: translateX(-18px) scale(.96);
   }
+
 }
   </style>
 </head>
