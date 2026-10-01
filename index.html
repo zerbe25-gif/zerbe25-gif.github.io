@@ -264,10 +264,10 @@
   background: #fcfefe;
 
   transition:
-  transform .8s cubic-bezier(.22, .61, .36, 1),
-  opacity .8s ease,
-  box-shadow .5s ease;
-}
+    transform 1s cubic-bezier(.22, .61, .36, 1),
+    opacity 1s ease,
+    box-shadow .6s ease;
+  }
     
 .photo-card img {
   display: block;
@@ -292,7 +292,7 @@
 
 .photo-card-back {
   z-index: 2;
-  transform: translateX(42px) scale(.98);
+  transform: translateX(42px) scale(.97);
   opacity: 1;
 }
 
@@ -883,22 +883,22 @@
 
   /* ================= PHOTO ================= */
 
-  .photo-area {
-    width: calc(100% - 24px);
-    max-width: 360px;
-    height: 460px;
-    margin-left: 0;
-    margin-right: auto;
-  }
+ .photo-area {
+  width: calc(100% - 24px);
+  max-width: 340px;
+  height: 440px;
+  margin-left: 0;
+  margin-right: auto;
+}
 
-  .photo-card {
-    width: 100%;
-    max-width: 340px;
-    height: 460px;
-  }
+.photo-card {
+  width: 100%;
+  max-width: 320px;
+  height: 440px;
+}
 
   .photo-card-back {
-    transform: translateX(24px) scale(.96);
+    transform: translateX(20px) scale(.94);
   }
 
   .photo-area.swap .photo-card-front {
@@ -957,17 +957,17 @@
   /* Ещё немного уменьшаем фото на маленьких экранах */
 
   .photo-area {
-    max-width: 330px;
-    height: 430px;
+    max-width: 310px;
+    height: 410px;
   }
 
   .photo-card {
-    max-width: 310px;
-    height: 430px;
+    max-width: 290px;
+    height: 410px;
   }
 
   .photo-card-back {
-    transform: translateX(22px) scale(.96);
+    transform: translateX(18px) scale(.94);
   }
 
  .photo-area.swap .photo-card-front {
