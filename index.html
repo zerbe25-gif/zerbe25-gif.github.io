@@ -287,7 +287,7 @@
 /* Фото 1 — впереди */
 
 .photo-card-front {
-  transform: translateX(0);
+  transform: translateX(10);
   z-index: 2;
 }
 
@@ -884,30 +884,32 @@
   }
 
   
-/* ================= PHOTO ================= */
+/* ================= PHOTO — MOBILE ================= */
 
 .photo-area {
   width: 100%;
   max-width: 390px;
-  height: min(480px, 133vw);
+  aspect-ratio: 3 / 4;
+  height: auto;
   margin-left: 0;
   margin-right: auto;
 }
 
 .photo-card {
-  width: min(360px, calc(100vw - 20px));
-  height: min(480px, 133vw);
-  right: 0;
+  width: 95%;
+  aspect-ratio: 3 / 4;
+  height: auto;
+  right: 5%;
 }
 
 /* Фото 2 немного выглядывает справа */
 
 .photo-card-back {
-  transform: translateX(clamp(16px, 5vw, 22px));
+  transform: translateX(5vw);
   z-index: 1;
 }
 
-/* После клика фото 1 уходит */
+/* После клика фото 1 уходит вправо */
 
 .photo-area.swap .photo-card-front {
   transform: translateX(100%);
@@ -918,6 +920,7 @@
 .photo-area.swap .photo-card-back {
   transform: translateX(0);
 }
+  
   @media (max-width: 550px) {
 
   .container {
