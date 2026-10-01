@@ -237,6 +237,8 @@
 
     /* ================= PHOTO ================= */
 
+/* ================= PHOTO SLIDER ================= */
+
 .photo-area {
   position: relative;
   width: 100%;
@@ -244,8 +246,10 @@
   height: 500px;
   margin-left: auto;
   cursor: pointer;
-  perspective: 1200px;
+  overflow: hidden;
 }
+
+/* Общая карточка фотографии */
 
 .photo-card {
   position: absolute;
@@ -260,14 +264,14 @@
 
   box-shadow: var(--shadow);
   border: 1px solid var(--line);
-
   background: #fcfefe;
 
-  transition:
-    transform 1.5s cubic-bezier(.52, .15, .36, 1),
-    opacity 1.8s ease,
-  }
-    
+  transition: transform 1s cubic-bezier(.4, 0, .2, 1);
+  will-change: transform;
+}
+
+/* Изображение */
+
 .photo-card img {
   display: block;
   width: 100%;
@@ -279,34 +283,34 @@
   pointer-events: none;
 }
 
-/* Передняя фотография */
+/* ================= НАЧАЛЬНОЕ СОСТОЯНИЕ ================= */
+
+/* Фото 1 — впереди */
 
 .photo-card-front {
-  transform: translateX(0) scale(1);
-  opacity: 1;
+  transform: translateX(0);
   z-index: 2;
 }
 
-/* Вторая фотография, которая немного выглядывает */
+/* Фото 2 — сзади, виден небольшой край */
 
 .photo-card-back {
-  transform: translateX(42px) scale(.97);
-  opacity: .9;
-   z-index: 1;
-}
-
-/* ================= PHOTO OPEN STATE ================= */
-
-.photo-area.swap .photo-card-front {
-  transform: translateX(-18px) scale(.96);
-  opacity: 1;
+  transform: translateX(42px);
   z-index: 1;
 }
 
+/* ================= ПОСЛЕ КЛИКА ================= */
+
+/* Фото 1 уходит влево */
+
+.photo-area.swap .photo-card-front {
+  transform: translateX(-110%);
+}
+
+/* Фото 2 выходит на передний план */
+
 .photo-area.swap .photo-card-back {
-  transform: translateX(0) scale(1);
-  opacity: 1;
-  z-index: 2;
+  transform: translateX(0);
 }
     
     /* ================= SECTIONS ================= */
