@@ -264,7 +264,7 @@
   background: #fcfefe;
 
   transition:
-    transform 1.8s cubic-bezier(.52, .1, .36, 1),
+    transform 15s cubic-bezier(.52, .15, .36, 1),
     opacity 1.8s ease,
     box-shadow .8s ease;
   }
@@ -283,7 +283,7 @@
 /* Передняя фотография */
 
 .photo-card-front {
-  z-index: 3;
+  z-index: 2;
   transform: translateX(0) scale(1);
   opacity: 1;
 }
@@ -291,9 +291,9 @@
 /* Вторая фотография, которая немного выглядывает */
 
 .photo-card-back {
-  z-index: 2;
+  z-index: 1;
   transform: translateX(42px) scale(.97);
-  opacity: .95;
+  opacity: .9;
 }
 
 /* ================= PHOTO OPEN STATE ================= */
@@ -306,6 +306,7 @@
 .photo-area.swap .photo-card-back {
   transform: translateX(0) scale(1);
   opacity: 1;
+  z-index: 3;
 }
     
     /* ================= SECTIONS ================= */
