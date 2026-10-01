@@ -266,7 +266,6 @@
   transition:
     transform 1.5s cubic-bezier(.52, .15, .36, 1),
     opacity 1.8s ease,
-    box-shadow .8s ease;
   }
     
 .photo-card img {
@@ -285,6 +284,7 @@
 .photo-card-front {
   transform: translateX(0) scale(1);
   opacity: 1;
+  z-index: 2;
 }
 
 /* Вторая фотография, которая немного выглядывает */
@@ -292,6 +292,7 @@
 .photo-card-back {
   transform: translateX(42px) scale(.97);
   opacity: .9;
+   z-index: 1;
 }
 
 /* ================= PHOTO OPEN STATE ================= */
@@ -299,13 +300,13 @@
 .photo-area.swap .photo-card-front {
   transform: translateX(-18px) scale(.96);
   opacity: 1;
-  z-index: 2;
+  z-index: 1;
 }
 
 .photo-area.swap .photo-card-back {
   transform: translateX(0) scale(1);
   opacity: 1;
-  z-index: 3;
+  z-index: 2;
 }
     
     /* ================= SECTIONS ================= */
