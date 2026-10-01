@@ -806,122 +806,169 @@
 
     /* ================= MOBILE ================= */
 
-    @media (max-width: 850px) {
+@media (max-width: 850px) {
 
-      .menu {
-        position: absolute;
-        left: 20px;
-        right: 20px;
-        top: 75px;
-        background: white;
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        padding: 20px;
-        box-shadow: var(--shadow);
-        display: none;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-      }
+  .menu {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 75px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
 
-      .menu.active {
-        display: flex;
-      }
+  .menu.active {
+    display: flex;
+  }
 
-      .menu a {
-        padding: 8px;
-      }
+  .menu a {
+    padding: 8px;
+  }
 
-      .mobile-button {
-        display: block;
-      }
+  .mobile-button {
+    display: block;
+  }
 
-      .hero {
-        padding: 65px 0 75px;
-      }
+  .hero {
+    padding: 55px 0 65px;
+  }
 
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 45px;
-      }
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 
-      .photo-placeholder {
-        margin: auto;
-        max-width: 340px;
-      }
+  .about-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 
-      .about-grid,
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
+  .formats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 
-      .formats-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+  section {
+    padding: 60px 0;
+  }
 
-      section {
-        padding: 70px 0;
-      }
-    }
+  /* Заголовки разделов */
 
-    @media (max-width: 550px) {
+  h2 {
+    font-size: 30px;
+    line-height: 1.2;
+  }
 
-      .container {
-        width: min(100% - 28px, 1120px);
-      }
+  /* Главный заголовок */
 
-      h1 {
-        font-size: 47px;
-      }
+  h1 {
+    font-size: 42px;
+    line-height: 1.08;
+    overflow-wrap: break-word;
+  }
 
-      .hero-text {
-        font-size: 16px;
-      }
+  .hero-text {
+    font-size: 16px;
+  }
 
-      .formats-grid {
-        grid-template-columns: 1fr;
-      }
+  /* ================= PHOTO ================= */
 
-      .quote {
-        padding: 40px 25px;
-      }
-
-      .form {
-        padding: 22px;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .whatsapp {
-        right: 14px;
-        bottom: 14px;
-      }
-    }
-
-      /* ================= PHOTO MOBILE ================= */
-    
-    @media (max-width: 700px) {
-  
   .photo-area {
-    max-width: 390px;
+    width: calc(100% - 24px);
+    max-width: 360px;
+    height: 460px;
     margin-left: 0;
     margin-right: auto;
   }
 
   .photo-card {
     width: 100%;
+    max-width: 340px;
+    height: 460px;
   }
 
   .photo-card-back {
-    transform: translateX(24px) scale(.96);
+    transform: translateX(20px) scale(.96);
   }
 
   .photo-area.swap .photo-card-front {
-    transform: translateX(-24px) scale(.96);
+    transform: translateX(-20px) scale(.96);
+  }
+
+  .photo-area.swap .photo-card-back {
+    transform: translateX(0) scale(1);
+  }
+}
+
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 550px) {
+
+  .container {
+    width: min(100% - 28px, 1120px);
+  }
+
+  h1 {
+    font-size: 38px;
+    line-height: 1.08;
+  }
+
+  h2 {
+    font-size: 27px;
+  }
+
+  .hero-text {
+    font-size: 16px;
+  }
+
+  .formats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quote {
+    padding: 40px 25px;
+  }
+
+  .form {
+    padding: 22px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .whatsapp {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  /* Ещё немного уменьшаем фото на маленьких экранах */
+
+  .photo-area {
+    max-width: 330px;
+    height: 430px;
+  }
+
+  .photo-card {
+    max-width: 310px;
+    height: 430px;
+  }
+
+  .photo-card-back {
+    transform: translateX(18px) scale(.96);
+  }
+
+  .photo-area.swap .photo-card-front {
+    transform: translateX(-18px) scale(.96);
   }
 }
   </style>
