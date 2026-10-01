@@ -264,8 +264,8 @@
   background: #fcfefe;
 
   transition:
-    transform 2s cubic-bezier(.52, .31, .80, 1.5),
-    opacity 1.5s ease,
+    transform 1.8s cubic-bezier(.52, .51, .36, 1),
+    opacity 1.8s ease,
     box-shadow .8s ease;
   }
     
@@ -300,14 +300,12 @@
 
 .photo-area.swap .photo-card-front {
   transform: translateX(-28px) scale(.97);
-  opacity: .90;
-  z-index: 1;
+  opacity: 0;
 }
 
 .photo-area.swap .photo-card-back {
   transform: translateX(0) scale(1);
   opacity: 1;
-  z-index: 3;
 }
     
     /* ================= SECTIONS ================= */
