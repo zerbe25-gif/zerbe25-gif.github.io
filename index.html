@@ -264,10 +264,9 @@
   background: #fcfefe;
 
   transition:
-    transform .65s cubic-bezier(.22, .61, .36, 1),
-    opacity .65s ease,
-    box-shadow .4s ease;
-}
+  transform .8s cubic-bezier(.22, .61, .36, 1),
+  opacity .8s ease,
+  box-shadow .5s ease;
 
 .photo-card img {
   display: block;
@@ -298,13 +297,15 @@
 /* ================= PHOTO OPEN STATE ================= */
 
 .photo-area.swap .photo-card-front {
-  transform: translateX(-42px) scale(.96);
+  transform: translateX(-28px) scale(.97);
+  opacity: .92;
   z-index: 1;
 }
 
 .photo-area.swap .photo-card-back {
   transform: translateX(0) scale(1);
-  z-index: 2;
+  opacity: 1;
+  z-index: 3;
 }
     
     /* ================= SECTIONS ================= */
@@ -899,8 +900,9 @@
   }
 
   .photo-area.swap .photo-card-front {
-    transform: translateX(-24px) scale(.96);
-  }
+  transform: translateX(-22px) scale(.97);
+  opacity: .92;
+}
 
   .photo-area.swap .photo-card-back {
     transform: translateX(0) scale(1);
@@ -968,7 +970,8 @@
   }
 
   .photo-area.swap .photo-card-front {
-    transform: translateX(-22px) scale(.96);
+  transform: translateX(-16px) scale(.97);
+  opacity: .92;
   }
 }
   </style>
