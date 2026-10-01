@@ -634,14 +634,37 @@
   font-weight: 600;
 }
     
-/* Скрываем пункты после 7-го */
+/* Показываем первые 6 пунктов, а 7-й — только частично */
 
-.requests-list li:nth-child(n+8) {
+.requests-list li:nth-child(n+7) {
   display: none;
 }
 
-.requests-card.open .requests-list li:nth-child(n+8) {
+.requests-card:not(.open) .requests-list li:nth-child(7) {
   display: list-item;
+  max-height: 32px;
+  overflow: hidden;
+  opacity: 0.35;
+  position: relative;
+}
+
+.requests-card:not(.open) .requests-list li:nth-child(7)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 28px;
+  background: linear-gradient(
+    transparent,
+    #fcfefe
+  );
+}
+
+.requests-card.open .requests-list li:nth-child(n+7) {
+  display: list-item;
+  max-height: none;
+  opacity: 1;
 }
     
 .requests-more {
