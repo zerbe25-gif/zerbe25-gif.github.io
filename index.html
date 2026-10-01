@@ -889,24 +889,25 @@
 .photo-area {
   width: 100%;
   max-width: 390px;
-  height: 480px;
+  height: min(480px, 133vw);
   margin-left: 0;
   margin-right: auto;
 }
 
 .photo-card {
-  width: 360px;
-  height: 480px;
+  width: min(360px, calc(100vw - 20px));
+  height: min(480px, 133vw);
+  right: 0;
 }
 
 /* Фото 2 немного выглядывает справа */
 
 .photo-card-back {
-  transform: translateX(clamp(15px, 5vw, 21px));
+  transform: translateX(clamp(16px, 5vw, 22px));
   z-index: 1;
 }
 
-/* После клика фото 1 уходит влево */
+/* После клика фото 1 уходит */
 
 .photo-area.swap .photo-card-front {
   transform: translateX(100%);
@@ -917,50 +918,7 @@
 .photo-area.swap .photo-card-back {
   transform: translateX(0);
 }
-    
-/* ================= БОЛЕЕ ШИРОКИЕ ТЕЛЕФОНЫ ================= */
-
-@media (min-width: 384px) and (max-width: 411px) {
-
-  .photo-area {
-    max-width: 390px;
-  }
-
-  .photo-card {
-    width: 380px;
-  }
-}
-
-
-/* ================= БОЛЬШИЕ ТЕЛЕФОНЫ ================= */
-
-@media (min-width: 412px) and (max-width: 550px) {
-
-  .photo-area {
-    max-width: 400px;
-  }
-
-  .photo-card {
-    width: 390px;
-  }
-}
-
-/* ================= ОЧЕНЬ МАЛЕНЬКИЙ ТЕЛЕФОНЫ ================= */
-
-    @media (max-width: 359px) {
-
-  .photo-area {
-    max-width: 340px;
-  }
-
-  .photo-card {
-    width: 330px;
-  }
-}
-
-/* ================= SMALL MOBILE ================= */
-
-@media (max-width: 550px) {
+  @media (max-width: 550px) {
 
   .container {
     width: min(100% - 28px, 1120px);
@@ -1000,8 +958,7 @@
     right: 14px;
     bottom: 14px;
   }
-
- }
+}
   </style>
 </head>
 
