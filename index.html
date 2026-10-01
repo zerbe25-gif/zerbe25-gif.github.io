@@ -902,7 +902,7 @@
 /* Фото 2 немного выглядывает справа */
 
 .photo-card-back {
-  transform: translateX(18px);
+  transform: translateX(clamp(16px, 5vw, 22px));
   z-index: 1;
 }
 
@@ -917,8 +917,46 @@
 .photo-area.swap .photo-card-back {
   transform: translateX(0);
 }
+    
+/* ================= БОЛЕЕ ШИРОКИЕ ТЕЛЕФОНЫ ================= */
+
+@media (min-width: 384px) and (max-width: 411px) {
+
+  .photo-area {
+    max-width: 390px;
+  }
+
+  .photo-card {
+    width: 380px;
+  }
 }
 
+
+/* ================= БОЛЬШИЕ ТЕЛЕФОНЫ ================= */
+
+@media (min-width: 412px) and (max-width: 550px) {
+
+  .photo-area {
+    max-width: 400px;
+  }
+
+  .photo-card {
+    width: 390px;
+  }
+}
+
+/* ================= ОЧЕНЬ МАЛЕНЬКИЙ ТЕЛЕФОНЫ ================= */
+
+    @media (max-width: 359px) {
+
+  .photo-area {
+    max-width: 340px;
+  }
+
+  .photo-card {
+    width: 330px;
+  }
+}
 
 /* ================= SMALL MOBILE ================= */
 
