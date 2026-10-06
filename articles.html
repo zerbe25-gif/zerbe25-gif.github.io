@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -890,48 +892,72 @@
 
   <div class="container">
 
+    {% for post in site.posts %}
+
     <article class="article">
 
       <div class="article-image">
-        <img
-          src="images/Atikel 1.jpeg"
-          alt="Мужчины «уходя в закат»"
-        >
+
+        {% if post.image %}
+          <img
+            src="{{ post.image | relative_url }}"
+            alt="{{ post.title }}"
+          >
+        {% else %}
+          <div class="image-placeholder">
+            <span>{{ post.title }}</span>
+          </div>
+        {% endif %}
+
       </div>
 
       <div class="article-content">
 
-        <div class="article-category">
-          Психология мужчин. Отношения. Общество.
-        </div>
+        {% if post.category %}
+          <div class="article-category">
+            {{ post.category }}
+          </div>
+        {% endif %}
 
         <h2>
-          Мужчины «уходя в закат»: Как архетип Героя мешает мужчинам быть счастливыми
+          {{ post.title }}
         </h2>
 
         <div class="article-date">
-          29 сентября 2026
+          {{ post.date | date: "%d.%m.%Y" }}
         </div>
 
         <div class="article-preview">
-          Разбираемся, почему привычка уходить «с одним чемоданом» перестала работать в XXI веке и как архетип Героя не только мешает мужчинам выстраивать зрелую жизнь, но мешает женщинам на пути к независимости.
+          {{ post.excerpt }}
         </div>
 
-        <a
+        <div class="article-full">
+          {{ post.content }}
+        </div>
+
+        <button
           class="read-button"
-          href="articles/muzhchiny-ukhodya-v-zakat/"
+          type="button"
         >
-          <span class="button-text">Читать полностью</span>
-          <span class="arrow">→</span>
-        </a>
+          <span class="button-text">
+            Читать полностью
+          </span>
+
+          <span class="arrow">
+            ↓
+          </span>
+        </button>
 
       </div>
 
     </article>
 
+    {% endfor %}
+
   </div>
 
 </section>
+    </main>
 
 
   <!-- ================= FOOTER ================= -->
