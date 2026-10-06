@@ -913,6 +913,19 @@
 
 
       
+    <section class="articles">
+  <div class="container">
+
+    {% for post in site.posts %}
+
+    <article class="article">
+
+      <div class="article-image">
+        {% if post.image %}
+          <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
+        {% endif %}
+      </div>
+
       <div class="article-content">
 
         {% if post.category %}
@@ -921,44 +934,24 @@
           </div>
         {% endif %}
 
-
-        <h2>
-          {{ post.title }}
-        </h2>
-
+        <h2>{{ post.title }}</h2>
 
         <div class="article-date">
-          {{ post.date | date: "%d %B %Y" }}
+          {{ post.date | date: "%d.%m.%Y" }}
         </div>
-
 
         <div class="article-preview">
           {{ post.excerpt }}
         </div>
 
-
         <div class="article-full">
-
           {{ post.content }}
-
         </div>
 
-
-        <button
-          class="read-button"
-          type="button"
-        >
-
-          <span class="button-text">
-            Читать полностью
-          </span>
-
-          <span class="arrow">
-            ↓
-          </span>
-
-        </button>
-
+        <a class="read-button" href="{{ post.url | relative_url }}">
+          <span class="button-text">Читать полностью</span>
+          <span class="arrow">→</span>
+        </a>
 
       </div>
 
@@ -967,10 +960,8 @@
     {% endfor %}
 
   </div>
-
 </section>
-
-  </main>
+    </main>
 
 
 
