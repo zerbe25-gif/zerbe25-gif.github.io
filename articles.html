@@ -886,69 +886,41 @@
 
     <!-- ================= ARTICLES ================= -->
 
-  <section class="articles">
+<section class="articles">
 
   <div class="container">
-
-    {% for post in site.posts %}
 
     <article class="article">
 
       <div class="article-image">
-
-        {% if post.image %}
-          <img
-            src="{{ post.image | relative_url }}"
-            alt="{{ post.title }}"
-          >
-        {% else %}
-          <div class="image-placeholder">
-            <span>
-              {{ post.title }}
-            </span>
-          </div>
-        {% endif %}
-
-      </div>
-
-
-      
-    <section class="articles">
-  <div class="container">
-
-    {% for post in site.posts %}
-
-    <article class="article">
-
-      <div class="article-image">
-        {% if post.image %}
-          <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
-        {% endif %}
+        <img
+          src="images/Atikel 1.jpeg"
+          alt="Мужчины «уходя в закат»"
+        >
       </div>
 
       <div class="article-content">
 
-        {% if post.category %}
-          <div class="article-category">
-            {{ post.category }}
-          </div>
-        {% endif %}
+        <div class="article-category">
+          Психология мужчин. Отношения. Общество.
+        </div>
 
-        <h2>{{ post.title }}</h2>
+        <h2>
+          Мужчины «уходя в закат»: Как архетип Героя мешает мужчинам быть счастливыми
+        </h2>
 
         <div class="article-date">
-          {{ post.date | date: "%d.%m.%Y" }}
+          29 сентября 2026
         </div>
 
         <div class="article-preview">
-          {{ post.excerpt }}
+          Разбираемся, почему привычка уходить «с одним чемоданом» перестала работать в XXI веке и как архетип Героя не только мешает мужчинам выстраивать зрелую жизнь, но мешает женщинам на пути к независимости.
         </div>
 
-        <div class="article-full">
-          {{ post.content }}
-        </div>
-
-        <a class="read-button" href="{{ post.url | relative_url }}">
+        <a
+          class="read-button"
+          href="articles/muzhchiny-ukhodya-v-zakat/"
+        >
           <span class="button-text">Читать полностью</span>
           <span class="arrow">→</span>
         </a>
@@ -957,12 +929,9 @@
 
     </article>
 
-    {% endfor %}
-
   </div>
-</section>
-    </main>
 
+</section>
 
 
   <!-- ================= FOOTER ================= -->
