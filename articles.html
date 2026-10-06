@@ -1058,6 +1058,18 @@
 
     /* ================= ARTICLES ================= */
 
+    /* ================= RESET ARTICLE STATE ================= */
+
+document.querySelectorAll(".article").forEach(article => {
+  article.classList.remove("open");
+
+  const buttonText =
+    article.querySelector(".button-text");
+
+  if (buttonText) {
+    buttonText.textContent = "Читать полностью";
+  }
+});
     const articles =
       document.querySelectorAll(".article");
 
