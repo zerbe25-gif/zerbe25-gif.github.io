@@ -1,1 +1,12 @@
+title: "Сергей Цербе — психологическое консультирование онлайн"
 
+description: "Русскоязычный психодинамический консультант. Индивидуальные и парные онлайн-сессии для взрослых и подростков."
+
+lang: ru
+
+url: "https://zerbe25-gif.github.io"
+baseurl: ""
+
+markdown: kramdown
+
+permalink: /articles/:title/
