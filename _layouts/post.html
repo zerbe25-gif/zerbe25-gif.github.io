@@ -69,17 +69,30 @@
       font-size: 28px;
     }
 
-    .back-link {
-      display: inline-block;
-      margin-top: 45px;
-      color: #5f7f80;
-      text-decoration: none;
-    }
+    .article-navigation {
+  display: flex;
+  gap: 14px;
+  margin-top: 45px;
+  flex-wrap: wrap;
+}
 
-    .back-link:hover {
-      text-decoration: underline;
-    }
-  </style>
+.nav-button {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: #e8f4f2;
+  color: #3e9690;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all .2s ease;
+}
+
+.nav-button:hover {
+  background: #dff2ef;
+  transform: translateY(-1px);
+}
+    
+   </style>
 </head>
 
 <body>
@@ -91,6 +104,26 @@
         {{ page.category }}
       </div>
     {% endif %}
+
+    {% if page.category %}
+  <div class="article-category">
+    {{ page.category }}
+  </div>
+{% endif %}
+
+<div class="article-navigation">
+
+  <a class="nav-button" href="{{ '/' | relative_url }}">
+    ← Главная
+  </a>
+
+  <a class="nav-button" href="{{ '/articles.html' | relative_url }}">
+    ← Все статьи
+  </a>
+
+</div>
+
+<h1>{{ page.title }}</h1>
 
     <h1>{{ page.title }}</h1>
 
@@ -110,9 +143,17 @@
       {{ content }}
     </div>
 
-    <a class="back-link" href="{{ '/articles.html' | relative_url }}">
-      ← Вернуться к статьям
-    </a>
+   <div class="article-navigation">
+
+  <a class="nav-button" href="{{ '/' | relative_url }}">
+    ← Главная
+  </a>
+
+  <a class="nav-button" href="{{ '/articles.html' | relative_url }}">
+    ← Все статьи
+  </a>
+
+</div>
 
   </main>
 
