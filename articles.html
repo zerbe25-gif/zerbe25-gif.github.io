@@ -1058,18 +1058,32 @@
 
     /* ================= ARTICLES ================= */
 
+  
     /* ================= RESET ARTICLE STATE ================= */
 
-document.querySelectorAll(".article").forEach(article => {
-  article.classList.remove("open");
+function resetArticles() {
 
-  const buttonText =
-    article.querySelector(".button-text");
+  document.querySelectorAll(".article").forEach(article => {
 
-  if (buttonText) {
-    buttonText.textContent = "Читать полностью";
-  }
+    article.classList.remove("open");
+
+    const buttonText =
+      article.querySelector(".button-text");
+
+    if (buttonText) {
+      buttonText.textContent = "Читать полностью";
+    }
+
+  });
+
+}
+
+resetArticles();
+
+window.addEventListener("pageshow", () => {
+  resetArticles();
 });
+    
     const articles =
       document.querySelectorAll(".article");
 
