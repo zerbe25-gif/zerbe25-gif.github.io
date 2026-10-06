@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{{ page.title }} — Сергей Цербе</title>
+
+  <meta
+    name="description"
+    content="{{ page.title }}"
+  >
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8fbfb;
+      color: #394b4d;
+      line-height: 1.75;
+    }
+
+    .article-page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .article-category {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 6px 12px;
+      border-radius: 10px;
+      background: #f3d2b5;
+      color: #5f4a3a;
+      font-size: 14px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      color: #394b4d;
+      font-size: 42px;
+      line-height: 1.2;
+    }
+
+    .article-date {
+      margin-bottom: 30px;
+      color: #7b8b8d;
+      font-size: 14px;
+    }
+
+    .article-image {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      border-radius: 24px;
+      margin-bottom: 35px;
+    }
+
+    .article-content {
+      font-size: 17px;
+    }
+
+    .article-content h2 {
+      margin-top: 45px;
+      margin-bottom: 20px;
+      color: #394b4d;
+      font-size: 28px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 45px;
+      color: #5f7f80;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="article-page">
+
+    {% if page.category %}
+      <div class="article-category">
+        {{ page.category }}
+      </div>
+    {% endif %}
+
+    <h1>{{ page.title }}</h1>
+
+    <div class="article-date">
+      {{ page.date | date: "%d.%m.%Y" }}
+    </div>
+
+    {% if page.image %}
+      <img
+        class="article-image"
+        src="{{ page.image | relative_url }}"
+        alt="{{ page.title }}"
+      >
+    {% endif %}
+
+    <div class="article-content">
+      {{ content }}
+    </div>
+
+    <a class="back-link" href="{{ '/articles.html' | relative_url }}">
+      ← Вернуться к статьям
+    </a>
+
+  </main>
+
+</body>
+</html>
