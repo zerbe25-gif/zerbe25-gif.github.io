@@ -3,7 +3,7 @@ layout: post
 title: "Название второй статьи"
 date: 2026-10-06
 category: "Психология. Отношения."
-image: "/images/sergey.jpg"
+image: "/images/Atikel-2.jpg"
 ---
 Вводный абзац статьи.
 
