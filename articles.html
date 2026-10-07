@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -16,7 +17,6 @@
     name="description"
     content="Статьи Сергея Цербе о психологии, отношениях, внутреннем мире и психодинамическом подходе."
   >
-
 
   <style>
 
@@ -38,10 +38,7 @@
       --radius: 24px;
     }
 
-.article-template {
-  display: none;
-}
-    
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -341,11 +338,6 @@
     }
 
 
-    /*
-      Если картинки пока нет,
-      показываем красивую заглушку.
-    */
-
     .image-placeholder {
 
       height: 100%;
@@ -446,105 +438,21 @@
 
     .article-preview {
 
-  color: #5d6d6f;
-
-  font-size: 16px;
-
-  line-height: 1.75;
-
-  margin-bottom: 20px;
-
-}
-
-    /* ================= FULL TEXT ================= */
-
-    .article-full {
-
-      display: none;
-
-      color:
-        #4f6062;
+      color: #5d6d6f;
 
       font-size: 16px;
 
-      line-height: 1.85;
+      line-height: 1.75;
 
-      padding-top: 8px;
+      margin-bottom: 20px;
 
-      animation:
-        articleOpen .35s ease;
-    }
+      display: -webkit-box;
 
+      -webkit-line-clamp: 4;
 
-    .article.open
-    .article-full {
+      -webkit-box-orient: vertical;
 
-      display: block;
-    }
-
-
-    .article.open
-    .article-preview {
-
-      display: none;
-    }
-
-
-    @keyframes articleOpen {
-
-      from {
-
-        opacity: 0;
-
-        transform:
-          translateY(-8px);
-      }
-
-      to {
-
-        opacity: 1;
-
-        transform:
-          translateY(0);
-      }
-    }
-
-
-    .article-full p {
-
-      margin-bottom: 22px;
-    }
-
-
-    .article-full h3 {
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-weight: 400;
-
-      font-size: 25px;
-
-      margin:
-        30px 0 12px;
-
-      color: var(--text);
-    }
-
-
-    .article-full ul {
-
-      padding-left: 25px;
-
-      margin-bottom: 22px;
-    }
-
-
-    .article-full li {
-
-      margin-bottom: 8px;
+      overflow: hidden;
     }
 
 
@@ -594,74 +502,19 @@
     }
 
 
-    .article.open
-    .arrow {
+    /* ================= EMPTY ================= */
 
-      transform:
-        rotate(180deg);
-    }
+    .empty {
 
+      padding: 40px;
 
-    /* ================= VIDEO ================= */
+      background: var(--surface);
 
-    .video-block {
+      border-radius: var(--radius);
 
-      margin-top: 30px;
-
-      padding: 25px;
-
-      background:
-        var(--surface);
-
-      border-radius: 18px;
-    }
-
-
-    .video-block strong {
-
-      display: block;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: 21px;
-
-      font-weight: 400;
-
-      margin-bottom: 7px;
-    }
-
-
-    .video-block p {
-
-      font-size: 14px;
+      text-align: center;
 
       color: var(--muted);
-
-      margin-bottom: 15px;
-    }
-
-
-    .video-link {
-
-      display: inline-flex;
-
-      padding:
-        10px 17px;
-
-      border-radius:
-        30px;
-
-      background:
-        var(--accent-dark);
-
-      color: white;
-
-      font-size: 13px;
-
-      font-weight: 600;
     }
 
 
@@ -711,6 +564,16 @@
     /* ================= MOBILE ================= */
 
     @media (max-width: 700px) {
+
+      .container {
+
+        width:
+          min(
+            100% - 32px,
+            900px
+          );
+      }
+
 
       .menu {
 
@@ -769,6 +632,20 @@
       }
 
 
+      h1 {
+
+        font-size: 46px;
+
+        letter-spacing: -1.5px;
+      }
+
+
+      .intro-text {
+
+        font-size: 16px;
+      }
+
+
       .article-image {
 
         height: 230px;
@@ -782,6 +659,12 @@
       }
 
 
+      .article h2 {
+
+        font-size: 29px;
+      }
+
+
       .footer-content {
 
         flex-direction: column;
@@ -790,7 +673,6 @@
       }
 
     }
-
 
   </style>
 
@@ -807,7 +689,7 @@
     <div class="container nav">
 
 
-      <a href="index.html" class="logo">
+      <a href="{{ '/' | relative_url }}" class="logo">
 
         Сергей Цербе
 
@@ -829,22 +711,22 @@
 
       <nav class="menu" id="menu">
 
-        <a href="index.html">
+        <a href="{{ '/' | relative_url }}">
           Главная
         </a>
 
-        <a href="index.html#about">
+        <a href="{{ '/' | relative_url }}#about">
           Подход
         </a>
-              
+
         <a
-          href="articles.html"
+          href="{{ '/articles.html' | relative_url }}"
           class="active"
         >
           Статьи
         </a>
 
-        <a href="index.html#contact">
+        <a href="{{ '/' | relative_url }}#contact">
           Записаться
         </a>
 
@@ -869,13 +751,14 @@
         </div>
 
         <h1>
-          Статьи и Медиа 
+          Статьи и Медиа
         </h1>
 
         <p class="intro-text">
-          Здесь я буду публиковать материалы о психологии и культуре. Через призму культуры и искуства 
-          будут исследоваться отношениях, внутренний мир человека и различных
-          аспектах его жизни, в межличностных отношениях и в обществе.
+          Здесь я буду публиковать материалы о психологии и культуре.
+          Через призму культуры и искусства будут исследоваться отношения,
+          внутренний мир человека и различные аспекты его жизни,
+          в межличностных отношениях и в обществе.
         </p>
 
       </div>
@@ -886,100 +769,105 @@
 
     <!-- ================= ARTICLES ================= -->
 
-<section class="articles">
+    <section class="articles">
 
-  <div class="container">
+      <div class="container">
 
-    <article class="article">
+        {% if site.posts.size > 0 %}
 
-      <div class="article-image">
-        <img
-          src="images/Atikel 1.jpeg"
-          alt="Мужчины «уходя в закат»"
-        >
+          {% for post in site.posts %}
+
+            <article class="article">
+
+              <div class="article-image">
+
+                {% if post.image %}
+
+                  <img
+                    src="{{ post.image | relative_url }}"
+                    alt="{{ post.title }}"
+                  >
+
+                {% else %}
+
+                  <div class="image-placeholder">
+
+                    <span>
+                      {{ post.title }}
+                    </span>
+
+                  </div>
+
+                {% endif %}
+
+              </div>
+
+
+              <div class="article-content">
+
+                {% if post.category %}
+
+                  <div class="article-category">
+                    {{ post.category }}
+                  </div>
+
+                {% endif %}
+
+
+                <h2>
+                  {{ post.title }}
+                </h2>
+
+
+                <div class="article-date">
+
+                  {{ post.date | date: "%d.%m.%Y" }}
+
+                </div>
+
+
+                <div class="article-preview">
+
+                  {{ post.excerpt | strip_html }}
+
+                </div>
+
+
+                <a
+                  class="read-button"
+                  href="{{ post.url | relative_url }}"
+                >
+
+                  <span class="button-text">
+                    Читать полностью
+                  </span>
+
+                  <span class="arrow">
+                    →
+                  </span>
+
+                </a>
+
+              </div>
+
+            </article>
+
+          {% endfor %}
+
+        {% else %}
+
+          <div class="empty">
+            Статьи пока не опубликованы.
+          </div>
+
+        {% endif %}
+
       </div>
 
-      <div class="article-content">
+    </section>
 
-        <div class="article-category">
-          Психология мужчин. Отношения. Общество.
-        </div>
+  </main>
 
-        <h2>
-          Мужчины «уходя в закат»: Как архетип Героя мешает мужчинам быть счастливыми
-        </h2>
-
-        <div class="article-date">
-          29 сентября 2026
-        </div>
-
-        <div class="article-preview">
-          Разбираемся, почему привычка уходить «с одним чемоданом» перестала работать в XXI веке и как архетип Героя не только мешает мужчинам выстраивать зрелую жизнь, но мешает женщинам на пути к независимости.
-        </div>
-
-        <a
-          class="read-button"
-          href="articles/muzhchiny-ukhodya-v-zakat/"
-        >
-          <span class="button-text">Читать полностью</span>
-          <span class="arrow">→</span>
-        </a>
-
-      </div>
-
-    </article>
-
-   
-    <article class="article">
-
-  <div class="article-image">
-    <img
-      src="images/Atikel-2.jpg"
-      alt="Сентиментальность - новая брутальность"
-    >
-  </div>
-
-  <div class="article-content">
-
-    <div class="article-category">
-      Психология. Отношения. Мужчины. Общество.
-    </div>
-
-    <h2>
-      Сентиментальность - новая брутальность
-    </h2>
-
-    <div class="article-date">
-      6 октября 2026
-    </div>
-
-    <div class="article-preview">
-      Как суровый брутальный идеал уступил место глубокой саморефлексии, а молчаливый подвиг — умению чувствовать
-      и осознанно брать на себя ответственность? В статье разбираем, как эволюция кинематографических героев
-      (от Человека-Паука до Джеймса Бонда) отражает сдвиг в современном понимании мужественности. 
-      Обсудим, где проходит грань между отжившей бытовой жертвенностью и настоящей эмоциональной зрелостью в XXI веке.
-    </div>
-
-    <a
-      class="read-button"
-      href="articles/sentimentalnost-navaja-brutalnost/"
-    >
-      <span class="button-text">
-        Читать полностью
-      </span>
-
-      <span class="arrow">
-        →
-      </span>
-    </a>
-
-  </div>
-
-</article>
-  </div>
-
-</section>
-    </main>
 
 
   <!-- ================= FOOTER ================= -->
@@ -995,15 +883,15 @@
 
       <div class="footer-links">
 
-        <a href="index.html">
+        <a href="{{ '/' | relative_url }}">
           Главная
         </a>
 
-        <a href="index.html#about">
+        <a href="{{ '/' | relative_url }}#about">
           Подход
         </a>
 
-        <a href="index.html#contact">
+        <a href="{{ '/' | relative_url }}#contact">
           Контакты
         </a>
 
@@ -1018,7 +906,6 @@
   <!-- ================= JAVASCRIPT ================= -->
 
   <script>
-
 
     /* ================= MOBILE MENU ================= */
 
@@ -1054,118 +941,10 @@
 
       });
 
-
-
-    /* ================= ARTICLES ================= */
-
-  
-    /* ================= RESET ARTICLE STATE ================= */
-
-function resetArticles() {
-
-  document.querySelectorAll(".article").forEach(article => {
-
-    article.classList.remove("open");
-
-    const buttonText =
-      article.querySelector(".button-text");
-
-    if (buttonText) {
-      buttonText.textContent = "Читать полностью";
-    }
-
-  });
-
-}
-
-resetArticles();
-
-window.addEventListener("pageshow", () => {
-  resetArticles();
-});
-    
-    const articles =
-      document.querySelectorAll(".article");
-
-
-    articles.forEach(article => {
-
-
-      const button =
-        article.querySelector(".read-button");
-
-
-      const buttonText =
-        article.querySelector(".button-text");
-
-
-      button.addEventListener(
-        "click",
-        () => {
-
-
-          const wasOpen =
-            article.classList.contains("open");
-
-
-          /*
-            Сначала закрываем ВСЕ статьи.
-            Поэтому одновременно открыта
-            только одна статья.
-          */
-
-          articles.forEach(item => {
-
-            item.classList.remove("open");
-
-            const text =
-              item.querySelector(".button-text");
-
-            text.textContent =
-              "Читать полностью";
-
-          });
-
-
-          /*
-            Если нажатая статья
-            раньше была закрыта —
-            открываем её.
-          */
-
-          if (!wasOpen) {
-
-            article.classList.add("open");
-
-            buttonText.textContent =
-              "Свернуть";
-
-            /*
-              Небольшая прокрутка,
-              чтобы начало статьи
-              оставалось перед глазами.
-            */
-
-            setTimeout(() => {
-
-              article.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-              });
-
-            }, 100);
-
-          }
-
-        }
-      );
-
-    });
-
-
   </script>
 
 
 </body>
 
 </html>
+```
