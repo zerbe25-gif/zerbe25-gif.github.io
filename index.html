@@ -748,6 +748,143 @@
 .requests-card.open .requests-toggle-icon {
   transform: rotate(45deg);
 }
+
+    /* ================= EDUCATION ================= */
+
+.education-section {
+  padding: 90px 0;
+}
+
+.education-section .section-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.education-section .section-label {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.education-section h2 {
+  margin: 0 0 30px;
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(32px, 5vw, 46px);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.education-item {
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+
+.education-item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.education-item strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.education-item p {
+  margin: 0;
+  color: #536466;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.education-item em {
+  color: var(--muted);
+}
+
+.education-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 24px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.education-toggle:hover {
+  background: var(--surface-2);
+  transform: translateY(-1px);
+}
+
+.education-toggle-icon {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform .2s ease;
+}
+
+
+/* Свернутое состояние */
+
+.education-list .education-item:nth-child(n + 3) {
+  display: none;
+}
+
+
+/* Раскрытое состояние */
+
+.education-section.open
+.education-list .education-item {
+  display: block;
+}
+
+.education-section.open .education-toggle-icon {
+  transform: rotate(45deg);
+}
+
+
+/* ================= EDUCATION MOBILE ================= */
+
+@media (max-width: 700px) {
+
+  .education-section {
+    padding: 65px 0;
+  }
+
+  .education-section h2 {
+    font-size: 34px;
+  }
+
+  .education-item {
+    padding: 18px 0;
+  }
+
+  .education-item strong {
+    font-size: 16px;
+  }
+
+  .education-item p {
+    font-size: 15px;
+  }
+
+}
     /* ================= WHATSAPP ================= */
 
     .whatsapp {
@@ -989,13 +1126,24 @@
 
   <a href="index.html#requests">Запросы</a>
 
-  <a href="#formats">Форматы</a>
+  <a href="#formats">
+  Форматы
+</a>
 
-<a href="articles.html" class="nav-article-orange">
+<a href="#education">
+  Образование
+</a>
+
+<a
+  href="articles/"
+  class="nav-article-orange"
+>
   Статьи
 </a>
 
-  <a href="#contact">Контакты</a>
+<a href="#contact">
+  Контакты
+</a>
 
   <a href="#contact" class="nav-button">Записаться</a>
 
@@ -1269,6 +1417,80 @@
   </div>
 </section>
 
+
+    <!-- ================= EDUCATION ================= -->
+
+<section id="education" class="education-section">
+
+  <div class="section-inner">
+
+    <div class="section-label">
+      Образование
+    </div>
+
+    <h2>
+      Образование и профессиональная подготовка
+    </h2>
+
+    <div class="education-list">
+
+      <div class="education-item">
+        <strong>Врач-психотерапевт</strong>
+        <p>
+          Профессиональная переподготовка по специальности
+          «Психотерапия» (Санкт-Петербург)
+        </p>
+      </div>
+
+      <div class="education-item">
+        <strong>Врач-психиатр</strong>
+        <p>
+          Интернатура по специальности «Психиатрия» (Санкт-Петербург)
+        </p>
+      </div>
+
+      <div class="education-item">
+        <strong>Высшее медицинское образование</strong>
+        <p>
+          Самарский государственный медицинский университет, врач
+        </p>
+      </div>
+
+      <div class="education-item">
+        <p>
+          Санкт-Петербургская Школа Психоанализа
+        </p>
+      </div>
+
+      <div class="education-item">
+        <strong>Повышение квалификации «Изучение трудов З. Фрейда»</strong>
+        <p>
+          <em>Ведущий: Александр Непомнящий (Франция)</em>
+        </p>
+      </div>
+
+      <div class="education-item">
+        <strong>Групповая терапия</strong>
+        <p>
+          Повышение квалификации по групповой психотерапии<br>
+          <em>Руководитель проекта: Роби Фридман (Израиль)</em>
+        </p>
+      </div>
+
+    </div>
+
+    <button
+      class="education-toggle"
+      type="button"
+      aria-expanded="false"
+    >
+      <span>Показать полностью</span>
+      <span class="education-toggle-icon">+</span>
+    </button>
+
+  </div>
+
+</section>
     <!-- ================= FORMATS ================= -->
 
     <section id="formats">
@@ -1717,6 +1939,34 @@
         photoSlider.classList.toggle("swap");
       });
     }
+
+    /* ================= EDUCATION TOGGLE ================= */
+
+const educationSection =
+  document.querySelector(".education-section");
+
+const educationToggle =
+  document.querySelector(".education-toggle");
+
+const educationToggleText =
+  educationToggle.querySelector("span");
+
+educationToggle.addEventListener("click", () => {
+
+  const isOpen =
+    educationSection.classList.toggle("open");
+
+  educationToggle.setAttribute(
+    "aria-expanded",
+    isOpen
+  );
+
+  educationToggleText.textContent =
+    isOpen
+      ? "Свернуть"
+      : "Показать полностью";
+
+});
     
   </script>
 
