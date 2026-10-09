@@ -91,12 +91,43 @@
       background: #dff2ef;
       transform: translateY(-1px);
     }
+
+    
+/* Верхняя навигация статьи */
+
+.article-top-navigation {
+  display: flex;
+  justify-content: flex-end;
+  gap: 11px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.article-top-navigation .nav-button {
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+    
   </style>
 </head>
 
 <body>
 
   <main class="article-page">
+
+    
+<div class="article-top-navigation">
+
+  <a class="nav-button" href="{{ '/' | relative_url }}">
+    ← На главную
+  </a>
+
+  <a class="nav-button" href="{{ '/articles/' | relative_url }}">
+    ← Все статьи
+  </a>
+
+</div>
 
     {% if page.category %}
       <div class="article-category">
