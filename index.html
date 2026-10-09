@@ -286,39 +286,36 @@
 
 /* ================= НАЧАЛЬНОЕ СОСТОЯНИЕ ================= */
 
-/* Фото 1 — впереди */
+
+/* Фото впереди — обычный размер */
 
 .photo-card-front {
-  transform: translateX(20);
+  transform: translateX(20px) scale(1);
   z-index: 2;
 }
 
-
-/* Фото 2 — сзади, немного меньше переднего */
+/* Фото сзади — немного меньше */
 
 .photo-card-back {
-  width: 360px;
-  height: 460px;
-
-  top: 20px;
-  right: 16px;
-
-  transform: translateX(18px);
+  transform: translateX(18px) scale(0.94);
   z-index: 1;
 }
 
 /* ================= ПОСЛЕ КЛИКА ================= */
 
-/* Фото 1 уходит влево */
+
+/* Фото 1 уходит назад и уменьшается */
 
 .photo-area.swap .photo-card-front {
-  transform: translateX(-105%);
+  transform: translateX(-105%) scale(0.94);
+  z-index: 1;
 }
 
-/* Фото 2 выходит на передний план */
+/* Фото 2 выходит вперед и увеличивается */
 
 .photo-area.swap .photo-card-back {
-  transform: translateX(0);
+  transform: translateX(0) scale(1);
+  z-index: 2;
 }
     
     /* ================= SECTIONS ================= */
