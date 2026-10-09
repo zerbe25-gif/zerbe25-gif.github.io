@@ -240,6 +240,9 @@
     /* ================= PHOTO ================= */
 
 
+
+/* ================= РАМКА ФОТОГРАФИЙ ================= */
+
 .photo-area {
   position: relative;
   width: 100%;
@@ -250,7 +253,7 @@
   overflow: hidden;
 }
 
-/* Общая карточка фотографии */
+/* ================= ОБЩАЯ КАРТОЧКА ================= */
 
 .photo-card {
   position: absolute;
@@ -271,7 +274,7 @@
   will-change: transform;
 }
 
-/* Изображение */
+/* ================= ИЗОБРАЖЕНИЕ ================= */
 
 .photo-card img {
   display: block;
@@ -286,35 +289,33 @@
 
 /* ================= НАЧАЛЬНОЕ СОСТОЯНИЕ ================= */
 
-
-/* Фото впереди — обычный размер */
+/* Фото №1 — переднее */
 
 .photo-card-front {
-  transform: translateX(20px) scale(1);
+  transform: translate(0, 0) scale(1);
   z-index: 2;
 }
 
-/* Фото сзади — немного меньше */
+/* Фото №2 — заднее, немного правее и ниже */
 
 .photo-card-back {
-  transform: translateX(18px) scale(0.94);
+  transform: translate(18px, 12px) scale(0.94);
   z-index: 1;
 }
 
 /* ================= ПОСЛЕ КЛИКА ================= */
 
-
-/* Фото 1 уходит назад и уменьшается */
+/* Фото №1 уходит влево, оставаясь частично видимым */
 
 .photo-area.swap .photo-card-front {
-  transform: translateX(-105%) scale(0.94);
+  transform: translateX(-72%) scale(0.94);
   z-index: 1;
 }
 
-/* Фото 2 выходит вперед и увеличивается */
+/* Фото №2 выходит вперед и занимает место фото №1 */
 
 .photo-area.swap .photo-card-back {
-  transform: translateX(0) scale(1);
+  transform: translate(0, 0) scale(1);
   z-index: 2;
 }
     
