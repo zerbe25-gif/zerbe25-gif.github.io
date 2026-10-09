@@ -240,20 +240,17 @@
     /* ================= PHOTO ================= */
 
 
-
-/* ================= РАМКА ФОТОГРАФИЙ ================= */
-
 .photo-area {
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 490px;
   height: 500px;
   margin-left: auto;
   cursor: pointer;
   overflow: hidden;
 }
 
-/* ================= ОБЩАЯ КАРТОЧКА ================= */
+/* Общая карточка фотографии */
 
 .photo-card {
   position: absolute;
@@ -274,7 +271,7 @@
   will-change: transform;
 }
 
-/* ================= ИЗОБРАЖЕНИЕ ================= */
+/* Изображение */
 
 .photo-card img {
   display: block;
@@ -289,35 +286,34 @@
 
 /* ================= НАЧАЛЬНОЕ СОСТОЯНИЕ ================= */
 
-/* Фото №1 — переднее */
+/* Фото 1 — впереди */
 
 .photo-card-front {
-  transform: translate(0, 0) scale(1);
+  transform: translateX(10);
   z-index: 2;
 }
 
-/* Фото №2 — заднее, немного правее и ниже */
+/* Фото 2 — сзади, виден небольшой край */
 
 .photo-card-back {
-  transform: translate(18px, 12px) scale(0.94);
+  transform: translateX(14px);
   z-index: 1;
 }
 
 /* ================= ПОСЛЕ КЛИКА ================= */
 
-/* Фото №1 уходит влево, оставаясь частично видимым */
+/* Фото 1 уходит влево */
 
 .photo-area.swap .photo-card-front {
-  transform: translateX(-72%) scale(0.94);
-  z-index: 1;
+  transform: translateX(-105%);
 }
 
-/* Фото №2 выходит вперед и занимает место фото №1 */
+/* Фото 2 выходит на передний план */
 
 .photo-area.swap .photo-card-back {
-  transform: translate(0, 0) scale(1);
-  z-index: 2;
+  transform: translateX(0);
 }
+
     
     /* ================= SECTIONS ================= */
 
