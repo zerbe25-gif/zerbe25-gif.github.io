@@ -1004,7 +1004,7 @@
 
 @media (max-width: 700px) {
   .pricing-section {
-    padding: 65px 0;
+    padding: 65px 16px;
   }
 
   .pricing-section h2 {
@@ -2171,32 +2171,24 @@
     }
 
 
-    /* ================= PRICING TOGGLE ================= */
+   /* ================= PRICING TOGGLE ================= */
 
-    const pricingSection =
-      document.querySelector(".pricing-section");
+const pricingSection = document.querySelector(".pricing-section");
+const pricingToggle = document.querySelector(".pricing-toggle");
 
-    const pricingToggle =
-      document.querySelector(".pricing-toggle");
+if (pricingSection && pricingToggle) {
+  const pricingToggleText = pricingToggle.querySelector("span");
 
-    if (pricingSection && pricingToggle) {
-      const pricingToggleText =
-        pricingToggle.querySelector("span");
+  pricingToggle.addEventListener("click", () => {
+    const isOpen = pricingSection.classList.toggle("open");
 
-      pricingToggle.addEventListener("click", () => {
-        const isOpen =
-          pricingSection.classList.toggle("open");
+    pricingToggle.setAttribute("aria-expanded", isOpen);
 
-        pricingToggle.setAttribute(
-          "aria-expanded",
-          isOpen
-        );
-
-        pricingToggleText.textContent =
-          isOpen ? "Свернуть" : "Показать полностью";
-      });
-    }
-```
+    pricingToggleText.textContent = isOpen
+      ? "Свернуть"
+      : "Показать полностью";
+  });
+}
 
 
   </script>
