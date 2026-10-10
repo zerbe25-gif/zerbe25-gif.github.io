@@ -867,7 +867,7 @@
 @media (max-width: 700px) {
 
   .education-section {
-    padding: 65px 0;
+    padding: 65px 16px;
   }
 
   .education-section h2 {
@@ -887,6 +887,142 @@
   }
 
 }
+
+    ```css
+/* ================= PRICING ================= */
+
+.pricing-section {
+  padding: 90px 0;
+}
+
+.pricing-section .section-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pricing-section .section-label {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.pricing-section h2 {
+  margin: 0 0 30px;
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(32px, 5vw, 46px);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.pricing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pricing-item {
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+
+.pricing-item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.pricing-item strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.pricing-item p {
+  margin: 0;
+  color: #536466;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.pricing-note {
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* Кнопка раскрытия */
+
+.pricing-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 24px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.pricing-toggle:hover {
+  background: var(--surface-2);
+  transform: translateY(-1px);
+}
+
+.pricing-toggle-icon {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform .2s ease;
+}
+
+/* В свернутом состоянии видны первые три услуги */
+
+.pricing-list .pricing-item:nth-child(n + 4) {
+  display: none;
+}
+
+.pricing-section.open .pricing-list .pricing-item {
+  display: block;
+}
+
+.pricing-section.open .pricing-toggle-icon {
+  transform: rotate(45deg);
+}
+
+/* Мобильная версия */
+
+@media (max-width: 700px) {
+  .pricing-section {
+    padding: 65px 0;
+  }
+
+  .pricing-section h2 {
+    font-size: 34px;
+  }
+
+  .pricing-item {
+    padding: 18px 0;
+  }
+
+  .pricing-item strong {
+    font-size: 16px;
+  }
+
+  .pricing-item p {
+    font-size: 15px;
+  }
+}
+
     /* ================= WHATSAPP ================= */
 
     .whatsapp {
@@ -1124,9 +1260,14 @@
 
      <nav class="menu" id="menu">
 
-  <a href="#about">Подход</a>
+<a
+  href="articles/"
+  class="nav-article-orange"
+>
+  Статьи / Медита
+</a>
 
-  <a href="index.html#requests">Запросы</a>
+       <a href="index.html#requests">Запросы</a>
 
   <a href="#formats">
   Форматы
@@ -1136,13 +1277,10 @@
   Образование
 </a>
 
-<a
-  href="articles/"
-  class="nav-article-orange"
->
-  Статьи
+<a href="#pricing">
+  Стоимость
 </a>
-
+       
 <a href="#contact">
   Контакты
 </a>
@@ -1345,39 +1483,40 @@
 
       <ul class="requests-list">
 
-        <li>Тревога, стресс, выгорание, переутомление.</li>
+        <li>Тревога, стресс, выгорание, переутомление
+        </li>
 
         <li>
           Проблемы в отношениях: созависимость, семейные конфликты,
-          конфликты поколений, развод, измены.
+          конфликты поколений, развод, измены
         </li>
 
         <li>
-          Поиск себя, вопросы самоидентификации.
+          Поиск себя, вопросы самоидентификации
         </li>
 
         <li>
-          Трудности на работе и вопросы самореализации.
+          Трудности на работе и вопросы самореализации
         </li>
 
         <li>
-          Последствия жестокого обращения, буллинг.
+          Последствия жестокого обращения, буллинг
         </li>
 
         <li>
-          Исследование мужской самоидентичности и особенностей социализации.
+          Исследование мужской самоидентичности и особенностей социализации
         </li>
 
         <li>
-          Вопросы сексуальной идентичности, поддержка ЛГБТК+ сообщества.
+          Вопросы сексуальной идентичности, поддержка ЛГБТК+ сообщества
         </li>
 
         <li>
-          Эмиграция и адаптация в новой среде.
+          Эмиграция и адаптация в новой среде
         </li>
 
         <li>
-          Переживание утраты, горя.
+          Переживание утраты, горя
         </li>
 
       </ul>
@@ -1616,7 +1755,7 @@
 
           <p>
             «Не готовые ответы, а совместное исследование
-            того, что происходит именно с вами».
+            того, что происходит именно с вами»
           </p>
 
         
@@ -1626,6 +1765,67 @@
 
     </section>
 
+```html
+<!-- ================= PRICING ================= -->
+
+<section id="pricing" class="pricing-section">
+
+  <div class="section-inner">
+
+    <div class="section-label">
+      Стоимость
+    </div>
+
+    <h2>
+      Стоимость консультаций
+    </h2>
+
+    <div class="pricing-list">
+
+      <div class="pricing-item">
+        <strong>Индивидуальная работа (50 мин.)</strong>
+        <p>40–50 Евро / 4000–5000 руб.</p>
+      </div>
+
+      <div class="pricing-item">
+        <strong>Работа с парами (60–90 мин.)</strong>
+        <p>60–80 Евро / 6000–8000 руб.</p>
+      </div>
+
+      <div class="pricing-item">
+        <strong>Работа с подростками (50 мин.)</strong>
+        <p>40–50 Евро / 4000–5000 руб.</p>
+      </div>
+
+      <div class="pricing-item">
+        <strong>Коучинг (50 мин.)</strong>
+        <p>40–50 Евро / 4000–5000 руб.</p>
+      </div>
+
+      <div class="pricing-item">
+        <strong>Текстовая терапия</strong>
+        <p>30 Евро / 3000 руб.</p>
+      </div>
+
+    </div>
+
+    <p class="pricing-note">
+      Стоимость обсуждается индивидуально на первой встрече.
+    </p>
+
+    <button
+      class="pricing-toggle"
+      type="button"
+      aria-expanded="false"
+    >
+      <span>Показать полностью</span>
+      <span class="pricing-toggle-icon">+</span>
+    </button>
+
+  </div>
+
+</section>
+```
 
     <!-- ================= CONTACT ================= -->
 
@@ -1969,7 +2169,37 @@ educationToggle.addEventListener("click", () => {
       : "Показать полностью";
 
 });
-    
+
+    ```javascript
+/* ================= PRICING TOGGLE ================= */
+
+const pricingSection =
+  document.querySelector(".pricing-section");
+
+const pricingToggle =
+  document.querySelector(".pricing-toggle");
+
+const pricingToggleText =
+  pricingToggle.querySelector("span");
+
+pricingToggle.addEventListener("click", () => {
+
+  const isOpen =
+    pricingSection.classList.toggle("open");
+
+  pricingToggle.setAttribute(
+    "aria-expanded",
+    isOpen
+  );
+
+  pricingToggleText.textContent =
+    isOpen
+      ? "Свернуть"
+      : "Показать полностью";
+
+});
+
+
   </script>
 
 </body>
