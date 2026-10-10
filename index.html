@@ -2144,63 +2144,61 @@
       });
     }
 
+  ```javascript
     /* ================= EDUCATION TOGGLE ================= */
 
-const educationSection =
-  document.querySelector(".education-section");
+    const educationSection =
+      document.querySelector(".education-section");
 
-const educationToggle =
-  document.querySelector(".education-toggle");
+    const educationToggle =
+      document.querySelector(".education-toggle");
 
-const educationToggleText =
-  educationToggle.querySelector("span");
+    if (educationSection && educationToggle) {
+      const educationToggleText =
+        educationToggle.querySelector("span");
 
-educationToggle.addEventListener("click", () => {
+      educationToggle.addEventListener("click", () => {
+        const isOpen =
+          educationSection.classList.toggle("open");
 
-  const isOpen =
-    educationSection.classList.toggle("open");
+        educationToggle.setAttribute(
+          "aria-expanded",
+          isOpen
+        );
 
-  educationToggle.setAttribute(
-    "aria-expanded",
-    isOpen
-  );
+        educationToggleText.textContent =
+          isOpen ? "Свернуть" : "Показать полностью";
+      });
+    }
 
-  educationToggleText.textContent =
-    isOpen
-      ? "Свернуть"
-      : "Показать полностью";
 
-});
+    /* ================= PRICING TOGGLE ================= */
 
-```javascript
-/* ================= PRICING TOGGLE ================= */
+    const pricingSection =
+      document.querySelector(".pricing-section");
 
-const pricingSection =
-  document.querySelector(".pricing-section");
+    const pricingToggle =
+      document.querySelector(".pricing-toggle");
 
-const pricingToggle =
-  document.querySelector(".pricing-toggle");
+    if (pricingSection && pricingToggle) {
+      const pricingToggleText =
+        pricingToggle.querySelector("span");
 
-const pricingToggleText =
-  pricingToggle.querySelector("span");
+      pricingToggle.addEventListener("click", () => {
+        const isOpen =
+          pricingSection.classList.toggle("open");
 
-pricingToggle.addEventListener("click", () => {
+        pricingToggle.setAttribute(
+          "aria-expanded",
+          isOpen
+        );
 
-  const isOpen =
-    pricingSection.classList.toggle("open");
-
-  pricingToggle.setAttribute(
-    "aria-expanded",
-    isOpen
-  );
-
-  pricingToggleText.textContent =
-    isOpen
-      ? "Свернуть"
-      : "Показать полностью";
-
-});
+        pricingToggleText.textContent =
+          isOpen ? "Свернуть" : "Показать полностью";
+      });
+    }
 ```
+
 
   </script>
 
