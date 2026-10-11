@@ -2,7 +2,7 @@
 layout: post
 title: "Персональные мифы: как мы становимся авторами собственной истории"
 date: 2026-10-07
-category: "Психология"
+category: 
 image: "/images/Artikel-3.jpeg"
 tags:
   - "Психология"
