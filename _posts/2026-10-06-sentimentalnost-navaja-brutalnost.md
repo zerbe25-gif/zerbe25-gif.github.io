@@ -2,7 +2,7 @@
 layout: post
 title: "Сентиментальность – новая брутальность"
 date: 2026-10-06
-category: "Отношения Психология мужчин Общество"
+category: 
 image: "/images/Atikel-2.jpg"
 tags:
   - "Психология"
