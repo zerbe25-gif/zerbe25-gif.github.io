@@ -82,6 +82,72 @@
       gap: 28px;
     }
 
+    
+/* Поиск статей по темам */
+
+.topic-filter {
+  margin: 28px 0 30px;
+}
+
+.topic-filter-title {
+  margin: 0 0 15px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.topic-filter-buttons,
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.topic-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 13px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--white);
+  color: var(--accent-dark);
+  font-family: inherit;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+
+.topic-tag:hover,
+.topic-tag.active {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+
+.topic-filter-divider {
+  margin-top: 25px;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.article-tags {
+  margin: 0 0 14px;
+  gap: 7px;
+}
+
+.article-tags .topic-tag {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.filter-empty {
+  display: none;
+  padding: 24px;
+  color: var(--muted);
+  background: var(--surface);
+  border-radius: 16px;
+}
+    
     .article {
       display: grid;
       grid-template-columns: 310px 1fr;
@@ -224,6 +290,51 @@
         Статьи
       </h1>
 
+      
+<div class="topic-filter">
+
+  <p class="topic-filter-title">
+    Искать статью по теме
+  </p>
+
+  <div class="topic-filter-buttons">
+
+    <button class="topic-tag active" type="button"
+      data-filter="all">
+      Все статьи
+    </button>
+
+    <button class="topic-tag" type="button"
+      data-filter="Психология">
+      # Психология
+    </button>
+
+    <button class="topic-tag" type="button"
+      data-filter="Общество">
+      # Общество
+    </button>
+
+    <button class="topic-tag" type="button"
+      data-filter="О мужчинах">
+      # О мужчинах
+    </button>
+
+    <button class="topic-tag" type="button"
+      data-filter="О женщинах">
+      # О женщинах
+    </button>
+
+    <button class="topic-tag" type="button"
+      data-filter="Подростки">
+      # Подростки
+    </button>
+
+  </div>
+
+  <hr class="topic-filter-divider">
+
+</div>
+      
       <p class="page-description">
         Психология, отношения, внутренний мир человека и психодинамический подход.
       </p>
@@ -237,7 +348,9 @@
 
         {% for post in site.posts %}
 
-          <article class="article">
+          
+<article class="article"
+  data-tags="{{ post.tags | join: '|' | downcase | escape }}">
 
             <div class="article-image">
 
@@ -255,6 +368,21 @@
 
             <div class="article-content">
 
+              
+{% if post.tags.size > 0 %}
+  <div class="article-tags">
+    {% for tag in post.tags %}
+      <button
+        class="topic-tag"
+        type="button"
+        data-filter="{{ tag | escape }}"
+      >
+        # {{ tag }}
+      </button>
+    {% endfor %}
+  </div>
+{% endif %}
+              
               {% if post.category %}
 
                 <div class="article-category">
@@ -312,6 +440,57 @@
 
   </main>
 
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const filterButtons = document.querySelectorAll("[data-filter]");
+  const articles = document.querySelectorAll(".article");
+  const articleList = document.querySelector(".articles-list");
+
+  const emptyMessage = document.createElement("div");
+  emptyMessage.className = "filter-empty";
+  emptyMessage.textContent = "По этой теме пока нет статей.";
+  articleList.appendChild(emptyMessage);
+
+  function filterArticles(tag) {
+    const selectedTag = tag.toLocaleLowerCase("ru");
+    let visibleCount = 0;
+
+    articles.forEach(function (article) {
+      const tags = (article.dataset.tags || "")
+        .split("|")
+        .map(function (item) {
+          return item.trim();
+        });
+
+      const matches =
+        selectedTag === "all" ||
+        tags.includes(selectedTag);
+
+      article.style.display = matches ? "" : "none";
+
+      if (matches) visibleCount++;
+    });
+
+    emptyMessage.style.display =
+      visibleCount === 0 ? "block" : "none";
+
+    filterButtons.forEach(function (button) {
+      const isActive =
+        button.dataset.filter.toLocaleLowerCase("ru") === selectedTag;
+
+      button.classList.toggle("active", isActive);
+    });
+  }
+
+  filterButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      filterArticles(button.dataset.filter);
+    });
+  });
+});
+</script>
+  
 </body>
 
 </html>
