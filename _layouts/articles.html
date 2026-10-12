@@ -272,11 +272,193 @@
 
     }
 
+    
+/* ===== ШАПКА И НАВИГАЦИЯ ===== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(251, 253, 252, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header .nav {
+  width: min(1120px, calc(100% - 40px));
+  min-height: 78px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.site-header .logo {
+  flex-shrink: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 23px;
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.site-header .logo span {
+  display: block;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  color: var(--muted);
+}
+
+.site-header .menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-header .menu a {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color .25s ease,
+              box-shadow .25s ease,
+              transform .25s ease,
+              color .25s ease;
+}
+
+.site-header .menu a:not(.nav-button):not(.nav-article-orange):hover {
+  background: var(--nav-hover-bg, #F2F7F6);
+  box-shadow: var(--nav-hover-shadow, 0 4px 12px rgba(45, 55, 72, 0.08));
+  transform: translateY(-1px);
+  color: var(--accent-dark);
+}
+
+.site-header .menu a.nav-button {
+  color: white;
+  background: var(--accent-dark);
+  border-radius: 30px;
+  padding: 11px 18px;
+}
+
+.site-header .menu a.nav-button:hover {
+  color: white;
+  background: #347f7a;
+}
+
+.site-header .menu a.nav-article-orange {
+  position: relative;
+  isolation: isolate;
+  padding-left: 24px;
+  color: #5f4a3a;
+  background: transparent;
+}
+
+.site-header .menu a.nav-article-orange::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 50%;
+  width: 14px;
+  height: 28px;
+  border-radius: 20px 0 0 20px;
+  background: var(--nav-article-orange, #D88A6E);
+  transform: translateY(-50%);
+  transition: width .25s ease, transform .25s ease;
+}
+
+.site-header .menu a.nav-article-orange:hover {
+  color: #5f4a3a;
+  background: transparent;
+  box-shadow: none;
+}
+
+.site-header .menu a.nav-article-orange:hover::before {
+  width: 19px;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.site-header .mobile-button {
+  display: none;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 25px;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .site-header .nav {
+    position: relative;
+    width: calc(100% - 32px);
+    min-height: 70px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .site-header .mobile-button {
+    display: block;
+  }
+
+  .site-header .menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+    padding: 16px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(45, 55, 72, 0.10);
+  }
+
+  .site-header .menu.open {
+    display: flex;
+  }
+
+  .site-header .menu a {
+    width: 100%;
+  }
+}
+    
   </style>
 
 </head>
 
+
 <body>
+
+  <header class="site-header">
+    <div class="nav">
+      <a href="{{ '/' | relative_url }}" class="logo">
+        Сергей Цербе
+        <span>Психологическое консультирование</span>
+      </a>
+
+      <button
+        class="mobile-button"
+        id="mobileButton"
+        type="button"
+        aria-label="Открыть меню"
+        aria-expanded="false"
+      >☰</button>
+
+      <nav class="menu" id="menu">
+        <a href="{{ '/' | relative_url }}">Главная</a>
+        <a href="{{ '/' | relative_url }}#about">Подход</a>
+        <a href="{{ '/articles/' | relative_url }}" class="nav-article-orange">Статьи</a>
+        <a href="{{ '/' | relative_url }}#contact" class="nav-button">Записаться</a>
+      </nav>
+    </div>
+  </header>
 
   <main class="container">
 
@@ -489,6 +671,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+</script>
+
+  
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const mobileButton = document.getElementById("mobileButton");
+  const menu = document.getElementById("menu");
+
+  if (mobileButton && menu) {
+    mobileButton.addEventListener("click", function () {
+      const isOpen = menu.classList.toggle("open");
+      mobileButton.setAttribute("aria-expanded", String(isOpen));
+      mobileButton.textContent = isOpen ? "✕" : "☰";
+    });
+  }
+});
+  
 </script>
   
 </body>
