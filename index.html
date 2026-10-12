@@ -132,18 +132,70 @@
       color: var(--text);
     }
     
-    .menu .nav-article-orange {
-  color: #5f4a3a;
-  background: #f3d2b5;
-  padding: 6px 12px;
+  
+/* ===== НАСТРОЙКИ ПУНКТОВ МЕНЮ ===== */
+
+/* Остальные пункты меню: мягкий фон и лёгкая тень */
+.menu a:not(.nav-article-orange):not(.nav-button) {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: -8px -12px;
   border-radius: 10px;
-  font-size: 14px;
-  line-height: 1.2;
+  transition:
+    background-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
 }
 
+.menu a:not(.nav-article-orange):not(.nav-button):hover {
+  background-color: var(--nav-hover-bg);
+  box-shadow: var(--nav-hover-shadow);
+  transform: translateY(-1px);
+}
+
+/* Пункт «Статьи» */
+.menu .nav-article-orange {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: #5f4a3a;
+  background: transparent;
+  padding: 8px 12px 8px 24px;
+  border-radius: 20px;
+  font-size: 14px;
+  line-height: 1.2;
+  isolation: isolate;
+  transition: color 0.25s ease;
+}
+
+/* Оранжевая полусфера слева */
+.menu .nav-article-orange::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 50%;
+  width: 14px;
+  height: 28px;
+  background: var(--nav-article-orange);
+  border-radius: 20px 0 0 20px;
+  transform: translateY(-50%);
+  transition:
+    width 0.25s ease,
+    transform 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* Анимация при наведении */
 .menu .nav-article-orange:hover {
-  background: #edc5a3;
-  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  color: #5f4a3a;
+  background: transparent;
+  box-shadow: none;
+}
+
+.menu .nav-article-orange:hover::before {
+  width: 19px;
+  transform: translateY(-50%) scale(1.08);
 }
 
     /* ================= HERO ================= */
