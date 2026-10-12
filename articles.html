@@ -35,6 +35,10 @@
         0 18px 50px rgba(53, 94, 91, 0.08);
 
       --radius: 24px;
+      /* Цвета меню — их можно менять самостоятельно */
+--nav-hover-bg: #F2F7F6;
+--nav-hover-shadow: 0 4px 12px rgba(45, 55, 72, 0.08);
+--nav-article-orange: #D88A6E;
     }
 
 
@@ -562,6 +566,61 @@
     }
 
 
+/* ===== НАСТРОЙКИ МЕНЮ ===== */
+
+/* Обычные пункты меню */
+header .menu a:not(.active) {
+  border-radius: 12px;
+  transition:
+    background-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Мягкое выделение при наведении */
+header .menu a:not(.active):hover {
+  background-color: var(--nav-hover-bg);
+  box-shadow: var(--nav-hover-shadow);
+  transform: translateY(-1px);
+}
+
+/* Активный пункт «Статьи» */
+header .menu a.active {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  isolation: isolate;
+  overflow: visible;
+  padding: 8px 12px 8px 27px;
+  background: transparent;
+  border-radius: 999px;
+  transition: color 0.25s ease;
+}
+
+/* Оранжевая полусфера слева */
+header .menu a.active::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 2px;
+  top: 50%;
+  width: 14px;
+  height: 28px;
+  background: var(--nav-article-orange);
+  border-radius: 20px 0 0 20px;
+  transform: translateY(-50%);
+  transition:
+    transform 0.25s ease,
+    width 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* Лёгкая анимация полусферы */
+header .menu a.active:hover::before {
+  width: 18px;
+  transform: translateY(-50%) scale(1.08);
+}
+    
     /* ================= MOBILE ================= */
 
     @media (max-width: 700px) {
