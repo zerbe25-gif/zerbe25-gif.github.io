@@ -2,13 +2,8 @@
 <html lang="ru">
 
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Статьи — Сергей Цербе</title>
 
@@ -18,7 +13,6 @@
   >
 
   <style>
-
     :root {
       --bg: #fbfdfc;
       --surface: #f1f8f7;
@@ -30,17 +24,14 @@
       --accent-light: #dff2ef;
       --white: #ffffff;
       --line: #dce9e7;
-
-      --shadow:
-        0 18px 50px rgba(53, 94, 91, 0.08);
-
+      --shadow: 0 18px 50px rgba(53, 94, 91, 0.08);
       --radius: 24px;
-      /* Цвета меню — их можно менять самостоятельно */
---nav-hover-bg: #F2F7F6;
---nav-hover-shadow: 0 4px 12px rgba(45, 55, 72, 0.08);
---nav-article-orange: #D88A6E;
-    }
 
+      /* Цвета меню */
+      --nav-hover-bg: #F2F7F6;
+      --nav-hover-shadow: 0 4px 12px rgba(45, 55, 72, 0.08);
+      --nav-article-orange: #D88A6E;
+    }
 
     * {
       box-sizing: border-box;
@@ -48,14 +39,12 @@
       padding: 0;
     }
 
-
     html {
       scroll-behavior: smooth;
     }
 
-
     body {
-        font-family:
+      font-family:
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
@@ -63,780 +52,418 @@
         Helvetica,
         Arial,
         sans-serif;
-
       background: var(--bg);
-
       color: var(--text);
-
       line-height: 1.7;
     }
-
 
     a {
       color: inherit;
       text-decoration: none;
     }
 
-
     .container {
-
-      width:
-        min(
-          900px,
-          calc(100% - 40px)
-        );
-
+      width: min(900px, calc(100% - 40px));
       margin: 0 auto;
     }
-
 
     /* ================= HEADER ================= */
 
     header {
-
       position: sticky;
-
       top: 0;
-
       z-index: 100;
-
-      background:
-        rgba(251, 253, 252, 0.93);
-
+      background: rgba(251, 253, 252, 0.94);
       backdrop-filter: blur(12px);
-
-      border-bottom:
-        1px solid rgba(220, 233, 231, 0.8);
+      border-bottom: 1px solid rgba(220, 233, 231, 0.8);
     }
-
 
     .nav {
-
+      position: relative;
       min-height: 78px;
-
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
-
-      gap: 30px;
+      gap: 24px;
     }
-
 
     .logo {
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+      flex-shrink: 0;
+      font-family: Georgia, "Times New Roman", serif;
       font-size: 23px;
-
       font-weight: 500;
+      color: var(--text);
     }
 
-
     .logo span {
-
       display: block;
-
       font-size: 12px;
-
       font-family:
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
-
       color: var(--muted);
-
-      margin-top: -5px;
+      margin-top: -4px;
     }
-
 
     .menu {
-
       display: flex;
-
       align-items: center;
-
-      gap: 28px;
+      gap: 12px;
     }
-
 
     .menu a {
-
-      font-size: 14px;
-
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 10px;
       color: var(--muted);
-
-      transition: color .2s ease;
+      font-size: 14px;
+      transition:
+        background-color .25s ease,
+        box-shadow .25s ease,
+        transform .25s ease,
+        color .25s ease;
     }
 
-
-    .menu a:hover {
-
-      color:
-        var(--accent-dark);
+    .menu a:not(.nav-button):not(.nav-article-orange):hover {
+      background: var(--nav-hover-bg);
+      box-shadow: var(--nav-hover-shadow);
+      transform: translateY(-1px);
+      color: var(--accent-dark);
     }
-
 
     .menu .active {
-
-      color:
-        var(--accent-dark);
-
+      color: var(--accent-dark);
       font-weight: 600;
     }
 
+    /* Кнопка «Записаться» */
 
-    .mobile-button {
-
-      display: none;
-
-      border: none;
-
-      background: none;
-
-      font-size: 25px;
-
-      cursor: pointer;
-
-      color: var(--text);
+    .menu a.nav-button {
+      color: white;
+      background: var(--accent-dark);
+      border-radius: 30px;
+      padding: 11px 18px;
     }
 
+    .menu a.nav-button:hover {
+      color: white;
+      background: #347f7a;
+    }
+
+    /* Активный пункт «Статьи» */
+
+    .menu a.nav-article-orange {
+      position: relative;
+      isolation: isolate;
+      padding-left: 24px;
+      color: #5f4a3a;
+      background: transparent;
+    }
+
+    .menu a.nav-article-orange:hover {
+      color: #5f4a3a;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .menu a.nav-article-orange::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      top: 50%;
+      width: 14px;
+      height: 28px;
+      border-radius: 20px 0 0 20px;
+      background: var(--nav-article-orange);
+      transform: translateY(-50%);
+      transition: width .25s ease, transform .25s ease;
+    }
+
+    .menu a.nav-article-orange:hover::before {
+      width: 19px;
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .mobile-button {
+      display: none;
+      border: none;
+      background: none;
+      font-size: 25px;
+      cursor: pointer;
+      color: var(--text);
+    }
 
     /* ================= PAGE INTRO ================= */
 
     .page-intro {
-
-      padding:
-        100px 0 70px;
-
+      padding: 100px 0 70px;
       text-align: center;
     }
 
-
     .eyebrow {
-
-      color:
-        var(--accent-dark);
-
+      color: var(--accent-dark);
       text-transform: uppercase;
-
       font-size: 12px;
-
       letter-spacing: 2px;
-
       font-weight: 600;
-
       margin-bottom: 17px;
     }
 
-
     h1 {
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+      font-family: Georgia, "Times New Roman", serif;
       font-weight: 400;
-
-      font-size:
-        clamp(48px, 7vw, 70px);
-
+      font-size: clamp(48px, 7vw, 70px);
       line-height: 1.1;
-
       letter-spacing: -2px;
-
       margin-bottom: 22px;
       color: #2D3748;
     }
 
-
     .intro-text {
-
       max-width: 650px;
-
       margin: 0 auto;
-
       color: var(--muted);
-
       font-size: 17px;
     }
-
 
     /* ================= ARTICLES ================= */
 
     .articles {
-
-      padding:
-        10px 0 100px;
+      padding: 10px 0 100px;
     }
-
 
     .article {
-
-      background:
-        var(--white);
-
-      border:
-        1px solid var(--line);
-
-      border-radius:
-        var(--radius);
-
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       overflow: hidden;
-
       margin-bottom: 28px;
-
-      box-shadow:
-        0 8px 35px rgba(53, 94, 91, 0.035);
-
-      transition:
-        box-shadow .3s ease,
-        transform .3s ease;
+      box-shadow: 0 8px 35px rgba(53, 94, 91, 0.035);
+      transition: box-shadow .3s ease, transform .3s ease;
     }
-
 
     .article:hover {
-
-      box-shadow:
-        var(--shadow);
+      box-shadow: var(--shadow);
     }
-
 
     /* ================= ARTICLE IMAGE ================= */
 
     .article-image {
-
       width: 100%;
-
       height: 310px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #e5f3f1,
-          #f6faf9
-        );
-
+      background: linear-gradient(135deg, #e5f3f1, #f6faf9);
       overflow: hidden;
-
       position: relative;
     }
 
-
     .article-image img {
-
       width: 100%;
-
       height: 100%;
-
       object-fit: cover;
-
       display: block;
     }
 
-
     .image-placeholder {
-
       height: 100%;
-
       display: flex;
-
       align-items: center;
-
       justify-content: center;
-
       text-align: center;
-
       color: var(--muted);
-
       padding: 30px;
     }
 
-
     .image-placeholder span {
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+      font-family: Georgia, "Times New Roman", serif;
       font-size: 24px;
-
-      color:
-        var(--accent-dark);
+      color: var(--accent-dark);
     }
-
 
     /* ================= ARTICLE CONTENT ================= */
 
     .article-content {
-
-      padding:
-        34px 38px 38px;
+      padding: 34px 38px 38px;
     }
 
-
     .article-category {
-
       display: inline-block;
-
-      color:
-        var(--accent-dark);
-
-      background:
-        var(--accent-light);
-
+      color: var(--accent-dark);
+      background: var(--accent-light);
       border-radius: 30px;
-
-      padding:
-        5px 12px;
-
+      padding: 5px 12px;
       font-size: 11px;
-
       text-transform: uppercase;
-
       letter-spacing: 1px;
-
       margin-bottom: 15px;
     }
 
-
     .article h2 {
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size:
-        clamp(29px, 4vw, 40px);
-
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(29px, 4vw, 40px);
       font-weight: 400;
-
       line-height: 1.2;
-
       letter-spacing: -0.7px;
-
       margin-bottom: 13px;
       color: #2D3748;
     }
 
-
     .article-date {
-
       font-size: 12px;
-
       color: var(--muted);
-
       margin-bottom: 20px;
     }
-
 
     /* ================= PREVIEW ================= */
 
     .article-preview {
-
       color: #5d6d6f;
-
       font-size: 16px;
-
       line-height: 1.75;
-
       margin-bottom: 20px;
-
       display: -webkit-box;
-
       -webkit-line-clamp: 4;
-
       -webkit-box-orient: vertical;
-
       overflow: hidden;
     }
-
 
     /* ================= READ BUTTON ================= */
 
     .read-button {
-
       display: inline-flex;
-
       align-items: center;
-
       gap: 8px;
-
       border: none;
-
       background: none;
-
-      color:
-        var(--accent-dark);
-
+      color: var(--accent-dark);
       font-size: 14px;
-
       font-weight: 600;
-
       cursor: pointer;
-
       padding: 5px 0;
-
-      transition:
-        color .2s ease;
+      transition: color .2s ease;
     }
-
 
     .read-button:hover {
-
-      color:
-        #286f6b;
+      color: #286f6b;
     }
-
 
     .arrow {
-
       font-size: 16px;
-
-      transition:
-        transform .3s ease;
+      transition: transform .3s ease;
     }
-
 
     /* ================= EMPTY ================= */
 
     .empty {
-
       padding: 40px;
-
       background: var(--surface);
-
       border-radius: var(--radius);
-
       text-align: center;
-
       color: var(--muted);
     }
-
 
     /* ================= FOOTER ================= */
 
     footer {
-
-      border-top:
-        1px solid var(--line);
-
-      padding:
-        35px 0;
-
+      border-top: 1px solid var(--line);
+      padding: 35px 0;
       color: var(--muted);
-
       font-size: 12px;
     }
 
-
     .footer-content {
-
       display: flex;
-
       justify-content: space-between;
-
       align-items: center;
-
       gap: 20px;
     }
-
 
     .footer-links {
-
       display: flex;
-
       gap: 20px;
     }
 
-
     .footer-links a:hover {
-
-      color:
-        var(--accent-dark);
+      color: var(--accent-dark);
     }
 
-      
-/* ===== ШАПКА И НАВИГАЦИЯ ===== */
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(251, 253, 252, 0.94);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(220, 233, 231, 0.8);
-}
-
-.site-header .nav {
-  min-height: 78px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
-
-.site-header .logo {
-  flex-shrink: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 23px;
-  font-weight: 500;
-  color: var(--text);
-}
-
-.site-header .logo span {
-  display: block;
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: -4px;
-}
-
-.site-header .menu {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.site-header .menu a {
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 12px;
-  border-radius: 10px;
-  color: var(--muted);
-  font-size: 14px;
-  transition: background-color .25s ease,
-              box-shadow .25s ease,
-              transform .25s ease,
-              color .25s ease;
-}
-
-.site-header .menu a:not(.nav-button):not(.nav-article-orange):hover {
-  background: var(--nav-hover-bg, #F2F7F6);
-  box-shadow: var(--nav-hover-shadow, 0 4px 12px rgba(45, 55, 72, 0.08));
-  transform: translateY(-1px);
-  color: var(--accent-dark);
-}
-
-/* Кнопка «Записаться» */
-.site-header .menu a.nav-button {
-  color: white;
-  background: var(--accent-dark);
-  border-radius: 30px;
-  padding: 11px 18px;
-}
-
-.site-header .menu a.nav-button:hover {
-  color: white;
-  background: #347f7a;
-}
-
-/* Активный пункт «Статьи» */
-.site-header .menu a.nav-article-orange {
-  position: relative;
-  isolation: isolate;
-  padding-left: 24px;
-  color: #5f4a3a;
-  background: transparent;
-}
-
-.site-header .menu a.nav-article-orange:hover {
-  color: #5f4a3a;
-  background: transparent;
-  box-shadow: none;
-}
-
-.site-header .menu a.nav-article-orange::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: 0;
-  top: 50%;
-  width: 14px;
-  height: 28px;
-  border-radius: 20px 0 0 20px;
-  background: var(--nav-article-orange, #D88A6E);
-  transform: translateY(-50%);
-  transition: width .25s ease, transform .25s ease;
-}
-
-.site-header .menu a.nav-article-orange:hover::before {
-  width: 19px;
-  transform: translateY(-50%) scale(1.08);
-}
-
-.site-header .mobile-button {
-  display: none;
-  border: none;
-  background: none;
-  font-size: 25px;
-  cursor: pointer;
-  color: var(--text);
-}
-
-/* Мобильная навигация */
-@media (max-width: 700px) {
-  .site-header .nav {
-    position: relative;
-    min-height: 70px;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  .site-header .mobile-button {
-    display: block;
-  }
-
-  .site-header .menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 5px;
-    padding: 18px;
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    box-shadow: var(--shadow);
-  }
-
-  .site-header .menu.open {
-    display: flex;
-  }
-
-  .site-header .menu a {
-    width: 100%;
-  }
-}
-    
     /* ================= MOBILE ================= */
 
     @media (max-width: 700px) {
-
       .container {
-
-        width:
-          min(
-            100% - 32px,
-            900px
-          );
+        width: min(100% - 32px, 900px);
       }
 
-
-      .menu {
-
-        position: absolute;
-
-        left: 14px;
-
-        right: 14px;
-
-        top: 74px;
-
-        background: white;
-
-        border:
-          1px solid var(--line);
-
-        border-radius: 18px;
-
-        padding: 18px;
-
-        box-shadow:
-          var(--shadow);
-
-        display: none;
-
-        flex-direction: column;
-
-        align-items: stretch;
-
-        gap: 5px;
+      .nav {
+        min-height: 70px;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding-top: 10px;
+        padding-bottom: 10px;
       }
-
-
-      .menu.active {
-
-        display: flex;
-      }
-
-
-      .menu a {
-
-        padding: 8px;
-      }
-
 
       .mobile-button {
-
         display: block;
       }
 
-
-      .page-intro {
-
-        padding:
-          70px 0 50px;
+      .menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+        padding: 18px;
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
       }
 
+      .menu.active {
+        display: flex;
+      }
+
+      .menu a {
+        width: 100%;
+      }
+
+      .page-intro {
+        padding: 70px 0 50px;
+      }
 
       h1 {
-
         font-size: 46px;
-
         letter-spacing: -1.5px;
       }
 
-
       .intro-text {
-
         font-size: 16px;
       }
 
-
       .article-image {
-
         height: 230px;
       }
 
-
       .article-content {
-
-        padding:
-          25px 22px 28px;
+        padding: 25px 22px 28px;
       }
 
-
       .article h2 {
-
         font-size: 29px;
       }
 
-
       .footer-content {
-
         flex-direction: column;
-
         text-align: center;
       }
-
     }
-
-      
   </style>
-
 </head>
 
 <body>
@@ -844,32 +471,23 @@
   <!-- ================= HEADER ================= -->
 
   <header>
-
     <div class="container nav">
 
-
       <a href="{{ '/' | relative_url }}" class="logo">
-
         Сергей Цербе
-
-        <span>
-          Психологическое консультирование онлайн
-        </span>
-
+        <span>Психологическое консультирование онлайн</span>
       </a>
-
 
       <button
         class="mobile-button"
         id="mobileButton"
         aria-label="Открыть меню"
+        aria-expanded="false"
       >
         ☰
       </button>
 
-
       <nav class="menu" id="menu">
-
         <a href="{{ '/' | relative_url }}">
           Главная
         </a>
@@ -880,29 +498,26 @@
 
         <a
           href="{{ '/articles.html' | relative_url }}"
-          class="active"
+          class="active nav-article-orange"
         >
           Статьи
         </a>
 
-        <a href="{{ '/' | relative_url }}#contact">
+        <a
+          href="{{ '/' | relative_url }}#contact"
+          class="nav-button"
+        >
           Записаться
         </a>
-
       </nav>
 
     </div>
-
   </header>
-
-
 
   <!-- ================= INTRO ================= -->
 
   <main>
-
     <section class="page-intro">
-
       <div class="container">
 
         <div class="eyebrow">
@@ -921,15 +536,11 @@
         </p>
 
       </div>
-
     </section>
-
-
 
     <!-- ================= ARTICLES ================= -->
 
     <section class="articles">
-
       <div class="container">
 
         {% if site.posts.size > 0 %}
@@ -950,53 +561,39 @@
                 {% else %}
 
                   <div class="image-placeholder">
-
                     <span>
                       {{ post.title }}
                     </span>
-
                   </div>
 
                 {% endif %}
 
               </div>
 
-
               <div class="article-content">
 
                 {% if post.category %}
-
                   <div class="article-category">
                     {{ post.category }}
                   </div>
-
                 {% endif %}
-
 
                 <h2>
                   {{ post.title }}
                 </h2>
 
-
                 <div class="article-date">
-
                   {{ post.date | date: "%d.%m.%Y" }}
-
                 </div>
-
 
                 <div class="article-preview">
-
                   {{ post.excerpt | strip_html }}
-
                 </div>
-
 
                 <a
                   class="read-button"
                   href="{{ post.url | relative_url }}"
                 >
-
                   <span class="button-text">
                     Читать полностью
                   </span>
@@ -1004,11 +601,9 @@
                   <span class="arrow">
                     →
                   </span>
-
                 </a>
 
               </div>
-
             </article>
 
           {% endfor %}
@@ -1022,23 +617,17 @@
         {% endif %}
 
       </div>
-
     </section>
-
   </main>
-
-
 
   <!-- ================= FOOTER ================= -->
 
   <footer>
-
     <div class="container footer-content">
 
       <div>
         © 2026 Сергей Цербе
       </div>
-
 
       <div class="footer-links">
 
@@ -1055,39 +644,37 @@
         </a>
 
       </div>
-
     </div>
-
   </footer>
-
-
 
   <!-- ================= JAVASCRIPT ================= -->
 
-<script>
-  const mobileButton = document.getElementById("mobileButton");
-  const menu = document.getElementById("menu");
+  <script>
+    const mobileButton = document.getElementById("mobileButton");
+    const menu = document.getElementById("menu");
 
-  if (mobileButton && menu) {
-    mobileButton.addEventListener("click", () => {
-      const isOpen = menu.classList.toggle("active");
-      mobileButton.setAttribute("aria-expanded", String(isOpen));
-      mobileButton.textContent = isOpen ? "✕" : "☰";
-    });
+    if (mobileButton && menu) {
+      mobileButton.addEventListener("click", () => {
+        const isOpen = menu.classList.toggle("active");
 
-    menu.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        menu.classList.remove("active");
-        mobileButton.setAttribute("aria-expanded", "false");
-        mobileButton.textContent = "☰";
+        mobileButton.setAttribute(
+          "aria-expanded",
+          String(isOpen)
+        );
+
+        mobileButton.textContent = isOpen ? "✕" : "☰";
       });
-    });
-  }
-</script>
 
+      menu.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          menu.classList.remove("active");
+          mobileButton.setAttribute("aria-expanded", "false");
+          mobileButton.textContent = "☰";
+        });
+      });
+    }
+  </script>
 
- 
 </body>
-
 </html>
 
