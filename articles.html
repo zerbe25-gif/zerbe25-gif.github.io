@@ -55,7 +55,8 @@
 
 
     body {
- 
+
+      
 <header class="site-header">
   <div class="container nav">
     <a href="index.html" class="logo">
@@ -76,7 +77,6 @@
     </nav>
   </div>
 </header>
-
       
       font-family:
         -apple-system,
@@ -587,64 +587,8 @@
         var(--accent-dark);
     }
 
-
-/* ===== НАСТРОЙКИ МЕНЮ ===== */
-
-/* Обычные пункты меню */
-header .menu a:not(.active) {
-  border-radius: 12px;
-  transition:
-    background-color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
-}
-
-/* Мягкое выделение при наведении */
-header .menu a:not(.active):hover {
-  background-color: var(--nav-hover-bg);
-  box-shadow: var(--nav-hover-shadow);
-  transform: translateY(-1px);
-}
-
-/* Активный пункт «Статьи» */
-header .menu a.active {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  isolation: isolate;
-  overflow: visible;
-  padding: 8px 12px 8px 27px;
-  background: transparent;
-  border-radius: 999px;
-  transition: color 0.25s ease;
-}
-
-/* Оранжевая полусфера слева */
-header .menu a.active::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: 2px;
-  top: 50%;
-  width: 14px;
-  height: 28px;
-  background: var(--nav-article-orange);
-  border-radius: 20px 0 0 20px;
-  transform: translateY(-50%);
-  transition:
-    transform 0.25s ease,
-    width 0.25s ease,
-    background-color 0.25s ease;
-}
-
-/* Лёгкая анимация полусферы */
-header .menu a.active:hover::before {
-  width: 18px;
-  transform: translateY(-50%) scale(1.08);
-}
-
-
-/* ===== ШАПКА САЙТА ===== */
+      
+/* ===== ШАПКА И НАВИГАЦИЯ ===== */
 
 .site-header {
   position: sticky;
@@ -652,7 +596,7 @@ header .menu a.active:hover::before {
   z-index: 100;
   background: rgba(251, 253, 252, 0.94);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(220, 233, 231, 0.7);
+  border-bottom: 1px solid rgba(220, 233, 231, 0.8);
 }
 
 .site-header .nav {
@@ -668,27 +612,25 @@ header .menu a.active:hover::before {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 23px;
   font-weight: 500;
-  line-height: 1.4;
   color: var(--text);
 }
 
 .site-header .logo span {
   display: block;
-  font-family: inherit;
   font-size: 12px;
   color: var(--muted);
-  letter-spacing: 0.5px;
   margin-top: -4px;
 }
 
 .site-header .menu {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
 }
 
 .site-header .menu a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   padding: 8px 12px;
   border-radius: 10px;
   color: var(--muted);
@@ -699,27 +641,27 @@ header .menu a.active:hover::before {
               color .25s ease;
 }
 
-.site-header .menu a:hover {
-  color: var(--accent-dark);
+.site-header .menu a:not(.nav-button):not(.nav-article-orange):hover {
   background: var(--nav-hover-bg, #F2F7F6);
   box-shadow: var(--nav-hover-shadow, 0 4px 12px rgba(45, 55, 72, 0.08));
   transform: translateY(-1px);
+  color: var(--accent-dark);
 }
 
-/* Кнопка записи */
+/* Кнопка «Записаться» */
 .site-header .menu a.nav-button {
-  color: #fff;
+  color: white;
   background: var(--accent-dark);
-  padding: 11px 18px;
   border-radius: 30px;
+  padding: 11px 18px;
 }
 
 .site-header .menu a.nav-button:hover {
-  color: #fff;
+  color: white;
   background: #347f7a;
 }
 
-/* Выделение пункта «Статьи» */
+/* Активный пункт «Статьи» */
 .site-header .menu a.nav-article-orange {
   position: relative;
   isolation: isolate;
@@ -755,16 +697,17 @@ header .menu a.active:hover::before {
 
 .site-header .mobile-button {
   display: none;
-  border: 0;
-  background: transparent;
-  color: var(--text);
+  border: none;
+  background: none;
   font-size: 25px;
   cursor: pointer;
+  color: var(--text);
 }
 
-/* Мобильная версия */
+/* Мобильная навигация */
 @media (max-width: 700px) {
   .site-header .nav {
+    position: relative;
     min-height: 70px;
     flex-wrap: wrap;
     gap: 12px;
@@ -777,12 +720,19 @@ header .menu a.active:hover::before {
   }
 
   .site-header .menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     display: none;
-    width: 100%;
     flex-direction: column;
     align-items: stretch;
-    gap: 8px;
-    padding: 10px 0;
+    gap: 5px;
+    padding: 18px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
   }
 
   .site-header .menu.open {
@@ -793,7 +743,7 @@ header .menu a.active:hover::before {
     width: 100%;
   }
 }
-      
+    
     /* ================= MOBILE ================= */
 
     @media (max-width: 700px) {
@@ -912,22 +862,7 @@ header .menu a.active:hover::before {
 
 </head>
 
-
-<script>
-  const mobileButton = document.getElementById('mobileButton');
-  const menu = document.getElementById('menu');
-
-  if (mobileButton && menu) {
-    mobileButton.addEventListener('click', () => {
-      const isOpen = menu.classList.toggle('open');
-      mobileButton.setAttribute('aria-expanded', String(isOpen));
-      mobileButton.textContent = isOpen ? '✕' : '☰';
-    });
-  }
-</script>
-  
 <body>
-
 
   <!-- ================= HEADER ================= -->
 
@@ -941,7 +876,7 @@ header .menu a.active:hover::before {
         Сергей Цербе
 
         <span>
-          психологическое консультирование онлайн
+          Психологическое консультирование онлайн
         </span>
 
       </a>
@@ -1189,7 +1124,18 @@ header .menu a.active:hover::before {
       });
 
   </script>
+<script>
+  const mobileButton = document.getElementById('mobileButton');
+  const menu = document.getElementById('menu');
 
+  if (mobileButton && menu) {
+    mobileButton.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      mobileButton.setAttribute('aria-expanded', String(isOpen));
+      mobileButton.textContent = isOpen ? '✕' : '☰';
+    });
+  }
+</script>
 
 </body>
 
