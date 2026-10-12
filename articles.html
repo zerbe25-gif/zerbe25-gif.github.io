@@ -55,7 +55,29 @@
 
 
     body {
+ 
+<header class="site-header">
+  <div class="container nav">
+    <a href="index.html" class="logo">
+      Сергей Цербе
+      <span>Психологическое консультирование</span>
+    </a>
 
+    <button class="mobile-button" id="mobileButton"
+            aria-label="Открыть меню" aria-expanded="false">
+      ☰
+    </button>
+
+    <nav class="menu" id="menu">
+      <a href="index.html">Главная</a>
+      <a href="index.html#about">Подход</a>
+      <a href="articles.html" class="nav-article-orange">Статьи</a>
+      <a href="index.html#contact" class="nav-button">Записаться</a>
+    </nav>
+  </div>
+</header>
+
+      
       font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -620,7 +642,158 @@ header .menu a.active:hover::before {
   width: 18px;
   transform: translateY(-50%) scale(1.08);
 }
-    
+
+
+/* ===== ШАПКА САЙТА ===== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(251, 253, 252, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(220, 233, 231, 0.7);
+}
+
+.site-header .nav {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.site-header .logo {
+  flex-shrink: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.site-header .logo span {
+  display: block;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  margin-top: -4px;
+}
+
+.site-header .menu {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.site-header .menu a {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  transition: background-color .25s ease,
+              box-shadow .25s ease,
+              transform .25s ease,
+              color .25s ease;
+}
+
+.site-header .menu a:hover {
+  color: var(--accent-dark);
+  background: var(--nav-hover-bg, #F2F7F6);
+  box-shadow: var(--nav-hover-shadow, 0 4px 12px rgba(45, 55, 72, 0.08));
+  transform: translateY(-1px);
+}
+
+/* Кнопка записи */
+.site-header .menu a.nav-button {
+  color: #fff;
+  background: var(--accent-dark);
+  padding: 11px 18px;
+  border-radius: 30px;
+}
+
+.site-header .menu a.nav-button:hover {
+  color: #fff;
+  background: #347f7a;
+}
+
+/* Выделение пункта «Статьи» */
+.site-header .menu a.nav-article-orange {
+  position: relative;
+  isolation: isolate;
+  padding-left: 24px;
+  color: #5f4a3a;
+  background: transparent;
+}
+
+.site-header .menu a.nav-article-orange:hover {
+  color: #5f4a3a;
+  background: transparent;
+  box-shadow: none;
+}
+
+.site-header .menu a.nav-article-orange::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 50%;
+  width: 14px;
+  height: 28px;
+  border-radius: 20px 0 0 20px;
+  background: var(--nav-article-orange, #D88A6E);
+  transform: translateY(-50%);
+  transition: width .25s ease, transform .25s ease;
+}
+
+.site-header .menu a.nav-article-orange:hover::before {
+  width: 19px;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.site-header .mobile-button {
+  display: none;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 25px;
+  cursor: pointer;
+}
+
+/* Мобильная версия */
+@media (max-width: 700px) {
+  .site-header .nav {
+    min-height: 70px;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .site-header .mobile-button {
+    display: block;
+  }
+
+  .site-header .menu {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 10px 0;
+  }
+
+  .site-header .menu.open {
+    display: flex;
+  }
+
+  .site-header .menu a {
+    width: 100%;
+  }
+}
+      
     /* ================= MOBILE ================= */
 
     @media (max-width: 700px) {
@@ -734,11 +907,25 @@ header .menu a.active:hover::before {
 
     }
 
+      
   </style>
 
 </head>
 
 
+<script>
+  const mobileButton = document.getElementById('mobileButton');
+  const menu = document.getElementById('menu');
+
+  if (mobileButton && menu) {
+    mobileButton.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      mobileButton.setAttribute('aria-expanded', String(isOpen));
+      mobileButton.textContent = isOpen ? '✕' : '☰';
+    });
+  }
+</script>
+  
 <body>
 
 
