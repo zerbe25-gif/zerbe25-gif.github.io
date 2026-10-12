@@ -55,30 +55,7 @@
 
 
     body {
-
-      
-<header class="site-header">
-  <div class="container nav">
-    <a href="index.html" class="logo">
-      Сергей Цербе
-      <span>Психологическое консультирование</span>
-    </a>
-
-    <button class="mobile-button" id="mobileButton"
-            aria-label="Открыть меню" aria-expanded="false">
-      ☰
-    </button>
-
-    <nav class="menu" id="menu">
-      <a href="index.html">Главная</a>
-      <a href="index.html#about">Подход</a>
-      <a href="articles.html" class="nav-article-orange">Статьи</a>
-      <a href="index.html#contact" class="nav-button">Записаться</a>
-    </nav>
-  </div>
-</header>
-      
-      font-family:
+        font-family:
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
@@ -1087,56 +1064,29 @@
 
   <!-- ================= JAVASCRIPT ================= -->
 
-  <script>
-
-    /* ================= MOBILE MENU ================= */
-
-    const mobileButton =
-      document.getElementById("mobileButton");
-
-    const menu =
-      document.getElementById("menu");
-
-
-    mobileButton.addEventListener(
-      "click",
-      () => {
-
-        menu.classList.toggle("active");
-
-      }
-    );
-
-
-    document
-      .querySelectorAll(".menu a")
-      .forEach(link => {
-
-        link.addEventListener(
-          "click",
-          () => {
-
-            menu.classList.remove("active");
-
-          }
-        );
-
-      });
-
-  </script>
 <script>
-  const mobileButton = document.getElementById('mobileButton');
-  const menu = document.getElementById('menu');
+  const mobileButton = document.getElementById("mobileButton");
+  const menu = document.getElementById("menu");
 
   if (mobileButton && menu) {
-    mobileButton.addEventListener('click', () => {
-      const isOpen = menu.classList.toggle('open');
-      mobileButton.setAttribute('aria-expanded', String(isOpen));
-      mobileButton.textContent = isOpen ? '✕' : '☰';
+    mobileButton.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("active");
+      mobileButton.setAttribute("aria-expanded", String(isOpen));
+      mobileButton.textContent = isOpen ? "✕" : "☰";
+    });
+
+    menu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        menu.classList.remove("active");
+        mobileButton.setAttribute("aria-expanded", "false");
+        mobileButton.textContent = "☰";
+      });
     });
   }
 </script>
 
+
+ 
 </body>
 
 </html>
