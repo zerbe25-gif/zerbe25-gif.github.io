@@ -1326,7 +1326,7 @@
 
 .article-carousel {
   position: relative;
-  padding: 22px 0 12px;
+  padding: 30px 0 12px;
 }
 
 .article-carousel-viewport {
@@ -1434,7 +1434,7 @@
   z-index: 3;
   top: 42%;
   transform: translateY(-50%);
-  width: 34px;
+  width: 24px;
   height: 50%;
   min-height: 90px;
   max-height: 180px;
@@ -1503,12 +1503,16 @@
     line-height: 1.4;
   }
 
-  .article-carousel-arrow {
-    width: 30px;
-    min-height: 80px;
-    background: rgba(255, 255, 255, 0.96);
-  }
-
+ .article-carousel-arrow {
+  width: 21px;
+  height: 25%;
+  min-height: 40px;
+  max-height: 90px;
+  top: 77%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.96);
+}
+  
   .article-carousel-prev {
     left: -7px;
   }
@@ -2558,6 +2562,7 @@ if (pricingSection && pricingToggle) {
 }
 
 
+
 /* ================= ARTICLE CAROUSEL ================= */
 
 (() => {
@@ -2570,11 +2575,39 @@ if (pricingSection && pricingToggle) {
   const prevButton = carousel.querySelector(".article-carousel-prev");
   const nextButton = carousel.querySelector(".article-carousel-next");
 
+  const originals = Array.from(
+    track.querySelectorAll(".article-carousel-card")
+  );
+
+  if (originals.length < 2) return;
+
+  // Добавляем копии первой и последней карточек для зацикливания.
+  const firstClone = originals[0].cloneNode(true);
+  const lastClone = originals[originals.length - 1].cloneNode(true);
+
+  firstClone.classList.add("is-carousel-clone");
+  lastClone.classList.add("is-carousel-clone");
+
+  firstClone.setAttribute("aria-hidden", "true");
+  lastClone.setAttribute("aria-hidden", "true");
+
+  track.insertBefore(lastClone, originals[0]);
+  track.appendChild(firstClone);
+
   const getCards = () =>
     Array.from(track.querySelectorAll(".article-carousel-card"));
 
   let timer = null;
+  let scrollEndTimer = null;
   let hovered = false;
+
+  function jumpToCard(fromCard, toCard) {
+    const difference =
+      toCard.getBoundingClientRect().left -
+      fromCard.getBoundingClientRect().left;
+
+    viewport.scrollLeft += difference;
+  }
 
   function updateFeaturedCard() {
     const cards = getCards();
@@ -2596,36 +2629,72 @@ if (pricingSection && pricingToggle) {
       )
       .sort((a, b) => a.rect.left - b.rect.left);
 
-    // Выделяем вторую видимую карточку слева.
     if (visibleCards.length >= 2) {
       visibleCards[1].card.classList.add("is-featured");
     }
   }
 
+  function checkLoopBoundary() {
+    const cards = getCards();
+    const firstOriginal = originals[0];
+    const lastOriginal = originals[originals.length - 1];
+
+    // Если остановились на копии последней карточки,
+    // незаметно переходим к настоящей последней карточке.
+    if (
+      lastClone.getBoundingClientRect().left >=
+        viewport.getBoundingClientRect().left - 25 &&
+      lastClone.getBoundingClientRect().left <
+        viewport.getBoundingClientRect().left + 25
+    ) {
+      jumpToCard(lastClone, lastOriginal);
+    }
+
+    // Если остановились на копии первой карточки,
+    // незаметно переходим к настоящей первой карточке.
+    if (
+      firstClone.getBoundingClientRect().left >=
+        viewport.getBoundingClientRect().left - 25 &&
+      firstClone.getBoundingClientRect().left <
+        viewport.getBoundingClientRect().left + 25
+    ) {
+      jumpToCard(firstClone, firstOriginal);
+    }
+
+    updateFeaturedCard();
+  }
+
+  function scheduleLoopCheck() {
+    clearTimeout(scrollEndTimer);
+    scrollEndTimer = setTimeout(checkLoopBoundary, 180);
+    updateFeaturedCard();
+  }
+
   function moveCarousel(direction) {
     const cards = getCards();
+    const currentCard = cards
+      .map(card => ({
+        card,
+        distance: Math.abs(
+          card.getBoundingClientRect().left -
+          viewport.getBoundingClientRect().left
+        )
+      }))
+      .sort((a, b) => a.distance - b.distance)[0]?.card;
 
-    if (cards.length < 2) return;
+    if (!currentCard) return;
 
-    const firstCard = cards[0];
-    const cardWidth = firstCard.getBoundingClientRect().width;
-    const trackStyle = getComputedStyle(track);
-    const gap = parseFloat(trackStyle.columnGap) || 0;
-    const step = cardWidth + gap;
+    const currentIndex = cards.indexOf(currentCard);
+    const nextIndex = Math.max(
+      0,
+      Math.min(cards.length - 1, currentIndex + direction)
+    );
 
-    const maxScroll = viewport.scrollWidth - viewport.clientWidth;
-    const current = viewport.scrollLeft;
-
-    if (direction > 0 && current >= maxScroll - 5) {
-      viewport.scrollTo({ left: 0, behavior: "smooth" });
-    } else if (direction < 0 && current <= 5) {
-      viewport.scrollTo({ left: maxScroll, behavior: "smooth" });
-    } else {
-      viewport.scrollBy({
-        left: direction * step,
-        behavior: "smooth"
-      });
-    }
+    cards[nextIndex].scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start"
+    });
   }
 
   function stopAutoplay() {
@@ -2638,12 +2707,10 @@ if (pricingSection && pricingToggle) {
   function startAutoplay() {
     stopAutoplay();
 
-    if (getCards().length < 2) return;
-
     timer = setInterval(() => {
-      if (hovered || document.hidden) return;
-
-      moveCarousel(1);
+      if (!hovered && !document.hidden) {
+        moveCarousel(1);
+      }
     }, 10000);
   }
 
@@ -2657,7 +2724,7 @@ if (pricingSection && pricingToggle) {
     startAutoplay();
   });
 
-  viewport.addEventListener("scroll", updateFeaturedCard, {
+  viewport.addEventListener("scroll", scheduleLoopCheck, {
     passive: true
   });
 
@@ -2680,28 +2747,31 @@ if (pricingSection && pricingToggle) {
   });
 
   document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) {
-      updateFeaturedCard();
-    }
+    if (!document.hidden) updateFeaturedCard();
   });
 
   window.addEventListener("resize", updateFeaturedCard);
 
-  // Если изображение не загрузилось, скрываем только его карточку.
-  getCards().forEach(card => {
-    const img = card.querySelector("img");
+  // При каждой загрузке выбираем случайную статью
+  // как начальную позицию карусели.
+  function chooseRandomStart() {
+    const index = Math.floor(Math.random() * originals.length);
+    const target = originals[index];
 
-    if (img) {
-      img.addEventListener("error", () => {
-        card.remove();
-        updateFeaturedCard();
-      }, { once: true });
-    }
+    viewport.scrollLeft +=
+      target.getBoundingClientRect().left -
+      viewport.getBoundingClientRect().left;
+
+    updateFeaturedCard();
+  }
+
+  // Сначала ждём, пока браузер рассчитает размеры карточек.
+  requestAnimationFrame(() => {
+    chooseRandomStart();
+    startAutoplay();
   });
-
-  updateFeaturedCard();
-  startAutoplay();
 })();
+
 
   </script>
 
