@@ -2,7 +2,7 @@
 layout: post
 title: "Герой: образ печального рыцаря"
 date: 2026-10-07
-category: "Психология. Отношения."
+category:
 image: "/images/Artikel-2.1.jpg"
 tags:
   - "О Мужчинах"
