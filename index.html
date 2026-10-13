@@ -22,7 +22,7 @@
       --muted: #68787a;
       --accent: #78c9c1;
       --accent-dark: #34797E;
-      --accent-orange: #DCB573;
+      --accent-orange: #F6A78A;
       --accent-light: #dff2ef;
       --white: #ffffff;
       --line: #dce9e7;
@@ -473,17 +473,17 @@
     /* ================= FORMATS ================= */
 
    .formats-grid {
-  width: 92%;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-}
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 17px;
+    }
+
     .format-card {
-      padding: 28px;
+      padding: 28px 20px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: white;
-      min-height: 190px;
+      min-height: 150px;
       transition: transform .25s ease, box-shadow .25s ease;
     }
 
@@ -708,7 +708,7 @@
   line-height: 1.45;
 }
    .highlight {
-  background: #DCB573;
+  background: #F6A78A;
   padding: 3px 7px;
   border-radius: 6px;
   font-weight: 600;
@@ -1196,11 +1196,9 @@
 
 
 .formats-grid {
-  grid-template-columns: 1fr 1fr;
-  width: 94%;
-  margin-left: auto;
-  margin-right: auto;
-}
+    grid-template-columns: 1fr 1fr;
+  }
+
 
 
   section {
@@ -1286,12 +1284,8 @@
 
  
 .formats-grid {
-  grid-template-columns: 1fr 1fr;
-  width: 94%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
+    grid-template-columns: 1fr 1fr;
+  }
 
   .quote {
     padding: 40px 25px;
