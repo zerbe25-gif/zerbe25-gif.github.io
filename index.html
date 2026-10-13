@@ -539,7 +539,7 @@
     /* ================= QUOTE ================= */
 
     .quote-section {
-      padding: 70px 0;
+      padding: 50px 0;
     }
 
     .quote {
@@ -1306,7 +1306,7 @@
 /* ================= ARTICLE CAROUSEL ================= */
 
 .article-carousel-section {
-  padding: 35px 0 55px;
+  padding: 30px 0 25px;
   color: #2D3748;
 }
 
@@ -1331,7 +1331,7 @@
 
 .article-carousel-viewport {
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
   scroll-behavior: smooth;
   scrollbar-width: none;
   overscroll-behavior-x: contain;
@@ -1412,7 +1412,7 @@
 
 @media (min-width: 701px) {
   .article-carousel-card.is-featured {
-    transform: translateY(-6%) scale(1.03);
+    transform: translateY(-3%) scale(1.03);
     transform-origin: center center;
   }
 
@@ -2667,32 +2667,44 @@ if (pricingSection && pricingToggle) {
     updateFeaturedCard();
   }
 
-  function moveCarousel(direction) {
-    const cards = getCards();
-    const currentCard = cards
-      .map(card => ({
-        card,
-        distance: Math.abs(
-          card.getBoundingClientRect().left -
-          viewport.getBoundingClientRect().left
-        )
-      }))
-      .sort((a, b) => a.distance - b.distance)[0]?.card;
+ function moveCarousel(direction) {
+  const cards = getCards();
 
-    if (!currentCard) return;
+  if (cards.length < 2) return;
 
-    const currentIndex = cards.indexOf(currentCard);
-    const nextIndex = Math.max(
-      0,
-      Math.min(cards.length - 1, currentIndex + direction)
-    );
+  const viewportRect = viewport.getBoundingClientRect();
 
-    cards[nextIndex].scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "start"
-    });
-  }
+  const visibleCards = cards
+    .map(card => ({
+      card,
+      rect: card.getBoundingClientRect()
+    }))
+    .filter(item =>
+      item.rect.right > viewportRect.left + 2 &&
+      item.rect.left < viewportRect.right - 2
+    )
+    .sort((a, b) => a.rect.left - b.rect.left);
+
+  const firstVisible = visibleCards[0]?.card;
+  if (!firstVisible) return;
+
+  const index = cards.indexOf(firstVisible);
+  const nextIndex = Math.max(
+    0,
+    Math.min(cards.length - 1, index + direction)
+  );
+
+  const target = cards[nextIndex];
+
+  const distance =
+    target.getBoundingClientRect().left -
+    viewport.getBoundingClientRect().left;
+
+  viewport.scrollBy({
+    left: distance,
+    behavior: "smooth"
+  });
+}
 
   function stopAutoplay() {
     if (timer !== null) {
