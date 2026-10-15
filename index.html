@@ -2441,22 +2441,54 @@
 
   <script>
 
-    // Мобильное меню
-    const mobileButton = document.getElementById("mobileButton");
-    const menu = document.getElementById("menu");
+/* ================= MOBILE MENU ================= */
 
-    mobileButton.addEventListener("click", () => {
-      menu.classList.toggle("active");
+const mobileButton =
+  document.getElementById("mobileButton");
+
+const menu =
+  document.getElementById("menu");
+
+
+mobileButton.addEventListener("click", (event) => {
+
+  event.stopPropagation();
+
+  menu.classList.toggle("active");
+
+});
+
+
+/* Закрытие меню при клике вне меню */
+
+document.addEventListener("click", (event) => {
+
+  if (
+    menu.classList.contains("active") &&
+    !menu.contains(event.target) &&
+    !mobileButton.contains(event.target)
+  ) {
+
+    menu.classList.remove("active");
+
+  }
+
+});
+
+
+/* Закрытие меню после выбора пункта */
+
+document
+  .querySelectorAll(".menu a")
+  .forEach(link => {
+
+    link.addEventListener("click", () => {
+
+      menu.classList.remove("active");
+
     });
 
-
-    // Закрытие меню после перехода
-    document.querySelectorAll(".menu a").forEach(link => {
-      link.addEventListener("click", () => {
-        menu.classList.remove("active");
-      });
-    });
-
+  });
 
     // Плавное появление элементов при прокрутке
     const observer = new IntersectionObserver(
