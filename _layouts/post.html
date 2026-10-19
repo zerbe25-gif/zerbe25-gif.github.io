@@ -200,22 +200,31 @@
   >
 {% endif %}
 
+liquid
 {% if page.tags %}
   <div class="article-tags">
     {% for tag in page.tags %}
-      <span class="article-tag">#{{ tag }}</span>
+      <a
+        class="article-tag"
+        href="{{ '/articles/' | relative_url }}?tag={{ tag | uri_escape }}"
+      >#{{ tag }}</a>
     {% endfor %}
   </div>
 {% endif %}
+
 
 <div class="article-content">
   {{ content }}
 </div>
 
+liquid
 {% if page.tags %}
   <div class="article-tags article-tags-bottom">
     {% for tag in page.tags %}
-      <span class="article-tag">#{{ tag }}</span>
+      <a
+        class="article-tag"
+        href="{{ '/articles/' | relative_url }}?tag={{ tag | uri_escape }}"
+      >#{{ tag }}</a>
     {% endfor %}
   </div>
 {% endif %}
@@ -236,4 +245,3 @@
 
 </body>
 </html>
-```
