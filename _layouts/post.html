@@ -121,7 +121,37 @@
     padding: 7px 11px;
   }
    }
- 
+
+/* ================= ARTICLE TAGS ================= */
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0 0 30px;
+}
+
+.article-tags-bottom {
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+
+.article-tag {
+  display: inline-block;
+  padding: 4px 9px;
+  border-radius: 8px;
+  background: #f3eee9;
+  color: #6b625d;
+  font-size: 11px;
+  line-height: 1.3;
+  text-decoration: none;
+}
+
+.article-tag:hover {
+  background: #eadfd8;
+  color: #4f4945;
+}
+    
 /* Размер заголовка статьи на телефонах */
 @media (max-width: 600px) {
   h1 {
@@ -162,19 +192,35 @@
       {{ page.date | date: "%d.%m.%Y" }}
     </div>
 
-    {% if page.image %}
-      <img
-        class="article-image"
-        src="{{ page.image | relative_url }}"
-        alt="{{ page.title }}"
-      >
-    {% endif %}
+   {% if page.image %}
+  <img
+    class="article-image"
+    src="{{ page.image | relative_url }}"
+    alt="{{ page.title }}"
+  >
+{% endif %}
 
-    <div class="article-content">
-      {{ content }}
-    </div>
+{% if page.tags %}
+  <div class="article-tags">
+    {% for tag in page.tags %}
+      <span class="article-tag">#{{ tag }}</span>
+    {% endfor %}
+  </div>
+{% endif %}
 
-    <div class="article-navigation">
+<div class="article-content">
+  {{ content }}
+</div>
+
+{% if page.tags %}
+  <div class="article-tags article-tags-bottom">
+    {% for tag in page.tags %}
+      <span class="article-tag">#{{ tag }}</span>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<div class="article-navigation">
 
       <a class="nav-button" href="{{ '/' | relative_url }}">
         ← Главная
