@@ -728,6 +728,12 @@ document.addEventListener("DOMContentLoaded", function () {
       filterArticles(button.dataset.filter);
     });
   });
+  const params = new URLSearchParams(window.location.search);
+const initialTag = params.get("tag");
+
+if (initialTag) {
+  filterArticles(initialTag);
+}
 });
 </script>
 
