@@ -744,14 +744,44 @@ document.addEventListener("DOMContentLoaded", function () {
   const menu = document.getElementById("menu");
 
   if (mobileButton && menu) {
-    mobileButton.addEventListener("click", function () {
+
+    mobileButton.addEventListener("click", function (event) {
+      event.stopPropagation();
+
       const isOpen = menu.classList.toggle("open");
-      mobileButton.setAttribute("aria-expanded", String(isOpen));
-      mobileButton.textContent = isOpen ? "✕" : "☰";
+
+      mobileButton.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
+      mobileButton.textContent =
+        isOpen ? "✕" : "☰";
     });
+
+
+    document.addEventListener("click", function (event) {
+
+      if (
+        menu.classList.contains("open") &&
+        !menu.contains(event.target) &&
+        event.target !== mobileButton
+      ) {
+
+        menu.classList.remove("open");
+
+        mobileButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+        mobileButton.textContent = "☰";
+      }
+
+    });
+
   }
 });
-  
 </script>
   
 </body>
