@@ -360,20 +360,6 @@
   z-index: 1;
 }
 
-/* ================= ПОСЛЕ КЛИКА ================= */
-
-/* Фото 1 уходит влево */
-
-.photo-area.swap .photo-card-front {
-  transform: translateX(-105%);
-}
-
-/* Фото 2 выходит на передний план */
-
-.photo-area.swap .photo-card-back {
-  transform: translateX(0);
-}
-
     
     /* ================= SECTIONS ================= */
 
@@ -1224,43 +1210,109 @@
     font-size: 16px;
   }
 
-  
+
+  .photo-area {
+    max-width: 390px;
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+}
 /* ================= PHOTO — MOBILE ================= */
 
+/* ================= ANIMATION ================= */
+
+.reveal {
+  ...
+}
+
+
+/* ================= PHOTO SLIDER ================= */
+
 .photo-area {
+  position: relative;
   width: 100%;
-  max-width: 390px;
+  max-width: 430px;
   aspect-ratio: 3 / 4;
-  height: auto;
-  margin-left: 0;
-  margin-right: auto;
+  margin-left: auto;
+  margin-right: 0;
+
+  overflow: hidden;
+  border-radius: 28px;
 }
 
 .photo-card {
-  width: 95%;
-  aspect-ratio: 3 / 4;
-  height: auto;
-  right: 5%;
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 28px;
+  overflow: hidden;
+
+  background: #e8f4f2;
+
+  transform: translateX(0);
+
+  will-change: transform;
 }
 
-/* Фото 2 немного выглядывает справа */
+.photo-card img {
+  display: block;
 
-.photo-card-back {
-  transform: translateX(5vw);
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* Следующая фотография изначально находится справа */
+
+.photo-card.next {
+  transform: translateX(100%);
+  z-index: 2;
+}
+
+
+/* Фотография, которая сейчас видна */
+
+.photo-card.current {
+  transform: translateX(0);
   z-index: 1;
 }
 
-/* После клика фото 1 уходит вправо */
 
-.photo-area.swap .photo-card-front {
-  transform: translateX(100%);
+/* Следующая фотография въезжает справа налево */
+
+.photo-card.slide-in {
+  animation: photoSlideIn 1.4s cubic-bezier(.22, .61, .36, 1) forwards;
+  z-index: 2;
 }
 
-/* Фото 2 выходит вперёд */
 
-.photo-area.swap .photo-card-back {
-  transform: translateX(0);
+/* Старая фотография остаётся неподвижной */
+
+.photo-card.slide-out {
+  z-index: 1;
 }
+
+
+@keyframes photoSlideIn {
+
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+
+}
+
+
+/* ================= MOBILE ================= */
  }
     
   @media (max-width: 550px) {
@@ -1634,23 +1686,28 @@
         
 <div class="photo-area reveal" id="photo-slider">
 
-  <div class="photo-card photo-card-back">
+  <div class="photo-card">
     <img
-      src="images/sergey-C.jpg"
+      src="images/Sergey-A.jpg"
       alt="Сергей Цербе"
     >
   </div>
 
-  <div class="photo-card photo-card-front">
+  <div class="photo-card">
     <img
-      src="images/sergey-A.jpg"
+      src="images/Sergey-B.jpg"
       alt="Сергей Цербе"
     >
   </div>
-     
+
+  <div class="photo-card">
+    <img
+      src="images/Sergey-C.jpg"
+      alt="Сергей Цербе"
+    >
+  </div>
+
 </div>
-</section>
-
 
     <!-- ================= ABOUT ================= -->
 
@@ -2540,13 +2597,7 @@ document
 
   });
 }
-    const photoSlider = document.querySelector("#photo-slider");
-
-    if (photoSlider) {
-      photoSlider.addEventListener("click", () => {
-        photoSlider.classList.toggle("swap");
-      });
-    }
+    
 
     /* ================= EDUCATION TOGGLE ================= */
 
@@ -2817,7 +2868,109 @@ if (pricingSection && pricingToggle) {
   });
 })();
 
+/* ================= PHOTO SLIDER ================= */
 
+const photoSlider = document.querySelector("#photo-slider");
+
+if (photoSlider) {
+
+  const photos = photoSlider.querySelectorAll(".photo-card");
+
+  let currentIndex = 0;
+  let nextIndex = 1;
+  let isAnimating = false;
+
+  const slideDuration = 1400;
+  const slideInterval = 10000;
+
+
+  /* Первая фотография показывается сразу */
+
+  photos[currentIndex].classList.add("current");
+
+
+  function changePhoto() {
+
+    if (isAnimating) {
+      return;
+    }
+
+    isAnimating = true;
+
+
+    const currentPhoto = photos[currentIndex];
+    const nextPhoto = photos[nextIndex];
+
+
+    /*
+      Новая фотография помещается
+      справа за пределами блока.
+    */
+
+    nextPhoto.classList.remove(
+      "current",
+      "slide-in",
+      "slide-out"
+    );
+
+    nextPhoto.classList.add("next");
+
+
+    /*
+      Принудительно даём браузеру
+      применить начальное положение.
+      Это помогает избежать рывка.
+    */
+
+    void nextPhoto.offsetWidth;
+
+
+    /*
+      Запускаем движение
+      справа налево.
+    */
+
+    nextPhoto.classList.remove("next");
+    nextPhoto.classList.add("slide-in");
+
+
+    /*
+      После окончания движения
+      новая фотография становится текущей.
+    */
+
+    setTimeout(() => {
+
+      currentPhoto.classList.remove(
+        "current",
+        "slide-out"
+      );
+
+      nextPhoto.classList.remove("slide-in");
+      nextPhoto.classList.add("current");
+
+
+      currentIndex = nextIndex;
+
+      nextIndex =
+        (currentIndex + 1) % photos.length;
+
+
+      isAnimating = false;
+
+    }, slideDuration);
+
+  }
+
+
+  /*
+    Первая смена через 10 секунд.
+    Затем каждые 10 секунд.
+  */
+
+  setInterval(changePhoto, slideInterval);
+
+}
   </script>
 
 </body>
