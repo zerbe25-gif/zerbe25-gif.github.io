@@ -222,12 +222,15 @@
       z-index: -1;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      align-items: center;
-      gap: 75px;
-    }
+   .hero-grid {
+  display: grid;
+
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+
+  align-items: center;
+
+  gap: 70px;
+}
 
     .eyebrow {
       color: var(--accent-dark);
@@ -1169,11 +1172,19 @@
     padding: 55px 0 65px;
   }
 
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
+ .hero-grid {
+  grid-template-columns: 1fr;
 
+  gap: 40px;
+}
+.photo-area {
+  width: 100%;
+  max-width: 360px;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+  
   .about-grid,
   .contact-grid {
     grid-template-columns: 1fr;
@@ -1184,7 +1195,6 @@
 .formats-grid {
     grid-template-columns: 1fr 1fr;
   }
-
 
 
   section {
@@ -1211,13 +1221,7 @@
   }
 
 
-  .photo-area {
-    max-width: 390px;
-    margin-left: 0;
-    margin-right: auto;
-  }
-
-}
+ }
 /* ================= PHOTO — MOBILE ================= */
 
 /* ================= ANIMATION ================= */
@@ -1231,32 +1235,43 @@
 
 .photo-area {
   position: relative;
+
   width: 100%;
-  max-width: 430px;
-  aspect-ratio: 3 / 4;
+  max-width: 360px;
+
+  aspect-ratio: 9 / 16;
+
   margin-left: auto;
   margin-right: 0;
 
   overflow: hidden;
+
   border-radius: 28px;
+
+  background: #e8f4f2;
+
+  box-shadow:
+    0 18px 45px rgba(53, 94, 91, 0.10);
 }
+
 
 .photo-card {
   position: absolute;
+
   inset: 0;
 
   width: 100%;
   height: 100%;
 
-  border-radius: 28px;
   overflow: hidden;
+
+  border-radius: 28px;
 
   background: #e8f4f2;
 
-  transform: translateX(0);
-
   will-change: transform;
 }
+
 
 .photo-card img {
   display: block;
@@ -1264,38 +1279,47 @@
   width: 100%;
   height: 100%;
 
-  object-fit: cover;
+  /*
+    Вся фотография полностью помещается
+    внутрь рамки.
+  */
+
+  object-fit: contain;
+
+  object-position: center;
+
+  background: #e8f4f2;
 }
 
 
-/* Следующая фотография изначально находится справа */
-
-.photo-card.next {
-  transform: translateX(100%);
-  z-index: 2;
-}
-
-
-/* Фотография, которая сейчас видна */
+/* Текущая фотография */
 
 .photo-card.current {
   transform: translateX(0);
+
   z-index: 1;
 }
 
 
-/* Следующая фотография въезжает справа налево */
+/* Следующая фотография
+   находится за правой границей */
 
-.photo-card.slide-in {
-  animation: photoSlideIn 1.4s cubic-bezier(.22, .61, .36, 1) forwards;
+.photo-card.next {
+  transform: translateX(100%);
+
   z-index: 2;
 }
 
 
-/* Старая фотография остаётся неподвижной */
+/* Новая фотография въезжает
+   справа налево */
 
-.photo-card.slide-out {
-  z-index: 1;
+.photo-card.slide-in {
+  animation:
+    photoSlideIn 1.4s cubic-bezier(.22, .61, .36, 1)
+    forwards;
+
+  z-index: 2;
 }
 
 
@@ -2880,8 +2904,8 @@ if (photoSlider) {
   let nextIndex = 1;
   let isAnimating = false;
 
-  const slideDuration = 1400;
-  const slideInterval = 10000;
+  const slideDuration = 1300;
+  const slideInterval = 15000;
 
 
   /* Первая фотография показывается сразу */
