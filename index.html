@@ -1236,107 +1236,157 @@
 
 /* ================= PHOTO SLIDER ================= */
 
-/* ================= PHOTO SLIDER ================= */
-
 .photo-area {
   position: relative;
-
   width: 100%;
   max-width: 360px;
-
   aspect-ratio: 9 / 16;
-
   margin-left: auto;
   margin-right: 0;
-
   overflow: hidden;
-
   border-radius: 28px;
-
   background: #e8f4f2;
-
-  box-shadow:
-    0 18px 45px rgba(53, 94, 91, 0.10);
+  box-shadow: 0 18px 45px rgba(53, 94, 91, 0.10);
+  cursor: pointer;
+  isolation: isolate;
 }
-
 
 .photo-card {
   position: absolute;
-
   inset: 0;
-
   width: 100%;
   height: 100%;
-
   overflow: hidden;
-
   border-radius: 28px;
-
   background: #e8f4f2;
-
-  will-change: transform;
+  transform: translateX(100%);
+  z-index: 0;
 }
-
 
 .photo-card img {
   display: block;
-
   width: 100%;
   height: 100%;
-
-  /*
-    Фотография полностью заполняет рамку.
-    Небольшая часть изображения может
-    обрезаться по краям.
-  */
-
   object-fit: cover;
-
   object-position: center center;
 }
 
-
-/* Текущая фотография */
-
 .photo-card.current {
   transform: translateX(0);
-
   z-index: 1;
 }
 
-
-/* Следующая фотография находится
-   за правой границей */
-
 .photo-card.next {
   transform: translateX(100%);
-
   z-index: 2;
 }
-
-
-/* Новая фотография въезжает справа налево */
 
 .photo-card.slide-in {
-  animation:
-    photoSlideIn 1.4s cubic-bezier(.22, .61, .36, 1)
-    forwards;
-
+  animation: photoSlideIn 1.4s cubic-bezier(.22, .61, .36, 1) forwards;
   z-index: 2;
 }
 
-
 @keyframes photoSlideIn {
-
   from {
     transform: translateX(100%);
   }
-
   to {
     transform: translateX(0);
   }
-
 }
+
+/* Таймер поверх фотографии, внизу */
+
+.photo-indicators {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  pointer-events: none;
+}
+
+.photo-indicator {
+  position: relative;
+  display: block;
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  box-sizing: border-box;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  background: rgba(100, 100, 100, 0.35);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  pointer-events: auto;
+  transition:
+    flex-basis 0.35s ease,
+    width 0.35s ease,
+    height 0.35s ease,
+    background 0.35s ease;
+}
+
+.photo-indicator.is-active {
+  flex-basis: 30%;
+  width: 30%;
+  max-width: 90px;
+  height: 7px;
+  background: rgba(125, 125, 125, 0.28);
+  border-color: rgba(255, 255, 255, 0.65);
+}
+
+.photo-indicator::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(65, 65, 65, 0.68);
+  transform: scaleX(0);
+  transform-origin: right center;
+}
+
+.photo-indicator.is-active::before {
+  animation: photoTimerFill 10s linear forwards;
+}
+
+@keyframes photoTimerFill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* На телефонах фотография располагается по центру */
+
+@media (max-width: 850px) {
+  .photo-area {
+    width: min(100%, 360px);
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-self: center;
+  }
+}
+
+@media (max-width: 550px) {
+  .photo-area {
+    width: min(100%, 330px);
+    max-width: 330px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-self: center;
+  }
+}
+
 
 /* ================= MOBILE ================= */
  }
@@ -1383,17 +1433,7 @@
     bottom: 14px;
   }
     
-    .photo-area {
-  width: min(100%, 330px);
-
-  max-width: 330px;
-
-  margin-left: auto;
-  margin-right: auto;
-
-  justify-self: center;
-}
-}
+   }
 
     
 /* ================= ARTICLE CAROUSEL ================= */
@@ -1721,27 +1761,29 @@
 
      <!-- ================= ФОТО ================= -->
         
+
 <div class="photo-area reveal" id="photo-slider">
 
   <div class="photo-card">
-    <img
-      src="images/Sergey-A.jpg"
-      alt="Сергей Цербе"
-    >
+    <img src="images/sergey-A.jpg" alt="Сергей Цербе">
   </div>
 
   <div class="photo-card">
-    <img
-      src="images/Sergey-B.jpg"
-      alt="Сергей Цербе"
-    >
+    <img src="images/sergey-B.jpg" alt="Сергей Цербе">
   </div>
 
   <div class="photo-card">
-    <img
-      src="images/Sergey-C.jpg"
-      alt="Сергей Цербе"
-    >
+    <img src="images/sergey-C.jpg" alt="Сергей Цербе">
+  </div>
+
+  <!-- Визуальный таймер поверх фотографии -->
+  <div class="photo-indicators" id="photo-indicators">
+    <button class="photo-indicator" type="button"
+      aria-label="Первая фотография"></button>
+    <button class="photo-indicator" type="button"
+      aria-label="Вторая фотография"></button>
+    <button class="photo-indicator" type="button"
+      aria-label="Третья фотография"></button>
   </div>
 
 </div>
@@ -2910,104 +2952,116 @@ if (pricingSection && pricingToggle) {
 const photoSlider = document.querySelector("#photo-slider");
 
 if (photoSlider) {
-
   const photos = photoSlider.querySelectorAll(".photo-card");
+  const indicators = photoSlider.querySelectorAll(".photo-indicator");
 
   let currentIndex = 0;
-  let nextIndex = 1;
   let isAnimating = false;
+  let timerId = null;
 
   const slideDuration = 1300;
   const slideInterval = 15000;
 
+  // Показываем первую фотографию
+  photos.forEach((photo, index) => {
+    photo.classList.remove("current", "next", "slide-in");
 
-  /* Первая фотография показывается сразу */
+    if (index === 0) {
+      photo.classList.add("current");
+    }
+  });
 
-  photos[currentIndex].classList.add("current");
+  // Обновляем индикаторы и запускаем заполнение полоски
+  function updateIndicators(index) {
+    indicators.forEach((indicator) => {
+      indicator.classList.remove("is-active");
+      indicator.setAttribute("aria-pressed", "false");
+    });
 
+    // Перезапускаем анимацию, даже если выбрана та же фотография
+    void photoSlider.offsetWidth;
 
-  function changePhoto() {
+    if (indicators[index]) {
+      indicators[index].classList.add("is-active");
+      indicators[index].setAttribute("aria-pressed", "true");
+    }
+  }
 
-    if (isAnimating) {
+  // Запускаем отсчёт до следующей фотографии
+  function startTimer() {
+    clearTimeout(timerId);
+
+    timerId = setTimeout(() => {
+      showPhoto((currentIndex + 1) % photos.length);
+    }, slideInterval);
+  }
+
+  // Переключаем фотографию
+  function showPhoto(index) {
+    if (isAnimating || photos.length < 2) return;
+
+    clearTimeout(timerId);
+
+    // Если нажали на уже выбранный индикатор,
+    // просто начинаем отсчёт заново
+    if (index === currentIndex) {
+      updateIndicators(currentIndex);
+      startTimer();
       return;
     }
 
     isAnimating = true;
 
+    const previousPhoto = photos[currentIndex];
+    const nextPhoto = photos[index];
 
-    const currentPhoto = photos[currentIndex];
-    const nextPhoto = photos[nextIndex];
+    // Новая фотография начинает показываться,
+    // а таймер переключается на её индикатор
+    updateIndicators(index);
 
-
-    /*
-      Новая фотография помещается
-      справа за пределами блока.
-    */
-
-    nextPhoto.classList.remove(
-      "current",
-      "slide-in",
-      "slide-out"
-    );
-
+    nextPhoto.classList.remove("current", "next", "slide-in");
     nextPhoto.classList.add("next");
 
-
-    /*
-      Принудительно даём браузеру
-      применить начальное положение.
-      Это помогает избежать рывка.
-    */
-
+    // Подготавливаем плавное появление
     void nextPhoto.offsetWidth;
-
-
-    /*
-      Запускаем движение
-      справа налево.
-    */
 
     nextPhoto.classList.remove("next");
     nextPhoto.classList.add("slide-in");
 
+    currentIndex = index;
 
-    /*
-      После окончания движения
-      новая фотография становится текущей.
-    */
+    // Следующий переход произойдёт через 10 секунд
+    startTimer();
 
     setTimeout(() => {
-
-      currentPhoto.classList.remove(
-        "current",
-        "slide-out"
-      );
-
+      previousPhoto.classList.remove("current", "slide-in");
       nextPhoto.classList.remove("slide-in");
       nextPhoto.classList.add("current");
 
-
-      currentIndex = nextIndex;
-
-      nextIndex =
-        (currentIndex + 1) % photos.length;
-
-
       isAnimating = false;
-
     }, slideDuration);
-
   }
 
+  // Нажатие на индикатор выбирает нужную фотографию
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener("click", (event) => {
+      event.stopPropagation();
+      showPhoto(index);
+    });
+  });
 
-  /*
-    Первая смена через 10 секунд.
-    Затем каждые 10 секунд.
-  */
+  // Нажатие на фотографию переключает на следующую
+  photoSlider.addEventListener("click", (event) => {
+    if (event.target.closest(".photo-indicators")) return;
 
-  setInterval(changePhoto, slideInterval);
+    showPhoto((currentIndex + 1) % photos.length);
+  });
 
+  // Начальное состояние
+  updateIndicators(currentIndex);
+  startTimer();
 }
+
   </script>
 
 </body>
