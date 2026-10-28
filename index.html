@@ -70,7 +70,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #EEE8DC;
+  background: #E8E5E1;
   border-bottom: 1px solid rgba(120, 112, 105, 0.18);
 
   /* Фактура бумаги */
@@ -1707,7 +1707,7 @@ body.modal-open {
 .photo-area {
   position: relative;
   width: 100%;
-  max-width: 360px;
+  max-width: 403px;
   aspect-ratio: 9 / 16;
   margin-left: auto;
   margin-right: 0;
@@ -1793,7 +1793,7 @@ body.modal-open {
   overflow: hidden;
   border: none;
   border-radius: 999px;
-  background: rgba(190, 193, 195, 0.72);
+  background: rgba(238, 218, 190, 0.70);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
   cursor: pointer;
   pointer-events: auto;
@@ -1815,6 +1815,17 @@ body.modal-open {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
+    /* Мягкий, слегка сепийный индикатор таймера */
+
+.photo-indicator {
+  background: rgba(218, 205, 187, 0.55);
+}
+
+.photo-indicator.is-active::before,
+.photo-indicator.is-active::after {
+  background: rgba(238, 218, 190, 0.7);
+}
+    
 /* Заполнение полоски: ртутно-серый цвет */
 
 .photo-indicator::before {
@@ -1830,7 +1841,7 @@ body.modal-open {
 /* За 10 секунд цвет становится темнее справа налево */
 
 .photo-indicator.is-active::before {
-  animation: photoTimerFill 10s linear forwards;
+  animation: photoTimerFill 13s linear forwards;
 }
 
 
@@ -1865,6 +1876,15 @@ body.modal-open {
   }
 }
 
+    /* Выравниваем текст первого экрана по верхнему краю фото */
+
+.hero-grid {
+  align-items: start;
+}
+
+.hero-content {
+  padding-top: 3px;
+}
 
 /* ================= MOBILE ================= */
  }
@@ -2146,10 +2166,6 @@ body.modal-open {
   }
 }
 
-  </style>
-</head>
-
-<body>
 
   <!-- ================= HEADER ================= -->
 
@@ -2224,14 +2240,7 @@ body.modal-open {
             по всему миру.
           </p>
 
-          <div class="buttons">
-            <a href="#contact" class="button button-primary">
-              Записаться на консультацию
-            </a>
-
-            <a href="#requests" class="button button-secondary" id="requests-button">
-               Запросы
-            </a>
+        
           </div>
 
         </div>
@@ -3627,7 +3636,7 @@ if (photoSlider) {
   let timerId = null;
 
   const slideDuration = 1300;
-  const slideInterval = 15000;
+  const slideInterval = 13000;
 
   // Показываем первую фотографию
   photos.forEach((photo, index) => {
