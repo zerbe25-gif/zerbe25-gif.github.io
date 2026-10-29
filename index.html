@@ -803,66 +803,252 @@ body.modal-open {
       font-size: 17px;
     }
 
-    /* ================= ABOUT ================= */
+ 
+/* ================= ABOUT ================= */
 
-    .about {
-      background: var(--surface);
-    }
+.about {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 65px 0 75px;
+  background-color: #eae6de;
+  background-image:
+    radial-gradient(
+      ellipse at 15% 15%,
+      rgba(255, 255, 255, 0.58),
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 85% 80%,
+      rgba(164, 144, 119, 0.12),
+      transparent 52%
+    ),
+    repeating-linear-gradient(
+      97deg,
+      rgba(91, 75, 56, 0.018) 0,
+      rgba(91, 75, 56, 0.018) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+}
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 70px;
-      align-items: start;
-    }
+/* Небольшое пространство под описанием */
+.about .section-header {
+  max-width: 820px;
+  margin-bottom: 34px;
+}
 
-    .about-text p {
-      margin-bottom: 20px;
-      color: #536466;
-    }
+.about .section-header h2 {
+  white-space: nowrap;
+}
 
-    .model-cards {
-      display: grid;
-      gap: 15px;
-    }
+.about .section-description {
+  max-width: 760px;
+  line-height: 1.75;
+}
 
-    .model-card {
-      background: white;
-      padding: 25px;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
+/* Горизонтальный ряд раскрывающихся карточек */
+.about .model-cards {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  min-height: 260px;
+  margin: 34px 0 42px;
+}
 
-    .model-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow);
-    }
+/* Каждая карточка — интерактивная кнопка */
+.about .model-card {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 260px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 25px 20px;
+  border: 1px solid rgba(105, 91, 73, 0.13);
+  border-radius: 5px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.36),
+      rgba(214, 202, 184, 0.18)
+    );
+  color: #384747;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+  transition:
+    flex 0.55s cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
 
-    .model-number {
-      display: inline-flex;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      align-items: center;
-      justify-content: center;
-      background: var(--accent-light);
-      color: var(--accent-dark);
-      font-size: 13px;
-      margin-bottom: 13px;
-    }
+.about .model-card:hover,
+.about .model-card:focus-visible,
+.about .model-card.expanded {
+  flex: 3 1 0;
+  background-color: rgba(255, 252, 246, 0.72);
+  border-color: rgba(105, 91, 73, 0.23);
+  box-shadow:
+    0 10px 28px rgba(75, 63, 48, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
 
-    .model-card h3 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 22px;
-      font-weight: 400;
-      margin-bottom: 6px;
-    }
+.about .model-card:focus-visible {
+  outline: 2px solid rgba(87, 105, 97, 0.65);
+  outline-offset: 3px;
+}
 
-    .model-card p {
-      color: var(--muted);
-      font-size: 14px;
-    }
+/* Заголовок вертикально сложенной карточки */
+.about .vertical-title {
+  position: absolute;
+  inset: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  transition: opacity 0.2s ease;
+}
+
+.about .model-card.expanded .vertical-title,
+.about .model-card:focus-visible .vertical-title {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Текст раскрытой карточки */
+.about .card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  width: 100%;
+  max-width: 340px;
+  opacity: 0;
+  transform: translateX(-9px);
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    transform 0.35s ease;
+}
+
+.about .model-card.expanded .card-content,
+.about .model-card:focus-visible .card-content {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.about .model-card-title {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(21px, 2.1vw, 28px);
+  line-height: 1.25;
+  font-weight: 400;
+}
+
+.about .model-card-text {
+  display: block;
+  color: #536466;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* Основной текст под карточками */
+.about .about-text {
+  max-width: 780px;
+}
+
+.about .about-text p {
+  margin-bottom: 20px;
+  color: #536466;
+  line-height: 1.8;
+}
+
+.about .about-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Адаптация для планшетов и телефонов */
+@media (max-width: 700px) {
+  .about {
+    padding: 48px 0 55px;
+  }
+
+  .about .section-header {
+    margin-bottom: 28px;
+  }
+
+  .about .section-header h2 {
+    white-space: normal;
+  }
+
+  .about .model-cards {
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+    margin: 26px 0 32px;
+  }
+
+  .about .model-card {
+    flex: none;
+    width: 100%;
+    min-height: 64px;
+    padding: 19px 20px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .about .model-card:hover,
+  .about .model-card:focus-visible,
+  .about .model-card.expanded {
+    flex: none;
+  }
+
+  .about .vertical-title {
+    position: static;
+    inset: auto;
+    display: block;
+    writing-mode: horizontal-tb;
+    transform: none;
+    text-align: left;
+    font-size: 20px;
+  }
+
+  .about .model-card.expanded .vertical-title,
+  .about .model-card:focus-visible .vertical-title {
+    display: none;
+  }
+
+  .about .card-content {
+    max-width: none;
+    gap: 9px;
+  }
+
+  .about .model-card-title {
+    font-size: 22px;
+  }
+
+  .about .model-card-text {
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about .model-card,
+  .about .card-content,
+  .about .vertical-title {
+    transition: none;
+  }
+}
 
     /* ================= FORMATS ================= */
 
@@ -2343,114 +2529,96 @@ body.modal-open {
 
         </div>
       </section>
-    <!-- ================= ABOUT ================= -->
+   
+<!-- ================= ABOUT ================= -->
 
-    <section class="about" id="about">
+<section class="about" id="about">
+  <div class="container">
 
-      <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Мой подход</div>
 
-        <div class="section-header reveal">
+      <h2>Смотреть на человека целостно</h2>
 
-          <div class="section-label">
-            Мой подход
-          </div>
+      <p class="section-description">
+        Психодинамический подход в сочетании с биопсихосоциальной
+        моделью позволяет рассматривать внутренний мир человека
+        вместе с его жизненным контекстом и состоянием организма.
+      </p>
+    </div>
 
-          <h2>
-            Смотреть на человека целостно
-          </h2>
+    <!-- Три сферы фокуса терапии -->
+    <div class="model-cards" aria-label="Три сферы фокуса терапии">
 
-          <p class="section-description">
-            Психодинамический подход в сочетании с биопсихосоциальной
-            моделью позволяет рассматривать внутренний мир человека
-            вместе с его жизненным контекстом и состоянием организма.
-          </p>
+      <button class="model-card expanded" type="button"
+              aria-expanded="true">
+        <span class="vertical-title">Внутренний мир</span>
+        <span class="card-content">
+          <span class="model-card-title">Внутренний мир</span>
+          <span class="model-card-text">
+            Чувства, переживания, отношения, внутренние конфликты
+            и повторяющиеся жизненные сценарии.
+          </span>
+        </span>
+      </button>
 
-        </div>
+      <button class="model-card" type="button"
+              aria-expanded="false">
+        <span class="vertical-title">Контекст жизни</span>
+        <span class="card-content">
+          <span class="model-card-title">Контекст жизни</span>
+          <span class="model-card-text">
+            Семья, отношения, культура, социальная среда, работа
+            и обстоятельства, в которых находится человек.
+          </span>
+        </span>
+      </button>
 
+      <button class="model-card" type="button"
+              aria-expanded="false">
+        <span class="vertical-title">Тело и состояние</span>
+        <span class="card-content">
+          <span class="model-card-title">Тело и состояние</span>
+          <span class="model-card-text">
+            Физическое состояние, усталость, болезни,
+            восстановление и другие биологические факторы.
+          </span>
+        </span>
+      </button>
 
-        <div class="about-grid">
+    </div>
 
-          <div class="about-text reveal">
+    <!-- Основной текст остаётся под карточками -->
+    <div class="about-text reveal">
+      <p>
+        Как русскоязычный психодинамический консультант,
+        я предлагаю индивидуальные и парные онлайн-сессии
+        для взрослых и подростков по всему миру.
+      </p>
 
-            <p>
-              Как русскоязычный психодинамический консультант,
-              я предлагаю индивидуальные и парные онлайн-сессии
-              для взрослых и подростков по всему миру.
-            </p>
+      <p>
+        В своей практике я использую интегративный
+        психодинамический подход, опираясь на
+        биопсихосоциальную модель.
+      </p>
 
-            <p>
-              В своей практике я использую интегративный
-              психодинамический подход, опираясь на
-              биопсихосоциальную модель.
-            </p>
+      <p>
+        Это означает, что мы не останавливаемся только
+        на личной истории человека. В работе может рассматриваться
+        взаимосвязь внутренних психических механизмов
+        с социальными и культурными факторами, а также
+        с биологическим контекстом.
+      </p>
 
-            <p>
-              Это означает, что мы не останавливаемся только
-              на личной истории человека. В работе может рассматриваться
-              взаимосвязь внутренних психических механизмов
-              с социальными и культурными факторами, а также
-              с биологическим контекстом.
-            </p>
+      <p>
+        В том числе значение могут иметь соматические
+        заболевания, истощение организма, уровень нагрузки,
+        образ жизни и другие обстоятельства.
+      </p>
+    </div>
 
-            <p>
-              В том числе значение могут иметь соматические
-              заболевания, истощение организма, уровень нагрузки,
-              образ жизни и другие обстоятельства.
-            </p>
-
-          </div>
-
-
-          <div class="model-cards">
-
-            <div class="model-card reveal">
-
-              <div class="model-number">01</div>
-
-              <h3>Внутренний мир</h3>
-
-              <p>
-                Чувства, переживания, отношения, внутренние
-                конфликты и повторяющиеся жизненные сценарии.
-              </p>
-
-            </div>
-
-
-            <div class="model-card reveal">
-
-              <div class="model-number">02</div>
-
-              <h3>Контекст жизни</h3>
-
-              <p>
-                Семья, отношения, культура, социальная среда,
-                работа и обстоятельства, в которых находится человек.
-              </p>
-
-            </div>
-
-
-            <div class="model-card reveal">
-
-              <div class="model-number">03</div>
-
-              <h3>Тело и состояние</h3>
-
-              <p>
-                Физическое состояние, усталость, болезни,
-                восстановление и другие биологические факторы.
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
+  </div>
+</section>
 
    
     <!-- С КАКИМИ ЗАПРОСАМИ Я РАБОТАЮ -->
@@ -3393,6 +3561,30 @@ document
       observer.observe(element);
     });
 
+    
+/* ================= ABOUT ACCORDION ================= */
+
+(() => {
+  const cards = document.querySelectorAll(
+    "#about .model-card"
+  );
+
+  if (!cards.length) return;
+
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      cards.forEach(item => {
+        item.classList.remove("expanded");
+        item.setAttribute("aria-expanded", "false");
+      });
+
+      card.classList.add("expanded");
+      card.setAttribute("aria-expanded", "true");
+    });
+  });
+})();
+
+    
     const requestsCard = document.querySelector(".requests-card");
     const requestsToggle = document.querySelector(".requests-toggle");
 
