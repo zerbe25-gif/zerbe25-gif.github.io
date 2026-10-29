@@ -2161,51 +2161,70 @@ body.modal-open {
   overflow: hidden;
 }
 
-/* Декоративные шлейфы по сторонам */
 
+/* ===== ДИНАМИЧЕСКАЯ ПОДСВЕТКА: ДВА СЛОЯ ===== */
+
+.photo-trails-wrapper {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 403px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.photo-trails-wrapper #photo-slider {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Общие настройки каждого слоя */
 .photo-trails-wrapper .photo-trail {
   position: absolute;
   top: 0;
   width: clamp(80px, 16vw, 200px);
   height: 100%;
-  z-index: 0;
   pointer-events: none;
+  z-index: 0;
   filter: blur(25px);
   opacity: 0.40;
+
+  /* Слои плавно проявляются и исчезают */
+  transition: opacity 1.8s ease-in-out;
 }
 
+/* Начальный и конечный цвета задаются JS */
 .photo-trails-wrapper .photo-trail-left {
   right: 100%;
-  background:
-    radial-gradient(ellipse 95% 38% at 100% 12%,
-      var(--trail-top, rgba(190,170,150,.4)), transparent 78%),
-    radial-gradient(ellipse 95% 42% at 100% 50%,
-      var(--trail-mid, rgba(170,160,150,.4)), transparent 78%),
-    radial-gradient(ellipse 95% 38% at 100% 88%,
-      var(--trail-bottom, rgba(190,170,150,.4)), transparent 78%);
 }
 
 .photo-trails-wrapper .photo-trail-right {
   left: 100%;
-  background:
-    radial-gradient(ellipse 95% 38% at 0% 12%,
-      var(--trail-top, rgba(190,170,150,.4)), transparent 78%),
-    radial-gradient(ellipse 95% 42% at 0% 50%,
-      var(--trail-mid, rgba(170,160,150,.4)), transparent 78%),
-    radial-gradient(ellipse 95% 38% at 0% 88%,
-      var(--trail-bottom, rgba(190,170,150,.4)), transparent 78%);
 }
 
+/* Старый слой затухает, новый проявляется */
+.photo-trails-wrapper .photo-trail.is-hidden {
+  opacity: 0;
+}
+
+/* Карточки фото должны оставаться наложенными */
+.photo-trails-wrapper .photo-card {
+  position: absolute;
+  inset: 0;
+}
+
+/* Мобильная версия */
 @media (max-width: 850px) {
   .photo-trails-wrapper {
-    width: min(100%, 220px);
+    width: min(100%, 320px);
     margin-left: auto;
     margin-right: auto;
   }
 
   .photo-trails-wrapper .photo-trail {
     width: 70px;
-    opacity: 0.3;
+    opacity: 0.40;
     filter: blur(16px);
   }
 }
@@ -2215,6 +2234,7 @@ body.modal-open {
     width: min(100%, 280px);
   }
 }
+
 
   </style>
 
@@ -4015,10 +4035,12 @@ bookingFields.forEach((fieldId) => {
 });
 
 
-/* ================= DYNAMIC PHOTO TRAILS ================= */
+
+/* ================= DYNAMIC PHOTO TRAILS: CROSSFADE ================= */
 
 (() => {
   const slider = document.getElementById("photo-slider");
+
   if (!slider || slider.dataset.trailsReady === "true") return;
 
   const cards = Array.from(slider.querySelectorAll(".photo-card"));
@@ -4026,42 +4048,53 @@ bookingFields.forEach((fieldId) => {
 
   slider.dataset.trailsReady = "true";
 
-  /*
-    Создаём внешнюю область для фотографии и шлейфов.
-    Сам слайдер остаётся внутри и продолжает переключать фото.
-  */
-
+  /* Создаём обёртку вокруг слайдера */
   const wrapper = document.createElement("div");
   wrapper.className = "photo-trails-wrapper";
 
   slider.parentNode.insertBefore(wrapper, slider);
   wrapper.appendChild(slider);
 
-  const leftTrail = document.createElement("div");
-  leftTrail.className = "photo-trail photo-trail-left";
-  leftTrail.setAttribute("aria-hidden", "true");
+  /* Два слоя подсветки с каждой стороны */
+  function createLayer(side) {
+    const layer = document.createElement("div");
+    layer.className = `photo-trail photo-trail-${side} is-hidden`;
+    layer.setAttribute("aria-hidden", "true");
+    wrapper.insertBefore(layer, slider);
+    return layer;
+  }
 
-  const rightTrail = document.createElement("div");
-  rightTrail.className = "photo-trail photo-trail-right";
-  rightTrail.setAttribute("aria-hidden", "true");
+  const layers = {
+    left: [createLayer("left"), createLayer("left")],
+    right: [createLayer("right"), createLayer("right")]
+  };
 
-  wrapper.prepend(leftTrail, rightTrail);
+  const activeLayer = {
+    left: -1,
+    right: -1
+  };
+
+  let lastCard = null;
+  let refreshFrame = 0;
 
   function getCurrentCard() {
     return cards.find(card => card.classList.contains("current"))
       || cards[0];
   }
 
-  function updateTrails(card) {
-    const img = card?.querySelector("img");
-    if (!img || !img.complete || !img.naturalWidth) return;
+  /* Извлекаем цвета у левого и правого края фотографии */
+  function getEdgeColors(card) {
+    const img = card.querySelector("img");
+
+    if (!img || !img.complete || !img.naturalWidth) return null;
 
     try {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d", {
         willReadFrequently: true
       });
-      if (!ctx) return;
+
+      if (!ctx) return null;
 
       const width = 120;
       const height = Math.max(
@@ -4071,11 +4104,12 @@ bookingFields.forEach((fieldId) => {
 
       canvas.width = width;
       canvas.height = height;
+
       ctx.drawImage(img, 0, 0, width, height);
 
       function colorAt(x, y) {
-        const data = ctx.getImageData(x, y, 1, 1).data;
-        return `rgba(${data[0]}, ${data[1]}, ${data[2]}, 0.48)`;
+        const pixel = ctx.getImageData(x, y, 1, 1).data;
+        return `rgba(${pixel[0]}, ${pixel[1]}, ${pixel[2]}, 0.48)`;
       }
 
       const ys = [
@@ -4084,29 +4118,96 @@ bookingFields.forEach((fieldId) => {
         Math.round(height * 0.88)
       ];
 
-      const names = ["--trail-top", "--trail-mid", "--trail-bottom"];
-
-      names.forEach((name, i) => {
-        leftTrail.style.setProperty(name, colorAt(0, ys[i]));
-        rightTrail.style.setProperty(name, colorAt(width - 1, ys[i]));
-      });
+      return {
+        left: ys.map(y => colorAt(0, y)),
+        right: ys.map(y => colorAt(width - 1, y))
+      };
     } catch (error) {
-      /* Слайдер продолжит работать, даже если цвета прочитать нельзя */
+      /* Например, если браузер запрещает чтение цвета изображения */
+      return null;
     }
+  }
+
+  function paintLayer(layer, colors) {
+    const names = ["--trail-top", "--trail-mid", "--trail-bottom"];
+
+    names.forEach((name, i) => {
+      layer.style.setProperty(name, colors[i]);
+    });
+
+    layer.style.background = `
+      radial-gradient(
+        ellipse 95% 38% at ${layer.classList.contains("photo-trail-left") ? "100%" : "0%"} 12%,
+        var(--trail-top), transparent 78%
+      ),
+      radial-gradient(
+        ellipse 95% 42% at ${layer.classList.contains("photo-trail-left") ? "100%" : "0%"} 50%,
+        var(--trail-mid), transparent 78%
+      ),
+      radial-gradient(
+        ellipse 95% 38% at ${layer.classList.contains("photo-trail-left") ? "100%" : "0%"} 88%,
+        var(--trail-bottom), transparent 78%
+      )
+    `;
+  }
+
+  function crossfade(side, colors) {
+    const previousIndex = activeLayer[side];
+    const nextIndex = previousIndex === 0 ? 1 : 0;
+    const nextLayer = layers[side][nextIndex];
+
+    /* Сначала готовим новые цвета на скрытом слое */
+    nextLayer.classList.add("is-hidden");
+    paintLayer(nextLayer, colors);
+
+    /* Фиксируем начальное состояние перед запуском перехода */
+    void nextLayer.offsetWidth;
+
+    /* Новый слой проявляется */
+    requestAnimationFrame(() => {
+      nextLayer.classList.remove("is-hidden");
+
+      /* Старый слой одновременно исчезает */
+      if (previousIndex !== -1) {
+        layers[side][previousIndex].classList.add("is-hidden");
+      }
+
+      activeLayer[side] = nextIndex;
+    });
+  }
+
+  function updateTrails(card) {
+    if (!card || card === lastCard) return;
+
+    const colors = getEdgeColors(card);
+    if (!colors) return;
+
+    lastCard = card;
+
+    crossfade("left", colors.left);
+    crossfade("right", colors.right);
   }
 
   function refreshTrails() {
-    updateTrails(getCurrentCard());
+    cancelAnimationFrame(refreshFrame);
+
+    refreshFrame = requestAnimationFrame(() => {
+      updateTrails(getCurrentCard());
+    });
   }
 
+  /* Обновляем подсветку после загрузки изображений */
   cards.forEach(card => {
     const img = card.querySelector("img");
+
     if (img && !img.complete) {
-      img.addEventListener("load", refreshTrails, { once: true });
+      img.addEventListener("load", refreshTrails);
     }
   });
 
+  /* Следим за сменой активной фотографии */
   const observer = new MutationObserver(refreshTrails);
+
   cards.forEach(card => {
     observer.observe(card, {
       attributes: true,
@@ -4116,6 +4217,7 @@ bookingFields.forEach((fieldId) => {
 
   refreshTrails();
 })();
+
 
    </script>
 
